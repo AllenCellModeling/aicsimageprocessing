@@ -57,7 +57,6 @@ class TextureAtlas:
         channel_data = self.aics_image.get_image_data("XYZ", C=channel)
         # renormalize
         channel_data = channel_data.astype(np.float32)
-        channel_data *= 255.0/channel_data.max()
 
         atlas = np.zeros((dims.atlas_width, dims.atlas_height))
         i = 0
@@ -67,10 +66,17 @@ class TextureAtlas:
                 if i < self.aics_image.size_z:
                     left_bound, right_bound = (dims.tile_width * col), (dims.tile_width * (col + 1))
                     tile = sktransform.rescale(channel_data[:, :, i], scale, preserve_range=True)
-                    atlas[left_bound:right_bound, top_bound:bottom_bound] = tile.astype(np.uint8)
+                    atlas[left_bound:right_bound, top_bound:bottom_bound] = tile
                     i += 1
                 else:
                     break
+
+        # rescale min to 0 and max to 255
+        mn = min(0, atlas.min())
+        mx = atlas.max()
+        atlas = 255.0 * (atlas-mn) / (mx-mn)
+        # atlas = np.interp(atlas, (min(0, atlas.min()), atlas.max()), (0.0, 255.0))
+        atlas = atlas.astype(np.uint8)
         # transpose to YX for input into CYX arrays
         return atlas.transpose((1, 0))
 
