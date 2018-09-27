@@ -434,8 +434,9 @@ class ThumbnailGenerator:
         assert len(im_size) == 3
         shape_out_rgb = self._get_output_shape(im_size)
 
+        final_size = shape_out_rgb if self.letterbox is False else [shape_out_rgb[0], self.size, self.size]
+
         if self.old_alg:
-            final_size = shape_out_rgb if self.letterbox is False else [shape_out_rgb[0], self.size, self.size]
             return self._old_algorithm(image, shape_out_rgb, final_size, apply_cell_mask=apply_cell_mask)
 
         if apply_cell_mask:
@@ -465,5 +466,15 @@ class ThumbnailGenerator:
         comp = resize_cyx_image(layered_image, shape_out_rgb)
         comp /= np.max(comp)
         comp[comp < 0] = 0
-        # returns a CYX array for the png writer
+
+        if self.letterbox:
+            composite = np.zeros(final_size)
+            x0 = int((final_size[1]-shape_out_rgb[1])/2)
+            x1 = x0 + shape_out_rgb[1]
+            y0 = int((final_size[2]-shape_out_rgb[2])/2)
+            y1 = y0 + shape_out_rgb[2]
+            composite[:, x0:x1, y0:y1] = comp
+            comp = composite
+
+# returns a CYX array for the png writer
         return comp
