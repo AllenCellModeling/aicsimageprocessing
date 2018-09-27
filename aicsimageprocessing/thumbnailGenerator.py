@@ -237,7 +237,7 @@ class ThumbnailGenerator:
 
         self.mask_channel_index = mask_channel_index
 
-    def _old_algorithm(self, image, new_size, apply_cell_mask=False):
+    def _old_algorithm(self, image, new_size, output_size_dim, apply_cell_mask=False):
         if apply_cell_mask:
             shape_out_rgb = new_size
 
@@ -246,7 +246,7 @@ class ThumbnailGenerator:
             #     image[:, i] = np.multiply(image[:, i], image[:, self.mask_channel_index] > 0)
 
             num_noise_floor_bins = 32
-            composite = np.zeros(shape_out_rgb)
+            composite = np.zeros((shape_out_rgb[0], output_size_dim[1], output_size_dim[2]))
             for i in range(3):
                 ch = self.channel_indices[i]
                 # try to subtract out the noise floor.
@@ -271,7 +271,12 @@ class ThumbnailGenerator:
                 rgb_out /= np.max(rgb_out)
 
                 rgb_out = resize_cyx_image(rgb_out.transpose((2, 1, 0)), shape_out_rgb).astype(np.float32)
-                composite += rgb_out
+
+                x0 = int((output_size_dim[1]-shape_out_rgb[1])/2)
+                x1 = ouput_size_dim[1] - x0
+                y0 = int((output_size_dim[2]-shape_out_rgb[2])/2)
+                y1 = ouput_size_dim[2] - y0
+                composite[:, x0:x1, y0:y1] += rgb_out
             # renormalize
             composite /= composite.max()
             # return as cyx for pngwriter
@@ -316,7 +321,12 @@ class ThumbnailGenerator:
                 rgb_out /= np.max(rgb_out)
 
                 rgb_out = resize_cyx_image(rgb_out.transpose((2, 1, 0)), shape_out_rgb)
-                composite += rgb_out
+
+                x0 = int((output_size_dim[1]-shape_out_rgb[1])/2)
+                x1 = ouput_size_dim[1] - x0
+                y0 = int((output_size_dim[2]-shape_out_rgb[2])/2)
+                y1 = ouput_size_dim[2] - y0
+                composite[:, x0:x1, y0:y1] += rgb_out
 
             # returns a CYX array for the pngwriter
             return composite.transpose((0, 2, 1))
@@ -424,7 +434,7 @@ class ThumbnailGenerator:
         shape_out_rgb = self._get_output_shape(im_size)
 
         if self.old_alg:
-            return self._old_algorithm(image, shape_out_rgb, apply_cell_mask=apply_cell_mask)
+            return self._old_algorithm(image, shape_out_rgb, [3, self.size, self.size], apply_cell_mask=apply_cell_mask)
 
         if apply_cell_mask:
             for i in range(len(self.channel_indices)):
