@@ -172,7 +172,7 @@ class ThumbnailGenerator:
 
     def __init__(self, colors=_cmy, size=128,
                  channel_indices=None, channel_thresholds=None, channel_multipliers=None,
-                 mask_channel_index=5, **kwargs):
+                 mask_channel_index=5, letterbox=True, **kwargs):
         """
         :param colors: The color palette that will be used to color each channel. The default palette
                        colors the membrane channel cyan, structure with magenta, and nucleus with yellow.
@@ -236,6 +236,7 @@ class ThumbnailGenerator:
         self.channel_multipliers = channel_multipliers
 
         self.mask_channel_index = mask_channel_index
+        self.letterbox = letterbox
 
     def _old_algorithm(self, image, new_size, output_size_dim, apply_cell_mask=False):
         if apply_cell_mask:
@@ -273,9 +274,9 @@ class ThumbnailGenerator:
                 rgb_out = resize_cyx_image(rgb_out.transpose((2, 1, 0)), shape_out_rgb).astype(np.float32)
 
                 x0 = int((output_size_dim[1]-shape_out_rgb[1])/2)
-                x1 = ouput_size_dim[1] - x0
+                x1 = x0 + shape_out_rgb[1]
                 y0 = int((output_size_dim[2]-shape_out_rgb[2])/2)
-                y1 = ouput_size_dim[2] - y0
+                y1 = y0 + shape_out_rgb[2]
                 composite[:, x0:x1, y0:y1] += rgb_out
             # renormalize
             composite /= composite.max()
@@ -286,7 +287,7 @@ class ThumbnailGenerator:
             shape_out_rgb = new_size
 
             num_noise_floor_bins = 16
-            composite = np.zeros(shape_out_rgb)
+            composite = np.zeros((shape_out_rgb[0], output_size_dim[1], output_size_dim[2]))
             channel_indices = self.channel_indices
             rgb_image = image[:, 0].astype('float')
             for i in channel_indices:
@@ -323,9 +324,9 @@ class ThumbnailGenerator:
                 rgb_out = resize_cyx_image(rgb_out.transpose((2, 1, 0)), shape_out_rgb)
 
                 x0 = int((output_size_dim[1]-shape_out_rgb[1])/2)
-                x1 = ouput_size_dim[1] - x0
+                x1 = x0 + shape_out_rgb[1]
                 y0 = int((output_size_dim[2]-shape_out_rgb[2])/2)
-                y1 = ouput_size_dim[2] - y0
+                y1 = y0 + shape_out_rgb[2]
                 composite[:, x0:x1, y0:y1] += rgb_out
 
             # returns a CYX array for the pngwriter
@@ -434,7 +435,8 @@ class ThumbnailGenerator:
         shape_out_rgb = self._get_output_shape(im_size)
 
         if self.old_alg:
-            return self._old_algorithm(image, shape_out_rgb, [3, self.size, self.size], apply_cell_mask=apply_cell_mask)
+            final_size = shape_out_rgb if self.letterbox is False else [shape_out_rgb[0], self.size, self.size]
+            return self._old_algorithm(image, shape_out_rgb, final_size, apply_cell_mask=apply_cell_mask)
 
         if apply_cell_mask:
             for i in range(len(self.channel_indices)):
