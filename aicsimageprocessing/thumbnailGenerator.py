@@ -434,7 +434,7 @@ class ThumbnailGenerator:
         assert len(im_size) == 3
         shape_out_rgb = self._get_output_shape(im_size)
 
-        final_size = shape_out_rgb if self.letterbox is False else [shape_out_rgb[0], self.size, self.size]
+        final_size = [shape_out_rgb[0], self.size, self.size] if self.letterbox else shape_out_rgb
 
         if self.old_alg:
             return self._old_algorithm(image, shape_out_rgb, final_size, apply_cell_mask=apply_cell_mask)
