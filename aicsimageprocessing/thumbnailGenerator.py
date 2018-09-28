@@ -158,6 +158,15 @@ def subtract_noise_floor(image, bins=256):
     return subtracted
 
 
+# assumes sizes are c, x, y so the 1 and 2 indices are the x and y
+def _get_letterbox_bounds(full_size, scaled_size):
+    x0 = (full_size[1]-scaled_size[1]) // 2
+    x1 = x0 + scaled_size[1]
+    y0 = (full_size[2]-scaled_size[2]) // 2
+    y1 = y0 + scaled_size[2]
+    return x0, x1, y0, y1
+
+
 class ThumbnailGenerator:
     """
 
@@ -273,10 +282,7 @@ class ThumbnailGenerator:
 
                 rgb_out = resize_cyx_image(rgb_out.transpose((2, 1, 0)), shape_out_rgb).astype(np.float32)
 
-                x0 = int((output_size_dim[1]-shape_out_rgb[1])/2)
-                x1 = x0 + shape_out_rgb[1]
-                y0 = int((output_size_dim[2]-shape_out_rgb[2])/2)
-                y1 = y0 + shape_out_rgb[2]
+                x0, x1, y0, y1 = _get_letterbox_bounds(output_size_dim, shape_out_rgb)
                 composite[:, x0:x1, y0:y1] += rgb_out
             # renormalize
             composite /= composite.max()
@@ -323,10 +329,7 @@ class ThumbnailGenerator:
 
                 rgb_out = resize_cyx_image(rgb_out.transpose((2, 1, 0)), shape_out_rgb)
 
-                x0 = int((output_size_dim[1]-shape_out_rgb[1])/2)
-                x1 = x0 + shape_out_rgb[1]
-                y0 = int((output_size_dim[2]-shape_out_rgb[2])/2)
-                y1 = y0 + shape_out_rgb[2]
+                x0, x1, y0, y1 = _get_letterbox_bounds(output_size_dim, shape_out_rgb)
                 composite[:, x0:x1, y0:y1] += rgb_out
 
             # returns a CYX array for the pngwriter
@@ -347,6 +350,7 @@ class ThumbnailGenerator:
                                max_edge if im_size[1] < im_size[2] else max_edge * (float(im_size[2]) / im_size[1])
                                ))
         return 4 if not self.old_alg else 3, int(np.ceil(shape_out[2])), int(np.ceil(shape_out[1]))
+
 
     def _layer_projections(self, projection_array, mask_array):
         """
@@ -469,10 +473,7 @@ class ThumbnailGenerator:
 
         if self.letterbox:
             composite = np.zeros(final_size)
-            x0 = int((final_size[1]-shape_out_rgb[1])/2)
-            x1 = x0 + shape_out_rgb[1]
-            y0 = int((final_size[2]-shape_out_rgb[2])/2)
-            y1 = y0 + shape_out_rgb[2]
+            x0, x1, y0, y1 = _get_letterbox_bounds(final_size, shape_out_rgb)
             composite[:, x0:x1, y0:y1] = comp
             comp = composite
 
