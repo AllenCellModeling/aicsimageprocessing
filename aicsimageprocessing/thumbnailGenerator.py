@@ -158,6 +158,15 @@ def subtract_noise_floor(image, bins=256):
     return subtracted
 
 
+# assumes sizes are c, x, y so the 1 and 2 indices are the x and y
+def _get_letterbox_bounds(full_size, scaled_size):
+    x0 = (full_size[1]-scaled_size[1]) // 2
+    x1 = x0 + scaled_size[1]
+    y0 = (full_size[2]-scaled_size[2]) // 2
+    y1 = y0 + scaled_size[2]
+    return x0, x1, y0, y1
+
+
 class ThumbnailGenerator:
     """
 
@@ -172,7 +181,7 @@ class ThumbnailGenerator:
 
     def __init__(self, colors=_cmy, size=128,
                  channel_indices=None, channel_thresholds=None, channel_multipliers=None,
-                 mask_channel_index=5, **kwargs):
+                 mask_channel_index=5, letterbox=True, **kwargs):
         """
         :param colors: The color palette that will be used to color each channel. The default palette
                        colors the membrane channel cyan, structure with magenta, and nucleus with yellow.
@@ -236,8 +245,9 @@ class ThumbnailGenerator:
         self.channel_multipliers = channel_multipliers
 
         self.mask_channel_index = mask_channel_index
+        self.letterbox = letterbox
 
-    def _old_algorithm(self, image, new_size, apply_cell_mask=False):
+    def _old_algorithm(self, image, new_size, output_size_dim, apply_cell_mask=False):
         if apply_cell_mask:
             shape_out_rgb = new_size
 
@@ -246,7 +256,7 @@ class ThumbnailGenerator:
             #     image[:, i] = np.multiply(image[:, i], image[:, self.mask_channel_index] > 0)
 
             num_noise_floor_bins = 32
-            composite = np.zeros(shape_out_rgb)
+            composite = np.zeros((shape_out_rgb[0], output_size_dim[1], output_size_dim[2]))
             for i in range(3):
                 ch = self.channel_indices[i]
                 # try to subtract out the noise floor.
@@ -271,7 +281,9 @@ class ThumbnailGenerator:
                 rgb_out /= np.max(rgb_out)
 
                 rgb_out = resize_cyx_image(rgb_out.transpose((2, 1, 0)), shape_out_rgb).astype(np.float32)
-                composite += rgb_out
+
+                x0, x1, y0, y1 = _get_letterbox_bounds(output_size_dim, shape_out_rgb)
+                composite[:, x0:x1, y0:y1] += rgb_out
             # renormalize
             composite /= composite.max()
             # return as cyx for pngwriter
@@ -281,7 +293,7 @@ class ThumbnailGenerator:
             shape_out_rgb = new_size
 
             num_noise_floor_bins = 16
-            composite = np.zeros(shape_out_rgb)
+            composite = np.zeros((shape_out_rgb[0], output_size_dim[1], output_size_dim[2]))
             channel_indices = self.channel_indices
             rgb_image = image[:, 0].astype('float')
             for i in channel_indices:
@@ -316,7 +328,9 @@ class ThumbnailGenerator:
                 rgb_out /= np.max(rgb_out)
 
                 rgb_out = resize_cyx_image(rgb_out.transpose((2, 1, 0)), shape_out_rgb)
-                composite += rgb_out
+
+                x0, x1, y0, y1 = _get_letterbox_bounds(output_size_dim, shape_out_rgb)
+                composite[:, x0:x1, y0:y1] += rgb_out
 
             # returns a CYX array for the pngwriter
             return composite.transpose((0, 2, 1))
@@ -336,6 +350,7 @@ class ThumbnailGenerator:
                                max_edge if im_size[1] < im_size[2] else max_edge * (float(im_size[2]) / im_size[1])
                                ))
         return 4 if not self.old_alg else 3, int(np.ceil(shape_out[2])), int(np.ceil(shape_out[1]))
+
 
     def _layer_projections(self, projection_array, mask_array):
         """
@@ -423,8 +438,10 @@ class ThumbnailGenerator:
         assert len(im_size) == 3
         shape_out_rgb = self._get_output_shape(im_size)
 
+        final_size = [shape_out_rgb[0], self.size, self.size] if self.letterbox else shape_out_rgb
+
         if self.old_alg:
-            return self._old_algorithm(image, shape_out_rgb, apply_cell_mask=apply_cell_mask)
+            return self._old_algorithm(image, shape_out_rgb, final_size, apply_cell_mask=apply_cell_mask)
 
         if apply_cell_mask:
             for i in range(len(self.channel_indices)):
@@ -453,5 +470,12 @@ class ThumbnailGenerator:
         comp = resize_cyx_image(layered_image, shape_out_rgb)
         comp /= np.max(comp)
         comp[comp < 0] = 0
-        # returns a CYX array for the png writer
+
+        if self.letterbox:
+            composite = np.zeros(final_size)
+            x0, x1, y0, y1 = _get_letterbox_bounds(final_size, shape_out_rgb)
+            composite[:, x0:x1, y0:y1] = comp
+            comp = composite
+
+# returns a CYX array for the png writer
         return comp
