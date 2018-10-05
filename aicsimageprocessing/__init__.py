@@ -9,7 +9,11 @@ from .imgToProjection import *
 from .isosurfaceGenerator import *
 from .resize import *
 from .thumbnailGenerator import *
-
+from .imshow import *
+from .crop_img import *
+from .normalization import *
+from .rigidAlignment import *
+from .utils import *
 
 def get_version():
     return MODULE_VERSION
