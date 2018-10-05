@@ -13,7 +13,8 @@ from .imshow import *
 from .crop_img import *
 from .normalization import *
 from .rigidAlignment import *
-from .utils import *
+from .imgToCoords import *
+
 
 def get_version():
     return MODULE_VERSION
