@@ -1,5 +1,5 @@
 import numpy as np
-import aicsimageprocessing as proc
+from . import rigidAlignment
 import skfmm
 from scipy.ndimage.morphology import distance_transform_edt as bwdist
 import math
@@ -39,9 +39,9 @@ def img_to_coords(im_cell, im_nuc, major_angle_object="cell"):
     centroid = regionprops((im_nuc > 0).astype("uint8"))[0]["centroid"]
 
     if major_angle_object == "nuc":
-        major_angle = proc.get_major_angle(im_nuc, degrees_or_radians="radians")[0][1]
+        major_angle = rigidAlignment.get_major_angle(im_nuc, degrees_or_radians="radians")[0][1]
     elif major_angle_object == "cell":
-        major_angle = proc.get_major_angle(im_cell, degrees_or_radians="radians")[0][1]
+        major_angle = rigidAlignment.get_major_angle(im_cell, degrees_or_radians="radians")[0][1]
 
     coords = np.where(im_cell > 0)
 
