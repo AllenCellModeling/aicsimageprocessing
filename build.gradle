@@ -75,7 +75,7 @@ task wrapper(type: Wrapper) {
     distributionType "all"
 }
 
-project.version = "0.4"
+project.version = "0.4.4"
 project.group = "org.alleninstitute.aics.pypi"
 
 ///////////////////////////////////////////////////////////////////////////////////
