@@ -1,8 +1,6 @@
 from setuptools import setup, find_packages
 
-
 PACKAGE_NAME = 'aicsimageprocessing'
-
 
 """
 Notes: 
@@ -13,12 +11,13 @@ See (3) in following link to read about versions from a single source
 https://packaging.python.org/guides/single-sourcing-package-version/#single-sourcing-the-version
 """
 
-
 exec(open(PACKAGE_NAME + "/version.py").read())
+
 
 def readme():
     with open('README.md') as f:
         return f.read()
+
 
 test_deps = ['pytest']
 lint_deps = ['flake8']
@@ -39,14 +38,15 @@ setup(name=PACKAGE_NAME,
       },
       keywords=["commit:{}".format(GIT_COMMIT_HASH)],
       install_requires=[
-            'aicsimageio>=0.4.0',
-            'imageio>=2.3.0',
-            'numpy>=1.14.5',
-            'Pillow>=5.2.0',
-            'scipy>=1.1.0',
-            'matplotlib>=2.2.2', # get >=2.2.3 when available, because of https://github.com/matplotlib/matplotlib/pull/10867
-            'scikit-image>=0.14.0',
-            'tifffile==0.15.0'
+          'aicsimageio>=0.4.0',
+          'imageio>=2.3.0',
+          'numpy>=1.14.5',
+          'Pillow>=5.2.0',
+          'scipy>=1.1.0',
+          'matplotlib>=2.2.2',
+          # get >=2.2.3 when available, because of https://github.com/matplotlib/matplotlib/pull/10867
+          'scikit-image>=0.14.0',
+          'tifffile==0.15.0'
       ],
 
       # For test setup. This will allow JUnit XML output for Jenkins
