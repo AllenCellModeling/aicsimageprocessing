@@ -46,6 +46,8 @@ setup(name=PACKAGE_NAME,
           'matplotlib>=2.2.2',
           # get >=2.2.3 when available, because of https://github.com/matplotlib/matplotlib/pull/10867
           'scikit-image>=0.14.0',
+          'scikit-learn',
+          'scikit-fmm',
           'tifffile==0.15.0'
       ],
 
