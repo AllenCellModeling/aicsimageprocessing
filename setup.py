@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-PACKAGE_NAME = "aicsimageprocessing"
+PACKAGE_NAME = 'aicsimageprocessing'
 
 
 """
@@ -16,43 +16,43 @@ https://packaging.python.org/guides/single-sourcing-package-version/#single-sour
 
 exec(open(PACKAGE_NAME + "/version.py").read())
 
-
 def readme():
-    with open("README.md") as f:
+    with open('README.md') as f:
         return f.read()
 
+test_deps = ['pytest']
+lint_deps = ['flake8']
+extras = {'test_group': test_deps, 'lint_group': lint_deps}
 
-test_deps = ["pytest"]
-lint_deps = ["flake8"]
-extras = {"test_group": test_deps, "lint_group": lint_deps}
+setup(name=PACKAGE_NAME,
+      version=MODULE_VERSION,
+      description='A generalized scientific image processing module from the Allen Institute for Cell Science.',
+      long_description=readme(),
+      url=GIT_REMOTE_URL,
+      author='AICS',
+      author_email='!AICS_SW@alleninstitute.org',
+      license='Allen Institute Software License',
+      packages=find_packages(exclude=['tests', '*.tests', '*.tests.*']),
+      entry_points={
+          "console_scripts": [
+          ]
+      },
+      keywords=["commit:{}".format(GIT_COMMIT_HASH)],
+      install_requires=[
+            'aicsimageio>=0.4.0',
+            'imageio>=2.3.0',
+            'numpy>=1.14.5',
+            'Pillow>=5.2.0',
+            'scipy>=1.1.0',
+            'matplotlib>=2.2.2', # get >=2.2.3 when available, because of https://github.com/matplotlib/matplotlib/pull/10867
+            'scikit-image>=0.14.0',
+            'tifffile==0.15.0'
+      ],
 
-setup(
-    name=PACKAGE_NAME,
-    version=MODULE_VERSION,
-    description="A generalized scientific image processing module from the Allen Institute for Cell Science.",
-    long_description=readme(),
-    url=GIT_REMOTE_URL,
-    author="AICS",
-    author_email="!AICS_SW@alleninstitute.org",
-    license="Allen Institute Software License",
-    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*"]),
-    entry_points={"console_scripts": []},
-    keywords=["commit:{}".format(GIT_COMMIT_HASH)],
-    install_requires=[
-        "aicsimageio>=0.4.0",
-        "imageio>=2.3.0",
-        "numpy>=1.14.5",
-        "Pillow>=5.2.0",
-        "scipy>=1.1.0",
-        "matplotlib>=2.2.2",  # get >=2.2.3 when available, because of https://github.com/matplotlib/matplotlib/pull/10867
-        "scikit-image>=0.14.0",
-        "tifffile==0.15.0",
-        "scikit-fmm==0.0.9",
-        "ipython==7.0.1"
-    ],
-    # For test setup. This will allow JUnit XML output for Jenkins
-    setup_requires=["pytest-runner"],
-    tests_require=test_deps,
-    extras_require=extras,
-    zip_safe=False,
-)
+      # For test setup. This will allow JUnit XML output for Jenkins
+      setup_requires=['pytest-runner'],
+      tests_require=test_deps,
+
+      extras_require=extras,
+      zip_safe=False
+      )
