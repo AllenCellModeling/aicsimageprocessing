@@ -40,7 +40,6 @@ setup(name=PACKAGE_NAME,
       install_requires=[
           'aicsimageio>=0.4.0',
           'imageio>=2.3.0',
-          'numpy>=1.14.5',
           'Pillow>=5.2.0',
           'scipy>=1.1.0',
           'matplotlib>=2.2.2',
@@ -48,6 +47,7 @@ setup(name=PACKAGE_NAME,
           'scikit-image>=0.14.0',
           'scikit-learn',
           'scikit-fmm',
+          'numpy>=1.14.5',
           'tifffile==0.15.0'
       ],
 

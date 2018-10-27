@@ -129,6 +129,12 @@ task installDependencies {
         exec {
             environment pyEnv
             executable "${pyPip}"
+            args "install", "numpy"
+        }
+
+        exec {
+            environment pyEnv
+            executable "${pyPip}"
             args "install", "-r", "requirements.txt"
         }
     }
