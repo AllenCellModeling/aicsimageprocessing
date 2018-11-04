@@ -33,3 +33,19 @@ description = "AICS Segmentation"
 // ("https://www.python.org/dev/peps/pep-0440/")
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// This package depends on scikit-fmm. It's setup.py calls numpy incorrectly within the setup,
+// before requirements can be install - thus breaking proper python installation procedures.
+// See: https://github.com/scikit-fmm/scikit-fmm/blob/master/setup.py#L29
+
+// Hence we need to extend installDependencies to preinstall numpy before install
+// other requirements
+installDependencies {
+    doFirst {
+        exec {
+            environment = py.env
+            executable = py.pip
+            args = ["install", "numpy"]
+        }
+    }
+}
