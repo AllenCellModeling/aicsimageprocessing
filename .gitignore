@@ -17,4 +17,5 @@ venv/
 .pyc
 .pytest_cache/
 activate
+.coverage.*
 .coverage

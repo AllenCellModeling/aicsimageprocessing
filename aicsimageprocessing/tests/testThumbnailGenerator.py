@@ -3,9 +3,7 @@
 # author: Zach Crabtree zacharyc@alleninstitute.org
 
 import unittest
-
 import numpy as np
-
 from aicsimageprocessing.thumbnailGenerator import ThumbnailGenerator
 
 
@@ -34,7 +32,7 @@ class TestThumbnailGenerator(unittest.TestCase):
 
         # act, assert
         with self.assertRaises(Exception, msg="The colors array and channel_indices array are not the same length"):
-            generator = ThumbnailGenerator(colors=invalid_color_palette)
+                                ThumbnailGenerator(colors=invalid_color_palette)
 
     def test_ChannelIndicesConstructor(self):
         # arrange

@@ -8,6 +8,7 @@ from scipy.ndimage.measurements import label
 from skimage.measure import regionprops
 from skimage import morphology
 
+
 def keep_connected_components(image, low_threshold, high_threshold=None):
     """
     This will keep components that have a larger volume than low_threshold
@@ -38,6 +39,7 @@ def keep_connected_components(image, low_threshold, high_threshold=None):
         output = image.copy()
 
     return output
+
 
 def fill_nucleus_segmentation(cell_index_img, nuc_original_img):
     """
@@ -86,7 +88,6 @@ def fill_nucleus_segmentation(cell_index_img, nuc_original_img):
             # threshold and mask to get the new nuclear segmentation
             output[cropped_cell_seg == 0] = 0
 
-
             if len(output[output > 0]) > 0:
                 otsu_threshold = threshold_otsu(output[output > 0])
                 output[output <= otsu_threshold] = 0
@@ -111,4 +112,3 @@ def fill_nucleus_segmentation(cell_index_img, nuc_original_img):
                 total_out[z_slice, y_slice, x_slice] += output
 
     return total_out
-

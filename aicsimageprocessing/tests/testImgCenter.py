@@ -2,8 +2,7 @@
 import unittest
 import numpy as np
 from aicsimageprocessing.imgCenter import get_edges, crop_all, center, get_center_moves
-from random import sample, randrange
-from scipy.ndimage.measurements import center_of_mass
+from random import randrange
 
 
 class TestImgCenter(unittest.TestCase):

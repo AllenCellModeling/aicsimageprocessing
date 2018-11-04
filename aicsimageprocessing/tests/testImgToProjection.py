@@ -35,7 +35,8 @@ class TestImg2Projection(unittest.TestCase):
         self.assertTrue((imgtoprojection(test_cube, colors=[[0, 1, 1]])[0] == 0).all(), 'Color cancelling with array')
 
     def test_colorAdjust(self):
-        self.assertTrue((imgtoprojection(np.random.random((1, 5, 5, 5)), global_adjust=True)[0] > 254).any(), 'Global color adjust')
+        self.assertTrue((imgtoprojection(np.random.random((1, 5, 5, 5)), global_adjust=True)[0] > 254).any(),
+                        'Global color adjust')
 
     def test_projectAll(self):
         test_cube = np.empty((1, 5, 5, 5))

@@ -38,7 +38,7 @@ class TestTextureAtlas(unittest.TestCase):
         # metadata = atlas.get_metadata()
         # returns list of dicts
         image_dicts = atlas.atlas_list
-        output_packed = [image.metadata['channels'] for image in image_dicts]
+        output_packed = [img.metadata['channels'] for img in image_dicts]
         # assert
         self.assertEqual(packing_list, output_packed)
 
@@ -47,14 +47,13 @@ class TestTextureAtlas(unittest.TestCase):
         # arrange
         image = AICSImage("img/img40_1.ome.tif")
         packing_list = [[0], [1, 2], [3, 4]]
-        output_dir = "img/atlas/"
         prefix = "atlas"
         # act
         atlas = generate_texture_atlas(image, prefix=prefix,
                                        pack_order=packing_list)
         # assert
         metadata = atlas.get_metadata()
-        self.assertTrue(all(key in metadata for key in ("tile_width", "tile_height", "width", "height", "channels", "channel_names", "tiles", "rows", "cols", "atlas_width", "atlas_height", "images")))
+        self.assertTrue(all(key in metadata for key in ("tile_width", "tile_height", "width", "height",
+                                                        "channels", "channel_names", "tiles", "rows",
+                                                        "cols", "atlas_width", "atlas_height", "images")))
         self.assertTrue(len(metadata["channel_names"]) == metadata["channels"])
-
-

@@ -9,6 +9,7 @@ import skimage.transform as sktransform
 from aicsimageio.pngWriter import PngWriter
 from aicsimageio import AICSImage
 
+
 class TextureAtlasDims:
     def __init__(self):
         self.width = 0
@@ -38,7 +39,8 @@ class TextureAtlas:
         if len(pack_order) > 4:
             raise ValueError("An atlas with more than 4 channels ({}) cannot be created!".format(pack_order))
         if any(channel > self.aics_image.size_c for channel in pack_order):
-            raise IndexError("A channel specified in the ordering {} is out-of-bounds in the AICSImage object!".format(pack_order))
+            raise IndexError(("A channel specified in the ordering {} is out-of-bounds in"
+                              " the AICSImage object!").format(pack_order))
 
         self.pack_order = pack_order
         self.metadata = {
@@ -159,7 +161,6 @@ class TextureAtlasGroup:
 
         return dims
 
-
     def _is_valid_atlas(self, atlas):
         if atlas is None:
             return False
@@ -174,7 +175,6 @@ class TextureAtlasGroup:
             return False
         return True
 
-
     def _append(self, atlas):
         if not isinstance(atlas, TextureAtlas):
             raise ValueError("TextureAtlasGroup can only append TextureAtlas objects!")
@@ -183,13 +183,11 @@ class TextureAtlasGroup:
         else:
             raise ValueError("Attempted to add atlas that doesn't match the rest of atlasGroup")
 
-
     def get_metadata(self):
         metadata = self.dims.__dict__
         metadata["images"] = [atlas.metadata for atlas in self.atlas_list]
         metadata["name"] = self.name
         return metadata
-
 
     def save(self, output_dir, name=None):
         """
@@ -216,6 +214,7 @@ class TextureAtlasGroup:
         metadata = self.get_metadata()
         with open(os.path.join(output_dir, name + "_atlas.json"), 'w') as json_output:
             json.dump(metadata, json_output)
+
 
 def generate_texture_atlas(im, name="texture_atlas", max_edge=2048, pack_order=None):
     """

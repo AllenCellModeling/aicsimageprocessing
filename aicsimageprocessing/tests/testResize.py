@@ -59,6 +59,6 @@ class TestImgResize(unittest.TestCase):
             arr_input = tuple(randrange(0, 20) for i in range(n_dim))
             arr_output = tuple(randrange(0, 20) for i in range(n_dim))
             out = resize_to(np.empty(arr_input), arr_output)
-            self.assertEqual(out.shape, 
+            self.assertEqual(out.shape,
                              tuple(0 if a == 0 else b for a, b in zip(arr_input, arr_output)),
                              "Random Resize_to {} -> {}, got {}".format(arr_input, arr_output, out.shape))

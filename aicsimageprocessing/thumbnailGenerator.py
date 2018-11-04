@@ -18,7 +18,8 @@ def get_thresholds(image, **kwargs):
 
     :param image: CYX-dimensioned image
     :param kwargs:
-        "border_percent" : how much of the corners to ignore when calculating the threshold. Sometimes corners can be unnecessarily bright
+        "border_percent" : how much of the corners to ignore when calculating the threshold. Sometimes
+                           corners can be unnecessarily bright
                            default = .1
         "max_percent" : how much to ignore from the top intensities of the image
                         default = .998

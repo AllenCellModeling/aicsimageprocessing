@@ -10,7 +10,7 @@ def get_edges(img, bg_val=0, axis=(-3, -2, -1)):
     :param axis: axis to get the edges for. Output length will be equal to axis length.
     Default is the last three axis
     :return: tuple of the same length as axis parameter. Contains lists the contain the left and right edges
-    for each axis specified. 
+    for each axis specified.
     """
     try:
         ndim = img.ndim
@@ -51,7 +51,7 @@ def crop(img, bg_val=0, axis=(-3, -2, -1), padding=0, get_slices=False):
     :param axis: tuple or list of axis indices to crop along. Can be either positive or negative values.
     Negative values will be from the end of the array as opposed to the start. By default, it crops along the last
     three axes
-    :param padding: integer. Specifies how much of the background value to leave in the output. Will be applied 
+    :param padding: integer. Specifies how much of the background value to leave in the output. Will be applied
     on all axis that are being cropped
     :param get_slices: boolean. If True, will return the slice indices that were taken out of the original image
     along with the cropped image. Default is False

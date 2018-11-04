@@ -77,10 +77,10 @@ def crop_all(images, axis=(-3, -2, -1)):
 
 def get_center_moves(image, axes=(-3, -2, -1)):
     """
-    Calculates moves needed to center an image based on its center of mass. 
+    Calculates moves needed to center an image based on its center of mass.
     Meant to be passed in to center_image
     :param image: N-dimensional image to be used for calculation. The image will not be altered
-    :param axis: Iterable containing the axis to center the image on. Order does not affect the output. 
+    :param axis: Iterable containing the axis to center the image on. Order does not affect the output.
     Default is the last three axis (meant to be ZYX). Can be positive or negative to index from the front
     or back
     :return: List of integers, meant to be passed to center_image

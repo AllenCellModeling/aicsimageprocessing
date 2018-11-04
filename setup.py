@@ -51,7 +51,15 @@ setup(name=PACKAGE_NAME,
           'numpy>=1.14.5',
           'tifffile==0.15.0'
       ],
-
+      classifiers=[
+          "Development Status :: 4 - Beta",
+          "Programming Language :: Python :: 2",
+          "Programming Language :: Python :: 3",
+          "License :: Allen Institute Software License",
+          "Operating System :: POSIX :: Linux",
+          "Operating System :: MacOS",
+          "Topic :: Scientific/Engineering :: Image Processing"
+      ],
       # For test setup. This will allow JUnit XML output for Jenkins
       setup_requires=['pytest-runner'],
       tests_require=test_deps,

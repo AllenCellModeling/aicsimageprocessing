@@ -5,6 +5,7 @@ import math as m
 from aicsimageprocessing import isosurfaceGenerator
 from aicsimageio import AICSImage
 
+
 class TestIsosurfaceGenerator(unittest.TestCase):
 
     def setUp(self):

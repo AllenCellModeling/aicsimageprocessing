@@ -75,11 +75,11 @@ class TestAlignMajor(unittest.TestCase):
         axes = self.getRandAxes()
         # create a 3d, 4d, and 5d test image
         # rotate them all and compare the last 3 dimensions for each
-        # They should all be the same 
+        # They should all be the same
         test3d = np.mean(self.testCube, axis=0)
         test4d = self.testCube
         test5d = np.expand_dims(self.testCube, axis=0)
         angles = get_align_angles(test5d, axes)
-        outputs = align_major([test3d, test4d, test5d], angles)
+        align_major([test3d, test4d, test5d], angles)
         self.assertTrue(np.array_equal(test3d, test4d[0]), "3d equals 4d image after rotate")
         self.assertTrue(np.array_equal(test4d[0], test5d[0, 0]), "4d equals 5d image after rotate")
