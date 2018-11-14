@@ -9,6 +9,12 @@ See (3) in following link to read about versions from a single source
 https://packaging.python.org/guides/single-sourcing-package-version/#single-sourcing-the-version
 """
 
+try:
+    import numpy
+except ModuleNotFoundError:
+    raise ImportError("{} (specifically scikit-fmm) requires numpy to be "
+                      "installed prior to attempting to install!".format(PACKAGE_NAME))
+
 MODULE_VERSION = ""
 exec(open(PACKAGE_NAME + "/version.py").read())
 
