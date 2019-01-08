@@ -296,7 +296,7 @@ class ThumbnailGenerator:
             num_noise_floor_bins = 16
             composite = np.zeros((shape_out_rgb[0], output_size_dim[1], output_size_dim[2]))
             channel_indices = self.channel_indices
-            rgb_image = image[:, 0].astype('float')
+            rgb_image = []
             for i in channel_indices:
                 # subtract out the noise floor.
                 immin = image[i].min()
@@ -316,15 +316,20 @@ class ThumbnailGenerator:
                 imdbl = np.asarray(thumb).astype('double')
                 im_proj = create_projection(imdbl, 0, 'slice', slice_index=int(thumb.shape[0] // 2))
 
-                rgb_image[i] = im_proj
+                # Add the modified channel to the list of channels to composite
+                rgb_image.append(im_proj)
 
-            for i in range(len(channel_indices)):
+            # Composite the desired channels
+            # rgb_image and self.colors can safely be assumed the same length because
+            # rgb_image is the same length as self.channel_indices and an assertion
+            # is made to that effect when constructing the class
+            for channel, color in zip(rgb_image, self.colors):
                 # turn into RGB
-                rgb_out = np.expand_dims(rgb_image[i], 2)
+                rgb_out = np.expand_dims(channel, 2)
                 rgb_out = np.repeat(rgb_out, 3, 2).astype('float')
 
                 # inject color.  careful of type mismatches.
-                rgb_out *= self.colors[i]
+                rgb_out *= color
 
                 rgb_out /= np.max(rgb_out)
 
