@@ -97,7 +97,7 @@ node ("python-gradle")
 
 def gitUrl() {
     //checkout scm
-    sh(returnStdout: true, script: 'git config remote.origin.url').trim()
+    sh(returnStdout: true, script: 'curl ${BUILD_URL}/git/api/json?tree=remoteUrls | jq -r .remoteUrls[0]').trim()
 }
 
 def gitAuthor() {
