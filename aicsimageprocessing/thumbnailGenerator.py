@@ -272,7 +272,7 @@ class ThumbnailGenerator:
 
                 # resize before projection?
                 rgbproj = np.asarray(thumb)
-                rgbproj = create_projection(rgbproj, 0, self.projection, slice_index=rgbproj.shape[1] // 2)
+                rgbproj = create_projection(rgbproj, 0, self.projection, slice_index=rgbproj.shape[0] // 2)
                 rgb_out = np.expand_dims(rgbproj, 2)
                 rgb_out = np.repeat(rgb_out, 3, 2)
 
