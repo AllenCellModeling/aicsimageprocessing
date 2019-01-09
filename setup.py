@@ -61,10 +61,9 @@ setup(name=PACKAGE_NAME,
           "Development Status :: 4 - Beta",
           "Programming Language :: Python :: 2",
           "Programming Language :: Python :: 3",
-          "License :: Allen Institute Software License",
           "Operating System :: POSIX :: Linux",
           "Operating System :: MacOS",
-          "Topic :: Scientific/Engineering :: Image Processing"
+          "Topic :: Scientific/Engineering :: Bio-Informatics"
       ],
       # For test setup. This will allow JUnit XML output for Jenkins
       setup_requires=['pytest-runner'],
