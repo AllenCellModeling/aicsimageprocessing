@@ -262,7 +262,7 @@ class ThumbnailGenerator:
                 ch = self.channel_indices[i]
                 # try to subtract out the noise floor.
                 # range is chosen to ignore zeros due to masking.  alternative is to pass mask image as weights=im1[-1]
-                thumb = subtract_noise_floor(image[:, i], bins=num_noise_floor_bins)
+                thumb = subtract_noise_floor(image[:, ch], bins=num_noise_floor_bins)
                 # apply mask
                 thumb = np.multiply(thumb, image[:, self.mask_channel_index] > 0)
 
