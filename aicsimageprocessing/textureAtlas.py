@@ -189,13 +189,14 @@ class TextureAtlasGroup:
         metadata["name"] = self.name
         return metadata
 
-    def save(self, output_dir, name=None):
+    def save(self, output_dir, name=None, app_data=None):
         """
         Saves a TextureAtlasGroup into one json file and 1 to many png files. Files are named with format:
         name+'_atlas.json'
         name+'_atlas_N.png'
         :param output_dir: directory in which to write the files
         :param name: if not supplied, then use the name given when creating the TextureAtlasGroup
+        :param app_data: optional dictionary of additional data to add to json file; to be used by client application
         """
         if name is None:
             name = self.name
@@ -212,6 +213,8 @@ class TextureAtlasGroup:
             i += 1
 
         metadata = self.get_metadata()
+        if app_data is not None:
+            metadata["appData"] = app_data
         with open(os.path.join(output_dir, name + "_atlas.json"), 'w') as json_output:
             json.dump(metadata, json_output)
 
