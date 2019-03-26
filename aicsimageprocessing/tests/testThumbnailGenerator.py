@@ -45,26 +45,27 @@ def test_channel_indices_constructor(channel_indices):
     # assert
     assert generator is not None
 
+
 """make_thumbnail tests"""
 
-def test_MakeValidThumbnail(self):
+
+@pytest.mark.parametrize('thumbnail_size', [128, 256])
+@pytest.mark.parametrize('image_shape', [
+    (10, 7, 256, 256),
+    (10, 7, 128, 128),
+    (1, 4, 256, 256),
+    (1, 4, 64, 64),
+    pytest.param((1, 2, 128, 128),
+                 marks=pytest.mark.raises(exception=Exception,
+                                          match="The image did not have 3 or more channels"))
+])
+def test_thumbnail_generation(thumbnail_size, image_shape):
+    image = np.random.rand(*image_shape)
+
     # arrange
-    valid_image = np.random.rand(10, 7, 256, 256)
-    generator = ThumbnailGenerator(size=128)
+    generator = ThumbnailGenerator(size=thumbnail_size)
 
     # act
-    valid_thumbnail = generator.make_thumbnail(valid_image)
+    thumbnail = generator.make_thumbnail(image)
 
-    # assert
-    self.assertEqual(valid_thumbnail.shape, (4, 128, 128),
-                     msg="The thumbnail was rescaled to rgba channels and "
-                         "height/width with same aspect ratio of initial image")
-
-def test_MakeInvalidThumbnail(self):
-    # arrange
-    invalid_image = np.random.rand(1, 2, 128, 128)  # < 3 channels should be an invalid image
-    generator = ThumbnailGenerator(size=128)
-
-    # act, assert
-    with self.assertRaises(Exception, msg="The image did not have more than 2 channels"):
-        generator.make_thumbnail(invalid_image)
+    assert thumbnail.shape == (4, thumbnail_size, thumbnail_size)
