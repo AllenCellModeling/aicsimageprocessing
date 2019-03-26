@@ -2,66 +2,70 @@
 
 # author: Zach Crabtree zacharyc@alleninstitute.org
 
-import unittest
 import numpy as np
+import pytest
+
 from aicsimageprocessing.thumbnailGenerator import ThumbnailGenerator
 
 
-class TestThumbnailGenerator(unittest.TestCase):
+"""Constructor tests"""
 
-    def setUp(self):
-        unittest.TestCase.__init__(self)
 
-    def runTest(self):
-        # this method has to be included in a testgroup in order for it be run
-        self.assertTrue(True)
+@pytest.mark.parametrize(
+    'color_palette', [
+        [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]],
+        pytest.param([['a', 'b', 'c', 'd']], marks=pytest.mark.raises(exception=AssertionError,
+                                                                      match="Colors .*? are invalid"))
+    ]
+)
+def test_colors_constructor(color_palette):
+    # act, assert
+    generator = ThumbnailGenerator(colors=color_palette)
+    # Assert that there are rgb values for each channel in channel_indices.
+    assert generator is not None
 
-    """Constructor tests"""
 
-    def test_ColorsConstructor(self):
-        # arrange
-        valid_color_palette = [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+@pytest.mark.parametrize(
+    'channel_indices', [
+        [0, 1, 2],
 
-        # act, assert
-        generator = ThumbnailGenerator(colors=valid_color_palette)
-        self.assertIsNotNone(generator, msg="There are rgb values for each channel in channel_indices.")
+        # Channel indices is not the same size as color palette
+        pytest.param([0, 1, 2, 3], marks=pytest.mark.raises(exception=AssertionError,
+                                                            match="Colors palette is a different size .*")),
 
-    def test_InvalidColorsConstructor(self):
-        # arrange
-        invalid_color_palette = [['a', 'b', 'c', 'd']]
+        # Minimum channel index must be greater than 0
+        pytest.param([-1, -1, -1],
+                     marks=pytest.mark.raises(exception=AssertionError,
+                                              match="Minimum channel index must be greater than or equal to 0"))
+    ]
+)
+def test_channel_indices_constructor(channel_indices):
+    # act
+    generator = ThumbnailGenerator(channel_indices=channel_indices)
+    # assert
+    assert generator is not None
 
-        # act, assert
-        with self.assertRaises(Exception, msg="The colors array and channel_indices array are not the same length"):
-                                ThumbnailGenerator(colors=invalid_color_palette)
 
-    def test_ChannelIndicesConstructor(self):
-        # arrange
-        valid_channel_indices = [0, 1, 2]
-        # act
-        generator = ThumbnailGenerator(channel_indices=valid_channel_indices)
-        # assert
-        self.assertIsNotNone(generator, "There is a channel for each rgb tuple in the default parameter list")
+"""make_thumbnail tests"""
 
-    """make_thumbnail tests"""
 
-    def test_MakeValidThumbnail(self):
-        # arrange
-        valid_image = np.random.rand(10, 7, 256, 256)
-        generator = ThumbnailGenerator(size=128)
+@pytest.mark.parametrize('thumbnail_size', [128, 256])
+@pytest.mark.parametrize('image_shape', [
+    (10, 7, 256, 256),
+    (10, 7, 128, 128),
+    (1, 4, 256, 256),
+    (1, 4, 64, 64),
+    pytest.param((1, 2, 128, 128),
+                 marks=pytest.mark.raises(exception=Exception,
+                                          match="The image did not have 3 or more channels"))
+])
+def test_thumbnail_generation(thumbnail_size, image_shape):
+    image = np.random.rand(*image_shape)
 
-        # act
-        valid_thumbnail = generator.make_thumbnail(valid_image)
+    # arrange
+    generator = ThumbnailGenerator(size=thumbnail_size)
 
-        # assert
-        self.assertEqual(valid_thumbnail.shape, (4, 128, 128),
-                         msg="The thumbnail was rescaled to rgba channels and "
-                             "height/width with same aspect ratio of initial image")
+    # act
+    thumbnail = generator.make_thumbnail(image)
 
-    def test_MakeInvalidThumbnail(self):
-        # arrange
-        invalid_image = np.random.rand(1, 5, 128, 128)  # < 6 channels should be an invalid image
-        generator = ThumbnailGenerator(size=128)
-
-        # act, assert
-        with self.assertRaises(Exception, msg="The image did not have more than 6 channels"):
-            generator.make_thumbnail(invalid_image)
+    assert thumbnail.shape == (4, thumbnail_size, thumbnail_size)
