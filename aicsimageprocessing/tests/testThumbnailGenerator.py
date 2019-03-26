@@ -54,7 +54,10 @@ def test_channel_indices_constructor(channel_indices):
     (10, 7, 256, 256),
     (10, 7, 128, 128),
     (1, 4, 256, 256),
-    (1, 4, 64, 64)
+    (1, 4, 64, 64),
+    pytest.param((1, 2, 128, 128),
+                 marks=pytest.mark.raises(exception=Exception,
+                                          match="The image did not have 3 or more channels"))
 ])
 def test_thumbnail_generation(thumbnail_size, image_shape):
     image = np.random.rand(*image_shape)
