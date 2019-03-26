@@ -23,7 +23,7 @@ def readme():
         return f.read()
 
 
-test_deps = ['pytest', 'pytest-cov']
+test_deps = ['pytest', 'pytest-cov', 'pytest-raises']
 lint_deps = ['flake8']
 interactive_dev_deps = []
 extras = {

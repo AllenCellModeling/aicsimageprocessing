@@ -230,13 +230,13 @@ class ThumbnailGenerator:
         assert self.layering == "superimpose" or self.layering == "alpha-blend"
         assert self.projection == "slice" or self.projection == "max" or self.projection == "sections"
 
-        assert len(colors) == 3 and len(colors[0]) == 3
+        assert len(colors) == 3 and len(colors[0]) == 3, f"Colors {colors} are invalid"
         self.colors = colors
 
         self.size = size
 
-        assert len(colors) == len(channel_indices)
-        assert min(channel_indices) >= 0
+        assert len(colors) == len(channel_indices), f"Colors palette is a different size than the channel indices (len({colors}) != len({channel_indices}))"
+        assert min(channel_indices) >= 0, "Minimum channel index must be greater than 0"
         self.channel_indices = channel_indices
 
         assert len(channel_thresholds) == len(channel_indices)
