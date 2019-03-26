@@ -36,7 +36,7 @@ def test_colors_constructor(color_palette):
         # Minimum channel index must be greater than 0
         pytest.param([-1, -1, -1],
                      marks=pytest.mark.raises(exception=AssertionError,
-                                              match="Minimum channel index must be greater than 0"))
+                                              match="Minimum channel index must be greater than or equal to 0"))
     ]
 )
 def test_channel_indices_constructor(channel_indices):

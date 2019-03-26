@@ -236,7 +236,7 @@ class ThumbnailGenerator:
         self.size = size
 
         assert len(colors) == len(channel_indices), f"Colors palette is a different size than the channel indices (len({colors}) != len({channel_indices}))"
-        assert min(channel_indices) >= 0, "Minimum channel index must be greater than 0"
+        assert min(channel_indices) >= 0, "Minimum channel index must be greater than or equal to 0"
         self.channel_indices = channel_indices
 
         assert len(channel_thresholds) == len(channel_indices)
