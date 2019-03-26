@@ -434,8 +434,8 @@ class ThumbnailGenerator:
         """
 
         image = image.astype(np.float32)
-        # check to make sure there are 6 or more channels
-        assert image.shape[1] >= 6
+        # check to make sure there are 3 or more channels
+        assert image.shape[1] >= 3
         assert image.shape[2] > 1 and image.shape[3] > 1
         assert self.mask_channel_index <= image.shape[1]
         assert max(self.channel_indices) <= image.shape[1] - 1

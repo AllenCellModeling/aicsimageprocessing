@@ -59,9 +59,9 @@ class TestThumbnailGenerator(unittest.TestCase):
 
     def test_MakeInvalidThumbnail(self):
         # arrange
-        invalid_image = np.random.rand(1, 5, 128, 128)  # < 6 channels should be an invalid image
+        invalid_image = np.random.rand(1, 2, 128, 128)  # < 3 channels should be an invalid image
         generator = ThumbnailGenerator(size=128)
 
         # act, assert
-        with self.assertRaises(Exception, msg="The image did not have more than 6 channels"):
+        with self.assertRaises(Exception, msg="The image did not have more than 2 channels"):
             generator.make_thumbnail(invalid_image)
