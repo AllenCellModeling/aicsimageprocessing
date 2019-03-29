@@ -3,60 +3,14 @@
 # authors: Dan Toloudis danielt@alleninstitute.org
 #          Zach Crabtree zacharyc@alleninstitute.org
 
-from __future__ import print_function
+import math
+from typing import Tuple, Sequence, Union
+
 import numpy as np
-import skimage.transform as t
-import math as m
+import skimage.transform
 
-z_axis_index = 0
-_cmy = [[0.0, 1.0, 1.0], [1.0, 0.0, 1.0], [1.0, 1.0, 0.0]]
-
-
-def get_thresholds(image, **kwargs):
-    """
-    This function finds thresholds for an image in order to reduce noise and bring up the peak contrast
-
-    :param image: CYX-dimensioned image
-    :param kwargs:
-        "border_percent" : how much of the corners to ignore when calculating the threshold. Sometimes
-                           corners can be unnecessarily bright
-                           default = .1
-        "max_percent" : how much to ignore from the top intensities of the image
-                        default = .998
-        "min_percent" : what proportion of the bottom intensities of the image will be factored out
-                        default = .40
-    :return: tuple of float values, the lower and upper thresholds of the image
-    """
-    border_percent = kwargs.get("border_percent", .1)
-    max_percent = kwargs.get("max_percent", .998)
-    min_percent = kwargs.get("min_percent", .4)
-
-    # expects CYX
-    # using this allows us to ignore the bright corners of a cell image
-    im_width = image.shape[2]
-    im_height = image.shape[1]
-    left_bound = int(m.floor(border_percent * im_width))
-    right_bound = int(m.ceil((1 - border_percent) * im_width)) + 1
-    bottom_bound = int(m.floor(border_percent * im_height))
-    top_bound = int(m.ceil((1 - border_percent) * im_height)) + 1
-    cut_border = image[:, left_bound:right_bound, bottom_bound:top_bound]
-
-    immin = cut_border.min()
-    immax = cut_border.max()
-    histogram, bin_edges = np.histogram(image, bins=256, range=(immin, immax))
-    total_cut = 0
-    total_pixels = sum(histogram)
-    lower_threshold = 0
-    for i in range(len(histogram)):
-        column = histogram[i]
-        total_cut += column
-        if total_cut >= total_pixels * min_percent:
-            lower_threshold = bin_edges[i]
-            break
-
-    upper_threshold = np.max(cut_border) * max_percent
-
-    return lower_threshold, upper_threshold
+COLORS_CMY = ((0.0, 1.0, 1.0), (1.0, 0.0, 1.0), (1.0, 1.0, 0.0))
+DEFAULT_SIZE = 128
 
 
 def resize_cyx_image(image, new_size):
@@ -87,9 +41,9 @@ def resize_cyx_image(image, new_size):
 
     if scaling < 1:
         scaling = 1.0 / scaling
-        im_out = t.pyramid_expand(image, upscale=scaling, multichannel=True)
+        im_out = skimage.transform.pyramid_expand(image, upscale=scaling, multichannel=True)
     elif scaling > 1:
-        im_out = t.pyramid_reduce(image, downscale=scaling, multichannel=True)
+        im_out = skimage.transform.pyramid_reduce(image, downscale=scaling, multichannel=True)
     else:
         im_out = image
 
@@ -99,7 +53,7 @@ def resize_cyx_image(image, new_size):
     return im_out
 
 
-def create_projection(image, axis, method='max', **kwargs):
+def create_projection(image: np.ndarray, axis: int, method: str = 'max', slice_index: int = 0, sections: int = 3):
     """
     This function creates a 2D projection out of an n-dimensional image.
 
@@ -113,12 +67,8 @@ def create_projection(image, axis, method='max', **kwargs):
                    - slice will take the pixel values from the middle slice of the stack
                    - sections will split the stack into proj_sections number of sections, and take a
                    max projection for each.
-    :param kwargs:
     :return:
     """
-    slice_index = kwargs.get("slice_index", 0)
-    sections = kwargs.get("sections", 3)
-
     if method == 'max':
         image = np.max(image, axis)
     elif method == 'mean':
@@ -128,7 +78,7 @@ def create_projection(image, axis, method='max', **kwargs):
     elif method == 'slice':
         image = image[slice_index]
     elif method == 'sections':
-        separator = int(m.floor(image.shape[0] / sections))
+        separator = int(math.floor(image.shape[0] / sections))
         # stack is a 2D YX im
         stack = np.zeros(image[0].shape)
         for i in range(sections - 1):
@@ -180,39 +130,37 @@ class ThumbnailGenerator:
 
     """
 
-    def __init__(self, colors=_cmy, size=128,
-                 channel_indices=None, channel_thresholds=None, channel_multipliers=None,
-                 mask_channel_index=5, letterbox=True, **kwargs):
+    def __init__(self, colors: Sequence[Tuple[float, float, float]] = COLORS_CMY, size: int = DEFAULT_SIZE,
+                 channel_indices: Sequence[int] = None, channel_thresholds: Sequence[float] = None,
+                 channel_multipliers: Sequence[int] = None, mask_channel_index: int = 5, letterbox: bool = True,
+                 projection: str = 'max', projection_sections: int = 3, return_rgb: bool = True):
         """
         :param colors: The color palette that will be used to color each channel. The default palette
                        colors the membrane channel cyan, structure with magenta, and nucleus with yellow.
-                       Keep color-blind acccessibility in mind.
+                       Keep color-blind accessibility in mind.
 
         :param size: This constrains the image to have the X or Y dims max out at this value, but keep
                      the original aspect ratio of the image.
 
         :param channel_indices: An array of channel indices to represent the three main channels of the cell
 
-        :param mask_channel_index: The index for the segmentation channel in image that will be used to mask the thumbnail
+        :param mask_channel_index: The index for the segmentation channel in image that will be used to mask
+                                   the thumbnail
 
-        :param kwargs:
-            "layering" : The method that will be used to layer each channel's projection over each other.
-                         Options: ["superimpose", "alpha-blend"]
-                         - superimpose will overwrite pixels on the final image as it layers each channel
-                         - alpha-blend will blend the final image's pixels with each new channel layer
-
-            "projection" : The method that will be used to generate each channel's projection. This is done
+        :param projection: The method that will be used to generate each channel's projection. This is done
                            for each pixel, through the z-axis
                            Options: ["max", "slice", "sections"]
                            - max will look through each z-slice, and determine the max value for each pixel
                            - slice will take the pixel values from the middle slice of the z-stack
-                           - sections will split the zstack into proj_sections number of sections, and take a
+                           - sections will split the zstack into projection_sections number of sections, and take a
                              max projection for each.
 
-            "proj_sections" : The number of sections that will be used to determine projections, if projection="sections"
-            "old_alg" : Use the old algorithm for generating thumbnails.
-                    False -> use new parameters
-                    True -> use old algorithm
+        :param projection_sections: The number of sections that will be used to determine projections,
+                                    if projection="sections"
+
+        :param return_rgb: Return an array that has been clipped and cast as uint8 to make it RGB compatible.
+                           Setting this to False will return the float array that is (generally) bounded between
+                           0 and 1.
         """
 
         if channel_indices is None:
@@ -222,33 +170,37 @@ class ThumbnailGenerator:
         if channel_multipliers is None:
             channel_multipliers = [1, 1, 1]
 
-        self.layering = kwargs.get("layering", "alpha-blend")
-        self.projection = kwargs.get("projection", "max")
-        self.proj_sections = kwargs.get("proj_sections", 3)
-        self.old_alg = kwargs.get("old_alg", False)
-
-        assert self.layering == "superimpose" or self.layering == "alpha-blend"
-        assert self.projection == "slice" or self.projection == "max" or self.projection == "sections"
-
-        assert len(colors) > 0 and all(len(color) == 3 for color in colors), f"Colors {colors} are invalid"
         self.colors = colors
-
         self.size = size
-
-        assert len(colors) == len(channel_indices), f"Colors palette is a different size than the channel indices (len({colors}) != len({channel_indices}))"
-        assert min(channel_indices) >= 0, "Minimum channel index must be greater than or equal to 0"
         self.channel_indices = channel_indices
-
-        assert len(channel_thresholds) >= len(channel_indices)
         self.channel_thresholds = channel_thresholds
-
-        assert len(channel_multipliers) >= len(channel_indices)
         self.channel_multipliers = channel_multipliers
-
         self.mask_channel_index = mask_channel_index
         self.letterbox = letterbox
+        self.projection = projection
+        self.projection_sections = projection_sections
+        self.return_rgb = return_rgb
 
-    def _old_algorithm(self, image, new_size, output_size_dim, apply_cell_mask=False):
+        self._validate_settings()
+
+    def _validate_settings(self):
+        assert self.projection in ["slice", "max",  "sections"]
+
+        assert len(self.colors) > 0 and all(len(color) == 3 for color in self.colors), \
+            f"Colors {self.colors} are invalid"
+
+        assert len(self.colors) == len(self.channel_indices), (
+            f"Colors palette is a different size than the channel indices "
+            f"(len({self.colors}) != len({self.channel_indices}))"
+        )
+        assert min(self.channel_indices) >= 0, "Minimum channel index must be greater than or equal to 0"
+
+        assert len(self.channel_thresholds) >= len(self.channel_indices)
+
+        assert len(self.channel_multipliers) >= len(self.channel_indices)
+
+    def _make_thumbnail(self, image: np.ndarray, new_size: Union[Tuple[int, int, int], np.ndarray],
+                        output_size_dim: Tuple[int, int, int], apply_cell_mask: bool = False):
         if apply_cell_mask:
             shape_out_rgb = new_size
 
@@ -341,12 +293,13 @@ class ThumbnailGenerator:
             # returns a CYX array for the pngwriter
             return composite.transpose((0, 2, 1))
 
-    def _get_output_shape(self, im_size):
+    def _get_output_shape(self, im_size: Union[Tuple[int, int, int], np.ndarray]) -> Tuple[int, int, int]:
         """
         This method will take in a 3D ZYX shape and return a 3D XYC of the final thumbnail
 
         :param im_size: 3D ZYX shape of original image
-        :return: CYX dims for a resized thumbnail where the maximum X or Y dimension is the one specified in the constructor.
+        :return: CYX dims for a resized thumbnail where the maximum X or Y dimension is the one
+                 specified in the constructor.
         """
         # size down to this edge size, maintaining aspect ratio.
         max_edge = self.size
@@ -355,73 +308,9 @@ class ThumbnailGenerator:
                                max_edge if im_size[1] > im_size[2] else max_edge * (float(im_size[1]) / im_size[2]),
                                max_edge if im_size[1] < im_size[2] else max_edge * (float(im_size[2]) / im_size[1])
                                ))
-        return 4 if not self.old_alg else 3, int(np.ceil(shape_out[2])), int(np.ceil(shape_out[1]))
+        return 3, int(np.ceil(shape_out[2])), int(np.ceil(shape_out[1]))
 
-    def _layer_projections(self, projection_array, mask_array):
-        """
-        This method will take in a list of 2D XY projections and layer them according to the method specified in the constructor
-
-        :param projection_array: list of 2D XY projections (for each channel of a cell image)
-        :return: single 3D XYC image where C is RGB values for each pixel
-        """
-        # array cannot be empty or have more channels than the color array
-        assert projection_array
-        assert len(projection_array) == len(self.colors)
-        layered_image = np.zeros((4, projection_array[0].shape[1], projection_array[0].shape[0]))
-
-        for i in range(len(projection_array)):
-
-            projection = projection_array[i]
-            # normalize channel projection
-            projection /= np.max(projection)
-            assert projection.shape == projection_array[0].shape
-
-            projection *= self.channel_multipliers[i]
-            projection[projection > 1] = 1
-
-            # 4 channels - rgba
-            rgb_out = np.expand_dims(projection, 2)
-            rgb_out = np.repeat(rgb_out, 4, 2).astype('float')
-            # inject color.  careful of type mismatches.
-            rgb_out = (rgb_out * (self.colors[i] + [1.0])).transpose((2, 1, 0))
-            # since there is a projection for each channel, there will be a threshold for each projection.
-            min_percent = self.channel_thresholds[i]
-            lower_threshold, upper_threshold = get_thresholds(rgb_out, min_percent=min_percent)
-
-            def superimpose(source_pixel, dest_pixel):
-                pixel_weight = np.mean(source_pixel)
-                if lower_threshold < pixel_weight < upper_threshold:
-                    return source_pixel
-                else:
-                    return dest_pixel
-
-            def alpha_blend(source_pixel, dest_pixel):
-                pixel_weight = np.mean(source_pixel)
-                if lower_threshold < pixel_weight < upper_threshold:
-                    # this alpha value is based on the intensity of the pixel in the channel's original projection
-                    alpha = projection[x, y]
-                    # premultiplied alpha
-                    return source_pixel + (1 - alpha) * dest_pixel
-                else:
-                    return dest_pixel
-
-            layering_method = superimpose if self.layering == "superimpose" else alpha_blend
-
-            for x in range(rgb_out.shape[2]):
-                for y in range(rgb_out.shape[1]):
-                    # these slicing methods in C channel are getting the rgb data *only* and ignoring the alpha values
-                    src_px = rgb_out[0:3, y, x]
-                    dest_px = layered_image[0:3, y, x]
-                    layered_image[0:3, y, x] = layering_method(source_pixel=src_px, dest_pixel=dest_px)
-                    # if mask_array has elements and the pixel is 0
-                    if mask_array and mask_array[i][x, y] == 0.0:
-                        layered_image[3, y, x] = 0.0
-                    else:
-                        layered_image[3, y, x] = 1.0
-
-        return layered_image
-
-    def make_thumbnail(self, image, apply_cell_mask=False):
+    def make_thumbnail(self, image: np.ndarray, apply_cell_mask: bool = False) -> np.ndarray:
         """
         This method is the primary interface with the ThumbnailGenerator. It can be used many times with different
         images in order to save the configuration that was specified at the beginning of the generator.
@@ -444,44 +333,8 @@ class ThumbnailGenerator:
         assert len(im_size) == 3
         shape_out_rgb = self._get_output_shape(im_size)
 
-        final_size = [shape_out_rgb[0], self.size, self.size] if self.letterbox else shape_out_rgb
+        final_size = (shape_out_rgb[0], self.size, self.size) if self.letterbox else shape_out_rgb
 
-        if self.old_alg:
-            return self._old_algorithm(image, shape_out_rgb, final_size, apply_cell_mask=apply_cell_mask)
+        thumbnail = self._make_thumbnail(image, shape_out_rgb, final_size, apply_cell_mask=apply_cell_mask)
 
-        if apply_cell_mask:
-            for i in range(len(self.channel_indices)):
-                image[:, i] = np.multiply(image[:, i], image[:, self.mask_channel_index] > 0)
-
-        num_noise_floor_bins = 256
-        projection_array = []
-        mask_array = []
-        projection_type = self.projection
-        for i in self.channel_indices:
-            # don't use max projections on the fullfield images... they get too messy
-            if not apply_cell_mask:
-                projection_type = 'slice'
-            # subtract out the noise floor.
-            image /= np.max(image)
-            thumb = subtract_noise_floor(image[:, i], bins=num_noise_floor_bins)
-            thumb = np.asarray(thumb).astype('double')
-            im_proj = create_projection(thumb, 0, projection_type, slice_index=int(thumb.shape[0] // 2),
-                                        sections=self.proj_sections)
-            if apply_cell_mask:
-                mask_proj = create_projection(image[:, self.mask_channel_index], 0, method="max")
-                mask_array.append(mask_proj)
-            projection_array.append(im_proj)
-
-        layered_image = self._layer_projections(projection_array, mask_array)
-        comp = resize_cyx_image(layered_image, shape_out_rgb)
-        comp /= np.max(comp)
-        comp[comp < 0] = 0
-
-        if self.letterbox:
-            composite = np.zeros(final_size)
-            x0, x1, y0, y1 = _get_letterbox_bounds(final_size, shape_out_rgb)
-            composite[:, x0:x1, y0:y1] = comp
-            comp = composite
-
-        # returns a CYX array for the png writer
-        return comp
+        return thumbnail

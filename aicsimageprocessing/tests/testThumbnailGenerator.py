@@ -60,12 +60,12 @@ def test_channel_indices_constructor(channel_indices):
                                           match="The image did not have 3 or more channels"))
 ])
 def test_thumbnail_generation(thumbnail_size, image_shape):
-    image = np.random.rand(*image_shape)
+    image = np.random.randint(low=1, high=2000, size=image_shape)
 
     # arrange
-    generator = ThumbnailGenerator(size=thumbnail_size)
+    generator = ThumbnailGenerator(size=thumbnail_size, projection='slice')
 
     # act
     thumbnail = generator.make_thumbnail(image)
 
-    assert thumbnail.shape == (4, thumbnail_size, thumbnail_size)
+    assert thumbnail.shape == (3, thumbnail_size, thumbnail_size)
