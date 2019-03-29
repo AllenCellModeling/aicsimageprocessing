@@ -230,7 +230,7 @@ class ThumbnailGenerator:
         assert self.layering == "superimpose" or self.layering == "alpha-blend"
         assert self.projection == "slice" or self.projection == "max" or self.projection == "sections"
 
-        assert len(colors) == 3 and len(colors[0]) == 3, f"Colors {colors} are invalid"
+        assert len(colors) > 0 and all(len(color) == 3 for color in colors), f"Colors {colors} are invalid"
         self.colors = colors
 
         self.size = size
@@ -239,10 +239,10 @@ class ThumbnailGenerator:
         assert min(channel_indices) >= 0, "Minimum channel index must be greater than or equal to 0"
         self.channel_indices = channel_indices
 
-        assert len(channel_thresholds) == len(channel_indices)
+        assert len(channel_thresholds) >= len(channel_indices)
         self.channel_thresholds = channel_thresholds
 
-        assert len(channel_multipliers) == len(channel_indices)
+        assert len(channel_multipliers) >= len(channel_indices)
         self.channel_multipliers = channel_multipliers
 
         self.mask_channel_index = mask_channel_index
@@ -258,7 +258,7 @@ class ThumbnailGenerator:
 
             num_noise_floor_bins = 32
             composite = np.zeros((shape_out_rgb[0], output_size_dim[1], output_size_dim[2]))
-            for i in range(3):
+            for i in range(len(self.channel_indices)):
                 ch = self.channel_indices[i]
                 # try to subtract out the noise floor.
                 # range is chosen to ignore zeros due to masking.  alternative is to pass mask image as weights=im1[-1]
