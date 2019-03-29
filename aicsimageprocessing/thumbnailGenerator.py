@@ -37,8 +37,6 @@ def resize_cyx_image(image, new_size):
 
     image = image.transpose((2, 1, 0))
 
-    # im_out = t.resize(image, new_size)
-
     if scaling < 1:
         scaling = 1.0 / scaling
         im_out = skimage.transform.pyramid_expand(image, upscale=scaling, multichannel=True)
@@ -65,8 +63,10 @@ def create_projection(image: np.ndarray, axis: int, method: str = 'max', slice_i
                    - mean will look through each axis-slice, and determine the mean value for each pixel
                    - sum will look through each axis-slice, and sum all pixels together
                    - slice will take the pixel values from the middle slice of the stack
-                   - sections will split the stack into proj_sections number of sections, and take a
+                   - sections will split the stack into `sections` number of sections, and take a
                    max projection for each.
+    :param slice_index: index to use for the 'slice' projection method
+    :param sections: number of sections to select and max-intensity project for the 'sections' projection method
     :return:
     """
     if method == 'max':
@@ -136,7 +136,7 @@ class ThumbnailGenerator:
                  projection: str = 'max', projection_sections: int = 3, return_rgb: bool = True):
         """
         :param colors: The color palette that will be used to color each channel. The default palette
-                       colors the membrane channel cyan, structure with magenta, and nucleus with yellow.
+                       colors are magenta=membrane, nucleus=cyan, structure=yellow.
                        Keep color-blind accessibility in mind.
 
         :param size: This constrains the image to have the X or Y dims max out at this value, but keep
