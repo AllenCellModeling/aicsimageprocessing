@@ -200,7 +200,7 @@ class ThumbnailGenerator:
         assert len(self.channel_multipliers) >= len(self.channel_indices)
 
     def _make_thumbnail(self, image: np.ndarray, new_size: Union[Tuple[int, int, int], np.ndarray],
-                        output_size_dim: Tuple[int, int, int], apply_cell_mask: bool = False):
+                        output_size_dim: Tuple[int, int, int], apply_cell_mask: bool = False) -> np.ndarray:
         if apply_cell_mask:
             shape_out_rgb = new_size
 
@@ -337,4 +337,11 @@ class ThumbnailGenerator:
 
         thumbnail = self._make_thumbnail(image, shape_out_rgb, final_size, apply_cell_mask=apply_cell_mask)
 
-        return thumbnail
+        if not self.return_rgb:
+            return thumbnail
+
+        # Clip the values of the float array between 0 and 1, rescale to the bit depth of uint8,
+        # and cast to uint8
+        rgb_thumbnail = (thumbnail.clip(0, 1) * 255.).astype(np.uint8)
+
+        return rgb_thumbnail
