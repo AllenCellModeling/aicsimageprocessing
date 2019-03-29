@@ -161,9 +161,9 @@ def subtract_noise_floor(image, bins=256):
 
 # assumes sizes are c, x, y so the 1 and 2 indices are the x and y
 def _get_letterbox_bounds(full_size, scaled_size):
-    x0 = (full_size[1]-scaled_size[1]) // 2
+    x0 = (full_size[1] - scaled_size[1]) // 2
     x1 = x0 + scaled_size[1]
-    y0 = (full_size[2]-scaled_size[2]) // 2
+    y0 = (full_size[2] - scaled_size[2]) // 2
     y1 = y0 + scaled_size[2]
     return x0, x1, y0, y1
 
@@ -357,7 +357,6 @@ class ThumbnailGenerator:
                                ))
         return 4 if not self.old_alg else 3, int(np.ceil(shape_out[2])), int(np.ceil(shape_out[1]))
 
-
     def _layer_projections(self, projection_array, mask_array):
         """
         This method will take in a list of 2D XY projections and layer them according to the method specified in the constructor
@@ -484,5 +483,5 @@ class ThumbnailGenerator:
             composite[:, x0:x1, y0:y1] = comp
             comp = composite
 
-# returns a CYX array for the png writer
+        # returns a CYX array for the png writer
         return comp
