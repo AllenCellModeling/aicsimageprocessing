@@ -230,7 +230,7 @@ class ThumbnailGenerator:
         assert self.layering == "superimpose" or self.layering == "alpha-blend"
         assert self.projection == "slice" or self.projection == "max" or self.projection == "sections"
 
-        assert len(colors) > 0 and len(colors[0]) == 3, f"Colors {colors} are invalid"
+        assert len(colors) > 0 and all(len(color) == 3 for color in colors), f"Colors {colors} are invalid"
         self.colors = colors
 
         self.size = size
