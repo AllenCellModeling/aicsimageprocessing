@@ -314,7 +314,7 @@ class ThumbnailGenerator:
                 thumb /= thmax
 
                 imdbl = np.asarray(thumb).astype('double')
-                im_proj = create_projection(imdbl, 0, 'slice', slice_index=int(thumb.shape[0] // 2))
+                im_proj = create_projection(imdbl, 0, self.projection, slice_index=int(thumb.shape[0] // 2))
 
                 # Add the modified channel to the list of channels to composite
                 rgb_image.append(im_proj)
