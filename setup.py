@@ -55,7 +55,6 @@ setup(name=PACKAGE_NAME,
           'scikit-learn',
           'scikit-fmm',
           'numpy>=1.14.5',
-          'tifffile==0.15.0'
       ],
       classifiers=[
           "Development Status :: 4 - Beta",
