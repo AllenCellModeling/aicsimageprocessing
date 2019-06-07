@@ -5,6 +5,7 @@ from aicsimageprocessing import get_module_version, thumbnailGenerator
 import argparse
 import logging
 import numpy
+import platform
 import sys
 import traceback
 from PIL import Image
@@ -71,21 +72,24 @@ def make_one_thumbnail(infile, outfile, channels, colors, size, projection='max'
                                                       mask_channel_index=mask_channel,
                                                       colors=colors,
                                                       projection=projection)
-    # take zeroth time, and transpose z and c
-    ffthumb = generator.make_thumbnail(imagedata[0].transpose(axistranspose), apply_cell_mask=apply_mask)
+    # take zeroth time, and transpose projection axis and c
+    thumbnail = generator.make_thumbnail(imagedata[0].transpose(axistranspose), apply_cell_mask=apply_mask)
     if label:
-        # font_path = "/Windows/Fonts/consola.ttf"
-        font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+        # Untested on MacOS
+        if platform.system() == "Windows":
+            font_path = "/Windows/Fonts/consola.ttf"
+        else:
+            font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
         font = ImageFont.truetype(font_path, 12)
-        img = Image.fromarray(ffthumb.transpose((1, 2, 0)))
+        img = Image.fromarray(thumbnail.transpose((1, 2, 0)))
         draw = ImageDraw.Draw(img)
         draw.text((2, 2), label, (255, 255, 255), font=font)
-        ffthumb = numpy.array(img)
-        ffthumb = ffthumb.transpose(2, 0, 1)
+        thumbnail = numpy.array(img)
+        thumbnail = thumbnail.transpose(2, 0, 1)
 
     with aicsimageio.PngWriter(file_path=outfile, overwrite_file=True) as writer:
-        writer.save(ffthumb)
-    return ffthumb
+        writer.save(thumbnail)
+    return thumbnail
 
 
 def main():
