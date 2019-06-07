@@ -64,6 +64,8 @@ def make_one_thumbnail(infile, outfile, channels, colors, size, projection='max'
         axistranspose = (2, 0, 1, 3)
     elif axis == 1:  # Y
         axistranspose = (3, 0, 2, 1)
+    else:
+        raise ValueError(f'Unknown axis value: {axis}')
 
     image = aicsimageio.AICSImage(infile)
     imagedata = image.get_image_data()
