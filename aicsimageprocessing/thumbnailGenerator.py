@@ -3,11 +3,16 @@
 # authors: Dan Toloudis danielt@alleninstitute.org
 #          Zach Crabtree zacharyc@alleninstitute.org
 
-import math
-from typing import Tuple, Sequence, Union
+import aicsimageio
 
+import math
 import numpy as np
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
+import platform
 import skimage.transform
+from typing import Tuple, Sequence, Union
 
 COLORS_CMY = ((0.0, 1.0, 1.0), (1.0, 0.0, 1.0), (1.0, 1.0, 0.0))
 DEFAULT_SIZE = 128
@@ -345,3 +350,41 @@ class ThumbnailGenerator:
         rgb_thumbnail = (thumbnail.clip(0, 1) * 255.).astype(np.uint8)
 
         return rgb_thumbnail
+
+
+def make_one_thumbnail(infile, outfile, channels, colors, size, projection='max', axis=2, apply_mask=False, mask_channel=0, label=''):
+    axistranspose = (1, 0, 2, 3)
+    if axis == 2:  # Z
+        axistranspose = (1, 0, 2, 3)
+    elif axis == 0:  # X
+        axistranspose = (2, 0, 1, 3)
+    elif axis == 1:  # Y
+        axistranspose = (3, 0, 2, 1)
+    else:
+        raise ValueError(f'Unknown axis value: {axis}')
+
+    image = aicsimageio.AICSImage(infile)
+    imagedata = image.get_image_data()
+    generator = ThumbnailGenerator(channel_indices=channels,
+                                   size=size,
+                                   mask_channel_index=mask_channel,
+                                   colors=colors,
+                                   projection=projection)
+    # take zeroth time, and transpose projection axis and c
+    thumbnail = generator.make_thumbnail(imagedata[0].transpose(axistranspose), apply_cell_mask=apply_mask)
+    if label:
+        # Untested on MacOS
+        if platform.system() == "Windows":
+            font_path = "/Windows/Fonts/consola.ttf"
+        else:
+            font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+        font = ImageFont.truetype(font_path, 12)
+        img = Image.fromarray(thumbnail.transpose((1, 2, 0)))
+        draw = ImageDraw.Draw(img)
+        draw.text((2, 2), label, (255, 255, 255), font=font)
+        thumbnail = numpy.array(img)
+        thumbnail = thumbnail.transpose(2, 0, 1)
+
+    with aicsimageio.PngWriter(file_path=outfile, overwrite_file=True) as writer:
+        writer.save(thumbnail)
+    return thumbnail
