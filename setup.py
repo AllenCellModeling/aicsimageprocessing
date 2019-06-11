@@ -42,6 +42,7 @@ setup(name=PACKAGE_NAME,
       packages=find_packages(exclude=['tests', '*.tests', '*.tests.*']),
       entry_points={
           "console_scripts": [
+              "make_thumbnail=aicsimageprocessing.bin.make_thumbnail:main"
           ]
       },
       install_requires=[
