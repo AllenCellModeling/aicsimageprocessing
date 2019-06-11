@@ -12,7 +12,7 @@ from PIL import ImageFont
 from PIL import ImageDraw
 import platform
 import skimage.transform
-from typing import Tuple, Sequence, Union
+from typing import List, Tuple, Sequence, Union
 
 COLORS_CMY = ((0.0, 1.0, 1.0), (1.0, 0.0, 1.0), (1.0, 1.0, 0.0))
 DEFAULT_SIZE = 128
@@ -352,7 +352,16 @@ class ThumbnailGenerator:
         return rgb_thumbnail
 
 
-def make_one_thumbnail(infile, outfile, channels, colors, size, projection='max', axis=2, apply_mask=False, mask_channel=0, label=''):
+def make_one_thumbnail(infile: str,
+                       outfile: str,
+                       channels: List[int],
+                       colors: List[Tuple[float, float, float]],
+                       size: int,
+                       projection: str = 'max',
+                       axis: int = 2,
+                       apply_mask: bool = False,
+                       mask_channel: int = 0,
+                       label: str = ''):
     axistranspose = (1, 0, 2, 3)
     if axis == 2:  # Z
         axistranspose = (1, 0, 2, 3)
