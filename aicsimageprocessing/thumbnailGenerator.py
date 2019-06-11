@@ -382,7 +382,7 @@ def make_one_thumbnail(infile, outfile, channels, colors, size, projection='max'
         img = Image.fromarray(thumbnail.transpose((1, 2, 0)))
         draw = ImageDraw.Draw(img)
         draw.text((2, 2), label, (255, 255, 255), font=font)
-        thumbnail = numpy.array(img)
+        thumbnail = np.array(img)
         thumbnail = thumbnail.transpose(2, 0, 1)
 
     with aicsimageio.PngWriter(file_path=outfile, overwrite_file=True) as writer:
