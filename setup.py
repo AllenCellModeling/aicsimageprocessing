@@ -46,7 +46,7 @@ setup(name=PACKAGE_NAME,
           ]
       },
       install_requires=[
-          'aicsimageio>=0.4.0',
+          'aicsimageio>=0.4.0<3.0.0',
           'imageio>=2.3.0',
           'Pillow>=5.2.0',
           'scipy>=1.1.0',
