@@ -40,8 +40,9 @@ class Mesh:
             writer.write("g Object001\n")
             for v in self.verts:
                 writer.write("v  {:.6f}  {:.6f}  {:.6f}\n".format(v[0], v[1], v[2]))
-            for n in self.normals:
-                writer.write("vn  {:.6f}  {:.6f}  {:.6f}\n".format(n[0], n[1], n[2]))
+            if self.normals:
+                for n in self.normals:
+                    writer.write("vn  {:.6f}  {:.6f}  {:.6f}\n".format(n[0], n[1], n[2]))
             for f in self.faces:
                 # obj file vertex arrays are not 0-indexed :( must add 1 in order to reference the right vertices
                 writer.write("f  {}  {}  {}\n".format(f[0]+1, f[1]+1, f[2]+1))
