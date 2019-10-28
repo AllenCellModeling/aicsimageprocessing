@@ -4,7 +4,7 @@
 
 import unittest
 
-from aicsimageio.tifReader import TifReader
+from oldaicsimageio.tifReader import TifReader
 from aicsimageprocessing.segmentation import nucleusSegmentation
 
 

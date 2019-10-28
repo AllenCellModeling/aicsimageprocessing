@@ -2,7 +2,7 @@
 
 from skimage import measure
 import os
-from aicsimageio import AICSImage
+from oldaicsimageio import AICSImage
 
 
 class Mesh:
