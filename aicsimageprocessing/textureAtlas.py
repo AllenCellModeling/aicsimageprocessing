@@ -6,8 +6,8 @@ import os
 import json
 import skimage.transform as sktransform
 
-from aicsimageio.pngWriter import PngWriter
-from aicsimageio import AICSImage
+from oldaicsimageio.pngWriter import PngWriter
+from oldaicsimageio import AICSImage
 
 
 class TextureAtlasDims:

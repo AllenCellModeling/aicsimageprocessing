@@ -1,5 +1,5 @@
 pipeline {
-    parameters { booleanParam(name: 'create_release', defaultValue: false, 
+    parameters { booleanParam(name: 'create_release', defaultValue: false,
                               description: 'If true, create a release artifact and publish to ' +
                                            'the artifactory release PyPi or public PyPi.') }
     options {
@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage ("create virtualenv") {
             steps {
-                this.notifyBB("INPROGRESS")
+                this.notifyAICSBitBucket("INPROGRESS")
                 sh "./gradlew -i cleanAll installCIDependencies"
             }
         }
@@ -42,20 +42,20 @@ pipeline {
         stage ("report on tests") {
             steps {
                 junit "build/test_report.xml"
-                
+
                 cobertura autoUpdateHealth: false,
                     autoUpdateStability: false,
-                    coberturaReportFile: 'build/coverage.xml', 
+                    coberturaReportFile: 'build/coverage.xml',
                     failUnhealthy: false,
                     failUnstable: false,
                     maxNumberOfBuilds: 0,
                     onlyStable: false,
                     sourceEncoding: 'ASCII',
                     zoomCoverageChart: false
-                
+
 
             }
-        } 
+        }
 
         stage ("publish release") {
             when {
@@ -88,31 +88,37 @@ pipeline {
     }
     post {
         always {
-            notifyBuildOnSlack(currentBuild.result, currentBuild.previousBuild?.result)
-            this.notifyBB(currentBuild.result)
+            this.notifyBuildOnSlack(currentBuild.result, currentBuild.previousBuild?.result)
+            this.notifyAICSBitBucket(currentBuild.result)
         }
-        cleanup {
-            deleteDir()
+        failure {
+            this.notifyEmail('failed')
+        }
+        unstable {
+            this.notifyEmail('unstable')
+        }
+        fixed {
+            this.notifyEmail('back to normal')
         }
     }
 }
 
-def notifyBB(String state) {
+def notifyAICSBitBucket(String state) {
     // on success, result is null
     state = state ?: "SUCCESS"
-    
+
     if (state == "SUCCESS" || state == "FAILURE") {
         currentBuild.result = state
     }
 
-    notifyBitbucket commitSha1: "${GIT_COMMIT}", 
-                credentialsId: 'aea50792-dda8-40e4-a683-79e8c83e72a6', 
-                disableInprogressNotification: false, 
-                considerUnstableAsSuccess: true, 
+    notifyBitbucket commitSha1: "${GIT_COMMIT}",
+                credentialsId: 'aea50792-dda8-40e4-a683-79e8c83e72a6',
+                disableInprogressNotification: false,
+                considerUnstableAsSuccess: true,
                 ignoreUnverifiedSSLPeer: false,
-                includeBuildNumberInKey: false, 
-                prependParentProjectKey: false, 
-                projectKey: 'SW', 
+                includeBuildNumberInKey: false,
+                prependParentProjectKey: false,
+                projectKey: 'SW',
                 stashServerBaseUrl: 'https://aicsbitbucket.corp.alleninstitute.org'
 }
 
@@ -132,6 +138,55 @@ def notifyBuildOnSlack(String buildStatus = 'STARTED', String priorStatus) {
                 message: "BACK_TO_NORMAL: '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
         )
     }
+}
+
+def notifyEmail(String status) {
+    // Send email only to the commit authors since last successful build.
+    // Param: status - This should be one of [ 'failed', 'unstable', 'back to normal' ]
+    def subject = "JOB ${status.toUpperCase()}: ${env.JOB_NAME}"
+    def title = ""
+    if (status == "failed") {
+        title = "<h3 style='color: #ff0000;'>Failed Job</h3>"
+    }
+    else if (status == "unstable") {
+        title = "<h3 style='color: #cc6600;'>Unstable Job</h3>"
+    }
+    else {
+        title = "<h3 style='color: #009933;'>Job Back To Normal</h3>"
+    }
+    def body = """
+    ${title}
+    <table>
+        <tr>
+            <td align="right"><b>Job:</b></td>
+            <td><a href="${JOB_URL}">${env.JOB_NAME}</a></td>
+        </tr>
+        <tr>
+            <td align="right"><b>Build:</b></td>
+            <td><a href="${env.BUILD_URL}">Number [${env.BUILD_NUMBER}]</a> <a href="${env.BUILD_URL}console">(Console Output)</a></td>
+        </tr>
+        <tr>
+            <td align="right"><b>Branch:</b></td>
+            <td>${env.BRANCH_NAME}</td>
+        </tr>
+        <tr>
+            <td align="right"><b>Git URL:</b></td>
+            <td><a href="${env.GIT_URL}">${env.GIT_URL}</a></td>
+        </tr>
+        <tr>
+            <td align="right"><b>Git Commit:</b></td>
+            <td>${env.GIT_COMMIT}</td>
+        </tr>
+    </table>
+    """
+    emailext (
+        subject: "${subject}",
+        body: "${body}",
+        recipientProviders: [
+            [$class: 'DevelopersRecipientProvider'],
+            [$class: 'RequesterRecipientProvider']
+        ]
+    )
 }
 
 def gitAuthor() {
