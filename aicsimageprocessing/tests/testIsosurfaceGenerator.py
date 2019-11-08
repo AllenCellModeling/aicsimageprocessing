@@ -29,8 +29,9 @@ class TestIsosurfaceGenerator(unittest.TestCase):
                     distance_from_center = m.sqrt(x_dist + y_dist + z_dist)
                     if distance_from_center <= radius:
                         bounding_cube[x, y, z] = 1
-        sphere = AICSImage(bounding_cube, dims="XYZ")
-        mesh = isosurfaceGenerator.generate_mesh(sphere, isovalue=.99)
+        with AICSImage(bounding_cube, dims="XYZ") as sphere:
+            mesh = isosurfaceGenerator.generate_mesh(sphere, isovalue=.99)
+
         mesh.save_as_obj("img/test_sphere.obj")
 
     @staticmethod
@@ -42,13 +43,13 @@ class TestIsosurfaceGenerator(unittest.TestCase):
         # set all pixels/voxels between 1 and size-1 to 1
         # (leave a single row/col buffer around entire cube shape)
         cube[1:-1, 1:-1, 1:-1] = 1
-        cube = AICSImage(cube, dims="XYZ")
-        mesh = isosurfaceGenerator.generate_mesh(cube, isovalue=0)
+        with AICSImage(cube, dims="XYZ") as cubeimage:
+            mesh = isosurfaceGenerator.generate_mesh(cubeimage, isovalue=0)
         mesh.save_as_obj("img/test_cube.obj")
 
     @staticmethod
     @unittest.skip("temporarily disabled")
     def testCellImage():
-        cell_image = AICSImage("./img/img40_1.ome.tif")
-        mesh = isosurfaceGenerator.generate_mesh(cell_image, channel=4)
+        with AICSImage("./img/img40_1.ome.tif") as cell_image:
+            mesh = isosurfaceGenerator.generate_mesh(cell_image, channel=4)
         mesh.save_as_obj("img/test_file.obj")

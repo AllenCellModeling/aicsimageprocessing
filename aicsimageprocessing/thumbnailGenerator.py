@@ -372,15 +372,15 @@ def make_one_thumbnail(infile: str,
     else:
         raise ValueError(f'Unknown axis value: {axis}')
 
-    image = aicsimageio.AICSImage(infile)
-    imagedata = image.get_image_data()
+    with aicsimageio.AICSImage(infile) as image:
+        imagedata = image.get_image_data("CZYX", T=0)
     generator = ThumbnailGenerator(channel_indices=channels,
                                    size=size,
                                    mask_channel_index=mask_channel,
                                    colors=colors,
                                    projection=projection)
     # take zeroth time, and transpose projection axis and c
-    thumbnail = generator.make_thumbnail(imagedata[0].transpose(axistranspose), apply_cell_mask=apply_mask)
+    thumbnail = generator.make_thumbnail(imagedata.transpose(axistranspose), apply_cell_mask=apply_mask)
     if label:
         # Untested on MacOS
         if platform.system() == "Windows":

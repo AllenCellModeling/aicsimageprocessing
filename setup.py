@@ -18,6 +18,7 @@ except ModuleNotFoundError:
 MODULE_VERSION = ""
 exec(open(PACKAGE_NAME + "/version.py").read())
 
+
 def readme():
     with open('README.md') as f:
         return f.read()
@@ -46,7 +47,7 @@ setup(name=PACKAGE_NAME,
           ]
       },
       install_requires=[
-          'aicsimageio>=0.4.0<3.0.0',
+          'aicsimageio>=3.0.6',
           'imageio>=2.3.0',
           'Pillow>=5.2.0',
           'scipy>=1.3.0',
@@ -56,7 +57,7 @@ setup(name=PACKAGE_NAME,
           'scikit-learn',
           'scikit-fmm==2019.1.30',
           'numpy>=1.16.4',
-          'vtk==8.1.2',
+          # 'vtk==8.1.2',
       ],
       classifiers=[
           "Development Status :: 4 - Beta",

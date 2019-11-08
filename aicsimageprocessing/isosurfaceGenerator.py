@@ -65,4 +65,3 @@ def generate_mesh(image, isovalue=0, channel=0):
     # Use marching cubes to obtain the surface mesh of the membrane wall
     verts, faces, normals, values = measure.marching_cubes(image_stack, isovalue, allow_degenerate=False)
     return Mesh(verts, faces, normals, values)
-

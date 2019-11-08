@@ -6,7 +6,7 @@ import os
 import json
 import skimage.transform as sktransform
 
-from aicsimageio.pngWriter import PngWriter
+from aicsimageio.writers import PngWriter
 from aicsimageio import AICSImage
 
 
@@ -79,8 +79,7 @@ class TextureAtlas:
         atlas = 255.0 * (atlas-mn) / (mx-mn)
         # atlas = np.interp(atlas, (min(0, atlas.min()), atlas.max()), (0.0, 255.0))
         atlas = atlas.astype(np.uint8)
-        # transpose to YX for input into CYX arrays
-        return atlas.transpose((1, 0))
+        return atlas
 
 
 class TextureAtlasGroup:
@@ -94,7 +93,7 @@ class TextureAtlasGroup:
         max_channels_per_png = 3
         if pack_order is None:
             # if no pack order is specified, pack 4 channels per png and move on
-            channel_list = [c for c in range(aics_image.shape[1])]
+            channel_list = list(range(aics_image.size_c))
             pack_order = [channel_list[x:x+max_channels_per_png] for x in range(0, len(channel_list), max_channels_per_png)]
         png_count = 0
         for png in pack_order:
@@ -149,7 +148,10 @@ class TextureAtlasGroup:
         else:
             dims.channel_names = ['CH_'+str(i) for i in range(aics_image.size_c)]
 
-        physical_pixel_size = aics_image.get_physical_pixel_size()
+        try:
+            physical_pixel_size = aics_image.reader.get_physical_pixel_size()
+        except AttributeError:
+            physical_pixel_size = (1.0, 1.0, 1.0)
         if physical_pixel_size is not None:
             dims.pixel_size_x = physical_pixel_size[0]
             dims.pixel_size_y = physical_pixel_size[1]
@@ -169,9 +171,9 @@ class TextureAtlasGroup:
         if atlas.atlas.shape is None:
             return False
         shape = atlas.atlas.shape
-        if self.dims.atlas_width != shape[2]:
+        if self.dims.atlas_width != shape[1]:
             return False
-        if self.dims.atlas_height != shape[1]:
+        if self.dims.atlas_height != shape[2]:
             return False
         return True
 
