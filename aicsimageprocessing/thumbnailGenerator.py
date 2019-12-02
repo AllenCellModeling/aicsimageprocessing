@@ -3,7 +3,7 @@
 # authors: Dan Toloudis danielt@alleninstitute.org
 #          Zach Crabtree zacharyc@alleninstitute.org
 
-import aicsimageio
+import oldaicsimageio
 
 import math
 import numpy as np
@@ -394,6 +394,6 @@ def make_one_thumbnail(infile: str,
         thumbnail = np.array(img)
         thumbnail = thumbnail.transpose(2, 0, 1)
 
-    with aicsimageio.PngWriter(file_path=outfile, overwrite_file=True) as writer:
+    with oldaicsimageio.PngWriter(file_path=outfile, overwrite_file=True) as writer:
         writer.save(thumbnail)
     return thumbnail
