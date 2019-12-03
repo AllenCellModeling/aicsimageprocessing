@@ -245,7 +245,7 @@ class ThumbnailGenerator:
             # renormalize
             composite /= composite.max()
             # return as cyx for pngwriter
-            return composite.transpose((0, 2, 1))
+            return composite
         else:
             image = image.transpose((1, 0, 2, 3))
             shape_out_rgb = new_size
@@ -296,7 +296,7 @@ class ThumbnailGenerator:
                 composite[:, x0:x1, y0:y1] += rgb_out
 
             # returns a CYX array for the pngwriter
-            return composite.transpose((0, 2, 1))
+            return composite
 
     def _get_output_shape(self, im_size: Union[Tuple[int, int, int], np.ndarray]) -> Tuple[int, int, int]:
         """
