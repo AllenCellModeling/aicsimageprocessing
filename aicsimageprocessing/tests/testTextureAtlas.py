@@ -2,7 +2,7 @@
 
 import unittest
 
-from oldaicsimageio import AICSImage
+from aicsimageio import AICSImage
 from aicsimageprocessing.textureAtlas import generate_texture_atlas
 
 
