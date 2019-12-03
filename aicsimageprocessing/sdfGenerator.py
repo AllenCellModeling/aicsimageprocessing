@@ -24,9 +24,6 @@ def make_vtkvolume(npvol):
     # The following two functions describe how the data is stored and the dimensions of the array it is stored in.
     # I have to admit however, that I honestly dont know the difference between SetDataExtent() and SetWholeExtent() although
     # VTK complains if not both are used.
-    # TODO: make sure shape[0] is first or last here:
-    # dataImporter.SetDataExtent(0, npvol.shape[0]-1, 0, npvol.shape[1]-1, 0, npvol.shape[2]-1)
-    # dataImporter.SetWholeExtent(0, npvol.shape[0]-1, 0, npvol.shape[1]-1, 0, npvol.shape[2]-1)
     dataImporter.SetDataExtent(0, npvol.shape[2]-1, 0, npvol.shape[1]-1, 0, npvol.shape[0]-1)
     dataImporter.SetWholeExtent(0, npvol.shape[2]-1, 0, npvol.shape[1]-1, 0, npvol.shape[0]-1)
     dataImporter.Update()
@@ -40,14 +37,7 @@ def make_vtkpolydata(verts, faces, normals):
     vtkpoints.SetData(numpy_to_vtk(verts))
     vtkpolydata.SetPoints(vtkpoints)
 
-    # n = vtk.vtkFloatArray()
-    # n.SetNumberOfComponents(3)
-    # n.SetNumberOfTuples(normals.shape[0])
-    # for i in range(normals.shape[0]):
-    #     n.SetTuple3(i, normals[i][0], normals[i][1], normals[i][2])
-    # n2 = numpy_to_vtk(normals)
-    # pointData = vtkpolydata.GetPointData()
-    # pointData.SetNormals(n2)
+    # TODO insert normals
 
     # Convert to a vtk array
     vtkcells = vtk.vtkCellArray()
@@ -83,7 +73,6 @@ def _generate_mesh_vtkmcubes(im, isovalue):
     # Flying Edges is WAYYYY faster than marching cubes, from vtk.
     # need to compare outputs.  poly count is similar and still 5x the other methods shown.
     vmc = vtk.vtkFlyingEdges3D()
-    # vmc = vtk.vtkMarchingCubes()
     vmc.SetInputData(vtkdataimporter.GetOutput())
     vmc.ComputeNormalsOn()
     vmc.ComputeGradientsOff()
@@ -185,9 +174,7 @@ def save_mesh_vtk(outpath, vtkpolydata):
     array = points.GetData()
     numpy_points = vtk_to_numpy(array)
     numpy_faces = vtk_iterate_cells(vtkpolydata)
-    # cells = vtkpolydata.GetPolys()
-    # array = cells.GetData()
-    # numpy_faces = vtk_to_numpy(array)
+    # TODO extract normals and maybe uvs too.
     m = isosurfaceGenerator.Mesh(numpy_points, numpy_faces, None, None)
     m.save_as_obj(outpath)
     end = time.perf_counter()
@@ -195,7 +182,6 @@ def save_mesh_vtk(outpath, vtkpolydata):
 
 
 def obj_to_sdf(filepath, volume_res):
-    # scene = pywavefront.Wavefront(filepath)
     reader = vtk.vtkOBJReader()
     reader.SetFileName(filepath)
     reader.Update()
@@ -233,13 +219,9 @@ def volume_to_sdf(im, isovalue=0, method=0):
         sdf = _generate_sdf_skfmm(im, isovalue)
         return sdf
     elif method == 2:
-        # v, t = generate_mesh_pymcubes(im, isovalue)
-        # v, t, n, values = generate_mesh_scikitmcubes(im, isovalue)
         vpolydata = _generate_mesh_vtkmcubes(im, isovalue)
-        # save_mesh_vtk("vtk.obj", vpolydata)
         sdf = _generate_sdf_vtkmesh(vpolydata, im)
         return sdf
-        # save_sdf("vtk_sdf.ome.tiff", sdf)
 
 
 def volume_to_obj(im, isovalue, outpath, method=0):
@@ -273,13 +255,6 @@ def combine_sdf(A, Amask, B, Bmask):
     sub = -np.minimum(Aabs, Babs)
     # invert the spaces that should be positive, in the intersecting "empty" space
     sub = np.where(inter, -sub, sub)
-
-    # Afilled = (Amask == 1)
-    # Bfilled = (Bmask == 1)
-    # interfilled = Bfilled * Afilled
-    # submax = -np.maximum(Aabs, Babs)
-
-    # sub = np.where(interfilled, -submax, sub)
 
     submask = np.logical_or(Amask > 0, Bmask > 0).astype(float)
 
