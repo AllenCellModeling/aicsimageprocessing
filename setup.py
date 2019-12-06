@@ -48,16 +48,17 @@ setup(name=PACKAGE_NAME,
           ]
       },
       install_requires=[
-          'oldaicsimageio',     # 'aicsimageio>=0.4.0<3.0.0',
+          'aicsimageio>=3.0.6',
           'imageio>=2.3.0',
           'Pillow>=5.2.0',
-          'scipy>=1.1.0',
-          'matplotlib>=2.2.2',
+          'scipy>=1.3.0',
+          'matplotlib>=3.1.1',
           # get >=2.2.3 when available, because of https://github.com/matplotlib/matplotlib/pull/10867
-          'scikit-image>=0.14.0',
+          'scikit-image>=0.15.0',
           'scikit-learn',
-          'scikit-fmm',
-          'numpy>=1.14.5',
+          'scikit-fmm==2019.1.30',
+          'numpy>=1.16.4',
+          # 'vtk==8.1.2',
       ],
       classifiers=[
           "Development Status :: 4 - Beta",

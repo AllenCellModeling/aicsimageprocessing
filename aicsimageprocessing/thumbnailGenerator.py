@@ -3,7 +3,7 @@
 # authors: Dan Toloudis danielt@alleninstitute.org
 #          Zach Crabtree zacharyc@alleninstitute.org
 
-import oldaicsimageio
+import aicsimageio
 
 import math
 import numpy as np
@@ -245,7 +245,7 @@ class ThumbnailGenerator:
             # renormalize
             composite /= composite.max()
             # return as cyx for pngwriter
-            return composite.transpose((0, 2, 1))
+            return composite
         else:
             image = image.transpose((1, 0, 2, 3))
             shape_out_rgb = new_size
@@ -296,7 +296,7 @@ class ThumbnailGenerator:
                 composite[:, x0:x1, y0:y1] += rgb_out
 
             # returns a CYX array for the pngwriter
-            return composite.transpose((0, 2, 1))
+            return composite
 
     def _get_output_shape(self, im_size: Union[Tuple[int, int, int], np.ndarray]) -> Tuple[int, int, int]:
         """
@@ -372,15 +372,15 @@ def make_one_thumbnail(infile: str,
     else:
         raise ValueError(f'Unknown axis value: {axis}')
 
-    image = oldaicsimageio.AICSImage(infile)
-    imagedata = image.get_image_data()
+    with aicsimageio.AICSImage(infile) as image:
+        imagedata = image.get_image_data("CZYX", T=0)
     generator = ThumbnailGenerator(channel_indices=channels,
                                    size=size,
                                    mask_channel_index=mask_channel,
                                    colors=colors,
                                    projection=projection)
     # take zeroth time, and transpose projection axis and c
-    thumbnail = generator.make_thumbnail(imagedata[0].transpose(axistranspose), apply_cell_mask=apply_mask)
+    thumbnail = generator.make_thumbnail(imagedata.transpose(axistranspose), apply_cell_mask=apply_mask)
     if label:
         # Untested on MacOS
         if platform.system() == "Windows":
@@ -394,6 +394,6 @@ def make_one_thumbnail(infile: str,
         thumbnail = np.array(img)
         thumbnail = thumbnail.transpose(2, 0, 1)
 
-    with oldaicsimageio.PngWriter(file_path=outfile, overwrite_file=True) as writer:
+    with aicsimageio.writers.PngWriter(file_path=outfile, overwrite_file=True) as writer:
         writer.save(thumbnail)
     return thumbnail

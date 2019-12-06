@@ -2,7 +2,7 @@
 
 from skimage import measure
 import os
-from oldaicsimageio import AICSImage
+from aicsimageio import AICSImage
 
 
 class Mesh:
@@ -40,8 +40,9 @@ class Mesh:
             writer.write("g Object001\n")
             for v in self.verts:
                 writer.write("v  {:.6f}  {:.6f}  {:.6f}\n".format(v[0], v[1], v[2]))
-            for n in self.normals:
-                writer.write("vn  {:.6f}  {:.6f}  {:.6f}\n".format(n[0], n[1], n[2]))
+            if self.normals:
+                for n in self.normals:
+                    writer.write("vn  {:.6f}  {:.6f}  {:.6f}\n".format(n[0], n[1], n[2]))
             for f in self.faces:
                 # obj file vertex arrays are not 0-indexed :( must add 1 in order to reference the right vertices
                 writer.write("f  {}  {}  {}\n".format(f[0]+1, f[1]+1, f[2]+1))
@@ -64,4 +65,3 @@ def generate_mesh(image, isovalue=0, channel=0):
     # Use marching cubes to obtain the surface mesh of the membrane wall
     verts, faces, normals, values = measure.marching_cubes(image_stack, isovalue, allow_degenerate=False)
     return Mesh(verts, faces, normals, values)
-
