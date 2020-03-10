@@ -8,7 +8,6 @@ from scipy.ndimage.measurements import center_of_mass
 
 
 class TestFlip(unittest.TestCase):
-
     def test_getFlipsCalc(self):
         for i in range(5):
             test = np.zeros((3, 10, 10, 10))
@@ -17,7 +16,11 @@ class TestFlip(unittest.TestCase):
             for a in test_flips:
                 test = np.flip(test, a)
             calc_flips = get_flips(test, "+++")
-            self.assertEqual(sorted(test_flips), sorted(calc_flips), "Flip calc test: {}, {}".format(test_flips, calc_flips))
+            self.assertEqual(
+                sorted(test_flips),
+                sorted(calc_flips),
+                "Flip calc test: {}, {}".format(test_flips, calc_flips),
+            )
 
     def test_getFlipsInput(self):
         test = np.zeros((3, 10, 10, 10))
@@ -43,7 +46,10 @@ class TestFlip(unittest.TestCase):
         flips = get_flips(test, "---")
         res = flip(test, flips)
         res_com = center_of_mass(res)
-        self.assertTrue(all(r < t for r, t in zip(res_com[1:], test_com[1:])), "Center of mass should move")
+        self.assertTrue(
+            all(r < t for r, t in zip(res_com[1:], test_com[1:])),
+            "Center of mass should move",
+        )
 
     def test_flipList(self):
         test = np.zeros((3, 10, 10, 10))

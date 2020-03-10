@@ -23,7 +23,9 @@ def get_edges(img, bg_val=0, axis=(-3, -2, -1)):
     except TypeError:
         raise ValueError("All values in axis must be integers")
     except IndexError:
-        raise ValueError("All axis must be integers in the range of {} to {}".format(-ndim, ndim-1))
+        raise ValueError(
+            "All axis must be integers in the range of {} to {}".format(-ndim, ndim - 1)
+        )
     for a_i, a in enumerate(axis):
         axis_slice = [slice(None, None)] * ndim
         axis_length = img.shape[a] - 1
@@ -31,13 +33,21 @@ def get_edges(img, bg_val=0, axis=(-3, -2, -1)):
         for s_i in range(axis_length):
             axis_slice[a] = s_i
             # iterate through until we find a slice that contains values other than bg_val,
-            if not np.all(np.isnan(img[tuple(axis_slice)]) if np.isnan(bg_val) else img[tuple(axis_slice)] == bg_val):
+            if not np.all(
+                np.isnan(img[tuple(axis_slice)])
+                if np.isnan(bg_val)
+                else img[tuple(axis_slice)] == bg_val
+            ):
                 ends_list[a_i][0] = s_i
                 break
         # loop from back to find max
         for s_i in range(axis_length, 0, -1):
             axis_slice[a] = s_i
-            if not np.all(np.isnan(img[tuple(axis_slice)]) if np.isnan(bg_val) else img[tuple(axis_slice)] == bg_val):
+            if not np.all(
+                np.isnan(img[tuple(axis_slice)])
+                if np.isnan(bg_val)
+                else img[tuple(axis_slice)] == bg_val
+            ):
                 ends_list[a_i][1] = s_i + 1
                 break
     return ends_list
@@ -60,7 +70,7 @@ def crop(img, bg_val=0, axis=(-3, -2, -1), padding=0, get_slices=False):
     """
     # check that padding is a positive integer
     if not isinstance(padding, int) or padding < 0:
-        raise ValueError('padding must be a positive integer')
+        raise ValueError("padding must be a positive integer")
     # get_edges will raise ValueErrors if parameters are bad
     edges = get_edges(img, bg_val=bg_val, axis=axis)
     # list of lists representing slice endpoints. Item i refers to the
@@ -70,8 +80,10 @@ def crop(img, bg_val=0, axis=(-3, -2, -1), padding=0, get_slices=False):
     for a, edge in zip(axis, edges):
         ends_list[a] = edge
     # add in padding
-    ends_list = [[max(0, ends[0] - padding), min(length, ends[1] + padding)]
-                 for length, ends in zip(img.shape, ends_list)]
+    ends_list = [
+        [max(0, ends[0] - padding), min(length, ends[1] + padding)]
+        for length, ends in zip(img.shape, ends_list)
+    ]
     crop_slices = tuple(slice(*axis_slice) for axis_slice in ends_list)
     if get_slices:
         return (img[crop_slices].copy(), tuple(ends_list))

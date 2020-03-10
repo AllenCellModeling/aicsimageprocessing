@@ -7,7 +7,6 @@ from aicsimageprocessing.backgroundCrop import crop, get_edges
 
 
 class TestBackgroundCrop(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.testImage = np.zeros((3, 10, 10, 10))
@@ -22,8 +21,16 @@ class TestBackgroundCrop(unittest.TestCase):
             crop(self.testImage, axis=0)
 
     def test_cropOutputs(self):
-        self.assertEqual(crop(self.testImage, 2).shape, (3, 10, 10, 10), "Nothing cropped when crop value not found")
-        self.assertEqual(crop(self.testImage).shape, (3, 3, 3, 3), "Cropped output is in expected shape")
+        self.assertEqual(
+            crop(self.testImage, 2).shape,
+            (3, 10, 10, 10),
+            "Nothing cropped when crop value not found",
+        )
+        self.assertEqual(
+            crop(self.testImage).shape,
+            (3, 3, 3, 3),
+            "Cropped output is in expected shape",
+        )
 
     def test_getEdges(self):
         # run test 5 times
@@ -35,17 +42,43 @@ class TestBackgroundCrop(unittest.TestCase):
                 continue
             test[tuple([slice(None, None)] + list(slice(*e) for e in ends))] = 1
             edges = get_edges(test)
-            self.assertEqual(ends, edges, "Edges " + str(edges) + " found for " + str(ends))
+            self.assertEqual(
+                ends, edges, "Edges " + str(edges) + " found for " + str(ends)
+            )
 
     def test_getCropSlices(self):
         cropped, slice_indices = crop(self.testImage, 0, get_slices=True)
-        self.assertEqual(cropped.shape, (3, 3, 3, 3), "Cropped output is expected shape when returning slices")
-        self.assertEqual(slice_indices, ([0, 3], [3, 6], [3, 6], [3, 6]), "Slice indices match expected values")
+        self.assertEqual(
+            cropped.shape,
+            (3, 3, 3, 3),
+            "Cropped output is expected shape when returning slices",
+        )
+        self.assertEqual(
+            slice_indices,
+            ([0, 3], [3, 6], [3, 6], [3, 6]),
+            "Slice indices match expected values",
+        )
 
     def test_cropAxis(self):
-        self.assertEqual(crop(self.testImage, 0, (-2, -1)).shape, (3, 10, 3, 3), "Crop only specified axes")
-        self.assertEqual(crop(self.testImage, 0, tuple()).shape, (3, 10, 10, 10), "Crop skipped when no axis specified")
+        self.assertEqual(
+            crop(self.testImage, 0, (-2, -1)).shape,
+            (3, 10, 3, 3),
+            "Crop only specified axes",
+        )
+        self.assertEqual(
+            crop(self.testImage, 0, tuple()).shape,
+            (3, 10, 10, 10),
+            "Crop skipped when no axis specified",
+        )
 
     def test_cropPadding(self):
-        self.assertEqual(crop(self.testImage, 0, padding=1).shape, (3, 5, 5, 5), "Crops to expected shape with padding")
-        self.assertEqual(crop(self.testImage, 0, padding=100).shape, (3, 10, 10, 10), "Crops correctly with large padding")
+        self.assertEqual(
+            crop(self.testImage, 0, padding=1).shape,
+            (3, 5, 5, 5),
+            "Crops to expected shape with padding",
+        )
+        self.assertEqual(
+            crop(self.testImage, 0, padding=100).shape,
+            (3, 10, 10, 10),
+            "Crops correctly with large padding",
+        )

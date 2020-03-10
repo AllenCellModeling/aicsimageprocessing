@@ -41,7 +41,7 @@ def background_sub(img, mask=None, method="mean"):
     :return: numpy array, copy of input image with background subtracted out
     """
     # apply mask if there is one
-    func_map = {'mean': _mean, 'common': _most_common, 'median': _median}
+    func_map = {"mean": _mean, "common": _most_common, "median": _median}
     if method not in func_map:
         raise ValueError("Invalid method")
     sub_method = func_map[method]

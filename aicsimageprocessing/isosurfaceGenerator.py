@@ -31,7 +31,7 @@ class Mesh:
         :param file_path: The filepath to the saved file
         """
         if not file_path.endswith(".obj"):
-            if file_path.rfind('.') != -1:
+            if file_path.rfind(".") != -1:
                 file_path = os.path.splitext(file_path)[0] + ".obj"
             else:
                 file_path += ".obj"
@@ -42,10 +42,12 @@ class Mesh:
                 writer.write("v  {:.6f}  {:.6f}  {:.6f}\n".format(v[0], v[1], v[2]))
             if self.normals:
                 for n in self.normals:
-                    writer.write("vn  {:.6f}  {:.6f}  {:.6f}\n".format(n[0], n[1], n[2]))
+                    writer.write(
+                        "vn  {:.6f}  {:.6f}  {:.6f}\n".format(n[0], n[1], n[2])
+                    )
             for f in self.faces:
                 # obj file vertex arrays are not 0-indexed :( must add 1 in order to reference the right vertices
-                writer.write("f  {}  {}  {}\n".format(f[0]+1, f[1]+1, f[2]+1))
+                writer.write("f  {}  {}  {}\n".format(f[0] + 1, f[1] + 1, f[2] + 1))
 
 
 def generate_mesh(image, isovalue=0, channel=0):
@@ -60,8 +62,12 @@ def generate_mesh(image, isovalue=0, channel=0):
     if not isinstance(image, AICSImage):
         raise ValueError("Meshes can only be generated with AICSImage objects!")
     if channel >= image.size_c:
-        raise IndexError("Channel provided for mesh generation is out of bounds for image data!")
+        raise IndexError(
+            "Channel provided for mesh generation is out of bounds for image data!"
+        )
     image_stack = image.get_image_data("ZYX", C=channel)
     # Use marching cubes to obtain the surface mesh of the membrane wall
-    verts, faces, normals, values = measure.marching_cubes(image_stack, isovalue, allow_degenerate=False)
+    verts, faces, normals, values = measure.marching_cubes(
+        image_stack, isovalue, allow_degenerate=False
+    )
     return Mesh(verts, faces, normals, values)

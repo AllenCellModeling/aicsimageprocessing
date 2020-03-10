@@ -4,7 +4,6 @@ from aicsimageprocessing.backgroundSub import background_sub as bg_sub
 
 
 class TestBackgroundSub(unittest.TestCase):
-
     def test_positiveOutput(self):
         methods = ["mean", "median", "common"]
         # perform subtraction on random input with a random method
@@ -12,7 +11,9 @@ class TestBackgroundSub(unittest.TestCase):
         for _ in range(5):
             method = methods[np.random.randint(len(methods))]
             test = bg_sub(np.random.randint(255, size=(3, 10, 10, 10)), method=method)
-            self.assertTrue(np.all(test >= 0), "No negative values for {} method".format(method))
+            self.assertTrue(
+                np.all(test >= 0), "No negative values for {} method".format(method)
+            )
 
     def test_methodInput(self):
         with self.assertRaises(ValueError, msg="Invalid method check"):
@@ -22,13 +23,17 @@ class TestBackgroundSub(unittest.TestCase):
         n = 9
         testImage = np.arange(n + 1)
         res = bg_sub(testImage, method="mean")
-        self.assertTrue(np.max(res) == n - np.mean(testImage), "Mean background subtraction")
+        self.assertTrue(
+            np.max(res) == n - np.mean(testImage), "Mean background subtraction"
+        )
 
     def test_median(self):
         n = 9
         testImage = np.arange(n + 1)
         res = bg_sub(testImage, method="median")
-        self.assertTrue(np.max(res) == n - (n + 1) // 2, "Median background subtraction")
+        self.assertTrue(
+            np.max(res) == n - (n + 1) // 2, "Median background subtraction"
+        )
 
     def test_common(self):
         n = 9

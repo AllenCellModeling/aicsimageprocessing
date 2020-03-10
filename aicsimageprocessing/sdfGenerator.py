@@ -24,8 +24,12 @@ def make_vtkvolume(npvol):
     # The following two functions describe how the data is stored and the dimensions of the array it is stored in.
     # I have to admit however, that I honestly dont know the difference between SetDataExtent() and SetWholeExtent() although
     # VTK complains if not both are used.
-    dataImporter.SetDataExtent(0, npvol.shape[2]-1, 0, npvol.shape[1]-1, 0, npvol.shape[0]-1)
-    dataImporter.SetWholeExtent(0, npvol.shape[2]-1, 0, npvol.shape[1]-1, 0, npvol.shape[0]-1)
+    dataImporter.SetDataExtent(
+        0, npvol.shape[2] - 1, 0, npvol.shape[1] - 1, 0, npvol.shape[0] - 1
+    )
+    dataImporter.SetWholeExtent(
+        0, npvol.shape[2] - 1, 0, npvol.shape[1] - 1, 0, npvol.shape[0] - 1
+    )
     dataImporter.Update()
     return dataImporter
 
@@ -88,9 +92,13 @@ def _generate_mesh_vtkmcubes(im, isovalue):
 
 def _generate_mesh_scikitmcubes(im, isovalue):
     start = time.perf_counter()
-    verts, faces, normals, values = measure.marching_cubes_lewiner(im, level=isovalue, step_size=1)
+    verts, faces, normals, values = measure.marching_cubes_lewiner(
+        im, level=isovalue, step_size=1
+    )
     end = time.perf_counter()
-    print(f"Generate mesh with skimage.measure.marching_cubes_lewiner: {end-start} seconds")
+    print(
+        f"Generate mesh with skimage.measure.marching_cubes_lewiner: {end-start} seconds"
+    )
     print(f"{len(faces)} polygons")
     return verts, faces, normals, values
 
@@ -123,12 +131,10 @@ def _generate_sdf2_vtkmesh(vtkpolydata, im):
     start = time.perf_counter()
     pdd = vtk.vtkSignedDistance()
     pdd.SetInputData(vtkpolydata)
-    pdd.SetRadius(0.5*max(im.shape[2], im.shape[1], im.shape[0]))
+    pdd.SetRadius(0.5 * max(im.shape[2], im.shape[1], im.shape[0]))
     pdd.SetDimensions(im.shape[2], im.shape[1], im.shape[0])
     pdd.SetBounds(
-        0, im.shape[2],
-        0, im.shape[1],
-        0, im.shape[0],
+        0, im.shape[2], 0, im.shape[1], 0, im.shape[0],
     )
     pdd.Update()
     vtkimagedata = pdd.GetOutput()
@@ -194,7 +200,11 @@ def obj_to_sdf(filepath, volume_res):
     xform.PostMultiply()
     xform.Identity()
     xform.Translate(-bounds[0], -bounds[2], -bounds[4])
-    xform.Scale(volume_res[0]/(bounds[1]-bounds[0]), volume_res[1]/(bounds[3]-bounds[2]), volume_res[2]/(bounds[5]-bounds[4]))
+    xform.Scale(
+        volume_res[0] / (bounds[1] - bounds[0]),
+        volume_res[1] / (bounds[3] - bounds[2]),
+        volume_res[2] / (bounds[5] - bounds[4]),
+    )
     xformoperator = vtk.vtkTransformPolyDataFilter()
     xformoperator.SetTransform(xform)
     xformoperator.SetInputConnection(reader.GetOutputPort())
@@ -243,8 +253,8 @@ def volume_to_obj(im, isovalue, outpath, method=0):
 def combine_sdf(A, Amask, B, Bmask):
     start = time.perf_counter()
 
-    Aspace = (Amask == 0)
-    Bspace = (Bmask == 0)
+    Aspace = Amask == 0
+    Bspace = Bmask == 0
 
     inter = Bspace * Aspace
 

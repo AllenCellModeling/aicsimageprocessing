@@ -11,9 +11,12 @@ def resize(orig, factor, method="nearest"):
     "bilinear", and "cubic". Default is "nearest"
     :return: n-dimen numpy array
     """
-    method_dict = {'nearest': 0, 'bilinear': 1, 'cubic': 2}
+    method_dict = {"nearest": 0, "bilinear": 1, "cubic": 2}
     if method.lower() not in method_dict:
-        raise ValueError("Invalid interpolation method. Options are: " + ", ".join(method_dict.keys()))
+        raise ValueError(
+            "Invalid interpolation method. Options are: "
+            + ", ".join(method_dict.keys())
+        )
     try:
         return zoom(orig, factor, order=method_dict[method.lower()])
     except RuntimeError:
@@ -33,8 +36,10 @@ def resize_to(orig, out_size, method="nearest"):
     try:
         if len(orig.shape) != len(out_size):
             raise ValueError("Factor sequence length does not match input length")
-        factors = tuple(0 if in_length == 0 else float(out_length) / in_length
-                        for out_length, in_length in zip(out_size, orig.shape))
+        factors = tuple(
+            0 if in_length == 0 else float(out_length) / in_length
+            for out_length, in_length in zip(out_size, orig.shape)
+        )
     except TypeError:
         # thrown if out_size is not an iterable or doesn't contain numbers
         raise ValueError("Invalid type for out_size")

@@ -31,15 +31,17 @@ def get_flips(img, sec, axes=(-3, -2, -1)):
     for side, axis in zip(sec, axes):
         try:
             # if we want the center of mass on the upper half
-            if side == '+':
+            if side == "+":
                 if com[axis] < (img.shape[axis] // 2):
                     flips.append(axis)
             # if we want it on the lower half
-            elif side == '-':
+            elif side == "-":
                 if com[axis] > (img.shape[axis] // 2):
                     flips.append(axis)
             else:
-                raise ValueError("Invalid sector char '{}', must be '+' or '-'".format(side))
+                raise ValueError(
+                    "Invalid sector char '{}', must be '+' or '-'".format(side)
+                )
         except IndexError:
             raise ValueError("Out of range axis value " + str(axis))
         except TypeError:

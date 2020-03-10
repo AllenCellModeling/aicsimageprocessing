@@ -7,7 +7,6 @@ from aicsimageio import AICSImage
 
 
 class TestIsosurfaceGenerator(unittest.TestCase):
-
     def setUp(self):
         unittest.TestCase.__init__(self)
 
@@ -18,19 +17,21 @@ class TestIsosurfaceGenerator(unittest.TestCase):
     @staticmethod
     @unittest.skip("temporarily disabled")
     def testSphere(radius=30):
-        bounding_cube = np.zeros((radius * 2 + 3, radius * 2 + 3, radius * 2 + 3)).astype(np.float32)
+        bounding_cube = np.zeros(
+            (radius * 2 + 3, radius * 2 + 3, radius * 2 + 3)
+        ).astype(np.float32)
         center = bounding_cube.shape[0] // 2
         for x in range(bounding_cube.shape[0]):
             for y in range(bounding_cube.shape[1]):
                 for z in range(bounding_cube.shape[2]):
-                    x_dist = (x-center) ** 2
-                    y_dist = (y-center) ** 2
-                    z_dist = (z-center) ** 2
+                    x_dist = (x - center) ** 2
+                    y_dist = (y - center) ** 2
+                    z_dist = (z - center) ** 2
                     distance_from_center = m.sqrt(x_dist + y_dist + z_dist)
                     if distance_from_center <= radius:
                         bounding_cube[x, y, z] = 1
         with AICSImage(bounding_cube, dims="XYZ") as sphere:
-            mesh = isosurfaceGenerator.generate_mesh(sphere, isovalue=.99)
+            mesh = isosurfaceGenerator.generate_mesh(sphere, isovalue=0.99)
 
         mesh.save_as_obj("img/test_sphere.obj")
 

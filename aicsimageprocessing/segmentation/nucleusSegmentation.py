@@ -55,7 +55,9 @@ def fill_nucleus_segmentation(cell_index_img, nuc_original_img):
     nuc_original_img = nuc_original_img.astype(np.float64)
     original_max = np.max(nuc_original_img)
     original_min = np.min(nuc_original_img)
-    nuc_original_img = (nuc_original_img - original_min) / (original_max - original_min) * 255
+    nuc_original_img = (
+        (nuc_original_img - original_min) / (original_max - original_min) * 255
+    )
     total_out = np.zeros(nuc_original_img.shape)
 
     for cell_value in range(1, cell_index_img.max() + 1):
@@ -64,13 +66,28 @@ def fill_nucleus_segmentation(cell_index_img, nuc_original_img):
         # if a cell exists with this cell_value
         if len(cell_indices[0]) > 0:
 
-            z_indices, y_indices, x_indices = cell_indices[0], cell_indices[1], cell_indices[2]
+            z_indices, y_indices, x_indices = (
+                cell_indices[0],
+                cell_indices[1],
+                cell_indices[2],
+            )
             # creates buffer of 10 pixels/slices around the cell, or stops at the boundaries of the original image
-            x_slice = slice(max(1, -10+min(x_indices)), min(10+max(x_indices), cell_index_img.shape[2]))
-            y_slice = slice(max(1, -10+min(y_indices)), min(10+max(y_indices), cell_index_img.shape[1]))
-            z_slice = slice(max(1, -10+min(z_indices)), min(10+max(z_indices), cell_index_img.shape[0]))
+            x_slice = slice(
+                max(1, -10 + min(x_indices)),
+                min(10 + max(x_indices), cell_index_img.shape[2]),
+            )
+            y_slice = slice(
+                max(1, -10 + min(y_indices)),
+                min(10 + max(y_indices), cell_index_img.shape[1]),
+            )
+            z_slice = slice(
+                max(1, -10 + min(z_indices)),
+                min(10 + max(z_indices), cell_index_img.shape[0]),
+            )
             # crop and mask the whole cell segmentation
-            cropped_cell_seg = cell_index_img[z_slice, y_slice, x_slice].astype(np.float64).copy()
+            cropped_cell_seg = (
+                cell_index_img[z_slice, y_slice, x_slice].astype(np.float64).copy()
+            )
             cropped_cell_seg[cropped_cell_seg != cell_value] = 0
             nucleus_mask = cropped_cell_seg.copy()
 
@@ -79,7 +96,7 @@ def fill_nucleus_segmentation(cell_index_img, nuc_original_img):
             output[nucleus_mask != cell_value] = 0
 
             # filter the membrane segmentation channel
-            sigma = np.divide([51, 51, 21], (4*m.sqrt(2*m.log(2))))
+            sigma = np.divide([51, 51, 21], (4 * m.sqrt(2 * m.log(2))))
             cropped_cell_seg = gaussian_filter(cropped_cell_seg, sigma)
             # filter the nuclear channel
             output = gaussian_filter(output, sigma)
@@ -98,13 +115,17 @@ def fill_nucleus_segmentation(cell_index_img, nuc_original_img):
                 output = morphology.remove_small_holes(output.astype(np.int))
                 # clean each slice of objects and holes
                 for z in range(output.shape[0]):
-                    output[z] = morphology.remove_small_objects(output[z].astype(np.int))
+                    output[z] = morphology.remove_small_objects(
+                        output[z].astype(np.int)
+                    )
                     output[z] = morphology.remove_small_holes(output[z].astype(np.int))
                 # output needs to be recast as int, because the morphology methods above return boolean arrays
                 output = output.astype(np.int)
                 # get the total volume and ignore components less than a quarter of that volume
                 total_volume = np.count_nonzero(output)
-                output = keep_connected_components(output,  total_volume // 4, total_volume * 2)
+                output = keep_connected_components(
+                    output, total_volume // 4, total_volume * 2
+                )
                 # change boolean value back to original segmentation value
                 output *= cell_value
                 # mask the nucleus inside the cell membrane segmentation again

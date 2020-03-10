@@ -38,15 +38,21 @@ def resize_cyx_image(image, new_size):
         # if neither scaling factors achieve the desired shape, then the aspect ratio of the image
         # is different than the aspect ratio of new_size
         if not np.array_equal(test_shape, new_size):
-            raise ValueError("This image does not have the same aspect ratio as new_size")
+            raise ValueError(
+                "This image does not have the same aspect ratio as new_size"
+            )
 
     image = image.transpose((2, 1, 0))
 
     if scaling < 1:
         scaling = 1.0 / scaling
-        im_out = skimage.transform.pyramid_expand(image, upscale=scaling, multichannel=True)
+        im_out = skimage.transform.pyramid_expand(
+            image, upscale=scaling, multichannel=True
+        )
     elif scaling > 1:
-        im_out = skimage.transform.pyramid_reduce(image, downscale=scaling, multichannel=True)
+        im_out = skimage.transform.pyramid_reduce(
+            image, downscale=scaling, multichannel=True
+        )
     else:
         im_out = image
 
@@ -56,7 +62,13 @@ def resize_cyx_image(image, new_size):
     return im_out
 
 
-def create_projection(image: np.ndarray, axis: int, method: str = 'max', slice_index: int = 0, sections: int = 3):
+def create_projection(
+    image: np.ndarray,
+    axis: int,
+    method: str = "max",
+    slice_index: int = 0,
+    sections: int = 3,
+):
     """
     This function creates a 2D projection out of an n-dimensional image.
 
@@ -74,15 +86,15 @@ def create_projection(image: np.ndarray, axis: int, method: str = 'max', slice_i
     :param sections: number of sections to select and max-intensity project for the 'sections' projection method
     :return:
     """
-    if method == 'max':
+    if method == "max":
         image = np.max(image, axis)
-    elif method == 'mean':
+    elif method == "mean":
         image = np.mean(image, axis)
-    elif method == 'sum':
+    elif method == "sum":
         image = np.sum(image, axis)
-    elif method == 'slice':
+    elif method == "slice":
         image = image[slice_index]
-    elif method == 'sections':
+    elif method == "sections":
         separator = int(math.floor(image.shape[0] / sections))
         # stack is a 2D YX im
         stack = np.zeros(image[0].shape)
@@ -92,7 +104,7 @@ def create_projection(image: np.ndarray, axis: int, method: str = 'max', slice_i
             # TODO: this line assumes the stack is separated through the z-axis, instead of the designated axis param
             section = np.max(image[bottom_bound:top_bound], axis)
             stack += section
-        stack += np.max(image[separator * sections - 1:])
+        stack += np.max(image[separator * sections - 1 :])
 
         return stack
     # returns 2D image, YX
@@ -135,10 +147,19 @@ class ThumbnailGenerator:
 
     """
 
-    def __init__(self, colors: Sequence[Tuple[float, float, float]] = COLORS_CMY, size: int = DEFAULT_SIZE,
-                 channel_indices: Sequence[int] = None, channel_thresholds: Sequence[float] = None,
-                 channel_multipliers: Sequence[int] = None, mask_channel_index: int = 5, letterbox: bool = True,
-                 projection: str = 'max', projection_sections: int = 3, return_rgb: bool = True):
+    def __init__(
+        self,
+        colors: Sequence[Tuple[float, float, float]] = COLORS_CMY,
+        size: int = DEFAULT_SIZE,
+        channel_indices: Sequence[int] = None,
+        channel_thresholds: Sequence[float] = None,
+        channel_multipliers: Sequence[int] = None,
+        mask_channel_index: int = 5,
+        letterbox: bool = True,
+        projection: str = "max",
+        projection_sections: int = 3,
+        return_rgb: bool = True,
+    ):
         """
         :param colors: The color palette that will be used to color each channel. The default palette
                        colors are magenta=membrane, nucleus=cyan, structure=yellow.
@@ -171,7 +192,7 @@ class ThumbnailGenerator:
         if channel_indices is None:
             channel_indices = [0, 1, 2]
         if channel_thresholds is None:
-            channel_thresholds = [.65, .65, .65]
+            channel_thresholds = [0.65, 0.65, 0.65]
         if channel_multipliers is None:
             channel_multipliers = [1, 1, 1]
 
@@ -189,23 +210,31 @@ class ThumbnailGenerator:
         self._validate_settings()
 
     def _validate_settings(self):
-        assert self.projection in ["slice", "max",  "sections"]
+        assert self.projection in ["slice", "max", "sections"]
 
-        assert len(self.colors) > 0 and all(len(color) == 3 for color in self.colors), \
-            f"Colors {self.colors} are invalid"
+        assert len(self.colors) > 0 and all(
+            len(color) == 3 for color in self.colors
+        ), f"Colors {self.colors} are invalid"
 
         assert len(self.colors) == len(self.channel_indices), (
             f"Colors palette is a different size than the channel indices "
             f"(len({self.colors}) != len({self.channel_indices}))"
         )
-        assert min(self.channel_indices) >= 0, "Minimum channel index must be greater than or equal to 0"
+        assert (
+            min(self.channel_indices) >= 0
+        ), "Minimum channel index must be greater than or equal to 0"
 
         assert len(self.channel_thresholds) >= len(self.channel_indices)
 
         assert len(self.channel_multipliers) >= len(self.channel_indices)
 
-    def _make_thumbnail(self, image: np.ndarray, new_size: Union[Tuple[int, int, int], np.ndarray],
-                        output_size_dim: Tuple[int, int, int], apply_cell_mask: bool = False) -> np.ndarray:
+    def _make_thumbnail(
+        self,
+        image: np.ndarray,
+        new_size: Union[Tuple[int, int, int], np.ndarray],
+        output_size_dim: Tuple[int, int, int],
+        apply_cell_mask: bool = False,
+    ) -> np.ndarray:
         if apply_cell_mask:
             shape_out_rgb = new_size
 
@@ -214,7 +243,9 @@ class ThumbnailGenerator:
             #     image[:, i] = np.multiply(image[:, i], image[:, self.mask_channel_index] > 0)
 
             num_noise_floor_bins = 32
-            composite = np.zeros((shape_out_rgb[0], output_size_dim[1], output_size_dim[2]))
+            composite = np.zeros(
+                (shape_out_rgb[0], output_size_dim[1], output_size_dim[2])
+            )
             for i in range(len(self.channel_indices)):
                 ch = self.channel_indices[i]
                 # try to subtract out the noise floor.
@@ -229,7 +260,9 @@ class ThumbnailGenerator:
 
                 # resize before projection?
                 rgbproj = np.asarray(thumb)
-                rgbproj = create_projection(rgbproj, 0, self.projection, slice_index=rgbproj.shape[0] // 2)
+                rgbproj = create_projection(
+                    rgbproj, 0, self.projection, slice_index=rgbproj.shape[0] // 2
+                )
                 rgb_out = np.expand_dims(rgbproj, 2)
                 rgb_out = np.repeat(rgb_out, 3, 2)
 
@@ -238,7 +271,9 @@ class ThumbnailGenerator:
 
                 rgb_out /= np.max(rgb_out)
 
-                rgb_out = resize_cyx_image(rgb_out.transpose((2, 1, 0)), shape_out_rgb).astype(np.float32)
+                rgb_out = resize_cyx_image(
+                    rgb_out.transpose((2, 1, 0)), shape_out_rgb
+                ).astype(np.float32)
 
                 x0, x1, y0, y1 = _get_letterbox_bounds(output_size_dim, shape_out_rgb)
                 composite[:, x0:x1, y0:y1] += rgb_out
@@ -251,14 +286,18 @@ class ThumbnailGenerator:
             shape_out_rgb = new_size
 
             num_noise_floor_bins = 16
-            composite = np.zeros((shape_out_rgb[0], output_size_dim[1], output_size_dim[2]))
+            composite = np.zeros(
+                (shape_out_rgb[0], output_size_dim[1], output_size_dim[2])
+            )
             channel_indices = self.channel_indices
             rgb_image = []
             for i in channel_indices:
                 # subtract out the noise floor.
                 immin = image[i].min()
                 immax = image[i].max()
-                hi, bin_edges = np.histogram(image[i], bins=num_noise_floor_bins, range=(max(1, immin), immax))
+                hi, bin_edges = np.histogram(
+                    image[i], bins=num_noise_floor_bins, range=(max(1, immin), immax)
+                )
                 # index of tallest peak in histogram
                 peakind = np.argmax(hi)
                 # subtract this out
@@ -270,8 +309,10 @@ class ThumbnailGenerator:
                 thmax = thumb.max()
                 thumb /= thmax
 
-                imdbl = np.asarray(thumb).astype('double')
-                im_proj = create_projection(imdbl, 0, self.projection, slice_index=int(thumb.shape[0] // 2))
+                imdbl = np.asarray(thumb).astype("double")
+                im_proj = create_projection(
+                    imdbl, 0, self.projection, slice_index=int(thumb.shape[0] // 2)
+                )
 
                 # Add the modified channel to the list of channels to composite
                 rgb_image.append(im_proj)
@@ -283,7 +324,7 @@ class ThumbnailGenerator:
             for channel, color in zip(rgb_image, self.colors):
                 # turn into RGB
                 rgb_out = np.expand_dims(channel, 2)
-                rgb_out = np.repeat(rgb_out, 3, 2).astype('float')
+                rgb_out = np.repeat(rgb_out, 3, 2).astype("float")
 
                 # inject color.  careful of type mismatches.
                 rgb_out *= color
@@ -298,7 +339,9 @@ class ThumbnailGenerator:
             # returns a CYX array for the pngwriter
             return composite
 
-    def _get_output_shape(self, im_size: Union[Tuple[int, int, int], np.ndarray]) -> Tuple[int, int, int]:
+    def _get_output_shape(
+        self, im_size: Union[Tuple[int, int, int], np.ndarray]
+    ) -> Tuple[int, int, int]:
         """
         This method will take in a 3D ZYX shape and return a 3D XYC of the final thumbnail
 
@@ -309,13 +352,22 @@ class ThumbnailGenerator:
         # size down to this edge size, maintaining aspect ratio.
         max_edge = self.size
         # keep same number of z slices.
-        shape_out = np.hstack((im_size[0],
-                               max_edge if im_size[1] > im_size[2] else max_edge * (float(im_size[1]) / im_size[2]),
-                               max_edge if im_size[1] < im_size[2] else max_edge * (float(im_size[2]) / im_size[1])
-                               ))
+        shape_out = np.hstack(
+            (
+                im_size[0],
+                max_edge
+                if im_size[1] > im_size[2]
+                else max_edge * (float(im_size[1]) / im_size[2]),
+                max_edge
+                if im_size[1] < im_size[2]
+                else max_edge * (float(im_size[2]) / im_size[1]),
+            )
+        )
         return 3, int(np.ceil(shape_out[2])), int(np.ceil(shape_out[1]))
 
-    def make_thumbnail(self, image: np.ndarray, apply_cell_mask: bool = False) -> np.ndarray:
+    def make_thumbnail(
+        self, image: np.ndarray, apply_cell_mask: bool = False
+    ) -> np.ndarray:
         """
         This method is the primary interface with the ThumbnailGenerator. It can be used many times with different
         images in order to save the configuration that was specified at the beginning of the generator.
@@ -338,30 +390,38 @@ class ThumbnailGenerator:
         assert len(im_size) == 3
         shape_out_rgb = self._get_output_shape(im_size)
 
-        final_size = (shape_out_rgb[0], self.size, self.size) if self.letterbox else shape_out_rgb
+        final_size = (
+            (shape_out_rgb[0], self.size, self.size)
+            if self.letterbox
+            else shape_out_rgb
+        )
 
-        thumbnail = self._make_thumbnail(image, shape_out_rgb, final_size, apply_cell_mask=apply_cell_mask)
+        thumbnail = self._make_thumbnail(
+            image, shape_out_rgb, final_size, apply_cell_mask=apply_cell_mask
+        )
 
         if not self.return_rgb:
             return thumbnail
 
         # Clip the values of the float array between 0 and 1, rescale to the bit depth of uint8,
         # and cast to uint8
-        rgb_thumbnail = (thumbnail.clip(0, 1) * 255.).astype(np.uint8)
+        rgb_thumbnail = (thumbnail.clip(0, 1) * 255.0).astype(np.uint8)
 
         return rgb_thumbnail
 
 
-def make_one_thumbnail(infile: str,
-                       outfile: str,
-                       channels: List[int],
-                       colors: List[Tuple[float, float, float]],
-                       size: int,
-                       projection: str = 'max',
-                       axis: int = 2,
-                       apply_mask: bool = False,
-                       mask_channel: int = 0,
-                       label: str = ''):
+def make_one_thumbnail(
+    infile: str,
+    outfile: str,
+    channels: List[int],
+    colors: List[Tuple[float, float, float]],
+    size: int,
+    projection: str = "max",
+    axis: int = 2,
+    apply_mask: bool = False,
+    mask_channel: int = 0,
+    label: str = "",
+):
     axistranspose = (1, 0, 2, 3)
     if axis == 2:  # Z
         axistranspose = (1, 0, 2, 3)
@@ -370,17 +430,21 @@ def make_one_thumbnail(infile: str,
     elif axis == 1:  # Y
         axistranspose = (3, 0, 2, 1)
     else:
-        raise ValueError(f'Unknown axis value: {axis}')
+        raise ValueError(f"Unknown axis value: {axis}")
 
     with aicsimageio.AICSImage(infile) as image:
         imagedata = image.get_image_data("CZYX", T=0)
-    generator = ThumbnailGenerator(channel_indices=channels,
-                                   size=size,
-                                   mask_channel_index=mask_channel,
-                                   colors=colors,
-                                   projection=projection)
+    generator = ThumbnailGenerator(
+        channel_indices=channels,
+        size=size,
+        mask_channel_index=mask_channel,
+        colors=colors,
+        projection=projection,
+    )
     # take zeroth time, and transpose projection axis and c
-    thumbnail = generator.make_thumbnail(imagedata.transpose(axistranspose), apply_cell_mask=apply_mask)
+    thumbnail = generator.make_thumbnail(
+        imagedata.transpose(axistranspose), apply_cell_mask=apply_mask
+    )
     if label:
         # Untested on MacOS
         if platform.system() == "Windows":
@@ -394,6 +458,8 @@ def make_one_thumbnail(infile: str,
         thumbnail = np.array(img)
         thumbnail = thumbnail.transpose(2, 0, 1)
 
-    with aicsimageio.writers.PngWriter(file_path=outfile, overwrite_file=True) as writer:
+    with aicsimageio.writers.PngWriter(
+        file_path=outfile, overwrite_file=True
+    ) as writer:
         writer.save(thumbnail)
     return thumbnail
