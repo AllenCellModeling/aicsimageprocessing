@@ -93,7 +93,7 @@ def get_rigid_reg_stats(img, com_method="nuc"):
     imsize = img.shape
     com = get_center_of_mass(img, com_method)
 
-    return imsize, com, angle, flipdim
+    return imsize, com
 
 
 def get_major_angle(img, degrees_or_radians="degrees"):
