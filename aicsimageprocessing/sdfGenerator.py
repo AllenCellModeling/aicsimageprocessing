@@ -1,13 +1,15 @@
-from aicsimageprocessing import isosurfaceGenerator
+import time
 
-from aicsimageio import writers
-import mcubes
 import numpy as np
 import skfmm
+from aicsimageio import writers
 from skimage import measure
-import time
+
+import mcubes
 import vtk
-from vtk.util.numpy_support import numpy_to_vtk, numpy_to_vtkIdTypeArray, vtk_to_numpy
+from aicsimageprocessing import isosurfaceGenerator
+from vtk.util.numpy_support import (numpy_to_vtk, numpy_to_vtkIdTypeArray,
+                                    vtk_to_numpy)
 
 
 # pass in a 3d numpy array of intensities

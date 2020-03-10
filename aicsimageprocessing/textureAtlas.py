@@ -1,13 +1,13 @@
 # author: Zach Crabtree zacharyc@alleninstitute.org
 
-import math as m
-import numpy as np
-import os
 import json
-import skimage.transform as sktransform
+import math as m
+import os
 
-from aicsimageio.writers import PngWriter
+import numpy as np
+import skimage.transform as sktransform
 from aicsimageio import AICSImage
+from aicsimageio.writers import PngWriter
 
 
 class TextureAtlasDims:

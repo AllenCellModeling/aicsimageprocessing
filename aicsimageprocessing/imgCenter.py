@@ -1,8 +1,9 @@
 # Author: Evan Wiederspan <evanw@alleninstitute.org>
 
 import numpy as np
-from .backgroundCrop import crop, get_edges
 from scipy.ndimage.measurements import center_of_mass
+
+from .backgroundCrop import crop, get_edges
 
 
 def _shape_to(img, out_shape, val=0):

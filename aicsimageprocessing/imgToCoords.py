@@ -1,9 +1,11 @@
+import math
+
 import numpy as np
-from . import rigidAlignment
 import skfmm
 from scipy.ndimage.morphology import distance_transform_edt as bwdist
-import math
 from skimage.measure import regionprops
+
+from . import rigidAlignment
 
 
 def img_to_coords(im_cell, im_nuc, major_angle_object="cell"):

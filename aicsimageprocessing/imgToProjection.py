@@ -1,10 +1,10 @@
 # Author: Evan Wiederspan
 
-import numpy as np
 import matplotlib
+import matplotlib.pyplot as pplot
+import numpy as np
 
 matplotlib.use("agg")
-import matplotlib.pyplot as pplot
 
 
 def matproj(im, dim, method="max", slice_index=0):

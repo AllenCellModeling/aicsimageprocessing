@@ -1,6 +1,7 @@
 import numpy as np
-import sklearn.decomposition
 import scipy
+import sklearn.decomposition
+
 from .alignMajor import align_major, angle_between
 
 # img - a CYXZ numpy array, channel order is generally [DNA, NUCLEUS, ... ]

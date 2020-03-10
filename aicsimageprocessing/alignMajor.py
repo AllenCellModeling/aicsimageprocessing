@@ -2,7 +2,7 @@
 
 import numpy as np
 from scipy.ndimage.interpolation import rotate
-from math import ceil
+
 from .backgroundCrop import crop
 
 

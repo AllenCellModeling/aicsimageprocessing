@@ -3,16 +3,14 @@
 # authors: Dan Toloudis danielt@alleninstitute.org
 #          Zach Crabtree zacharyc@alleninstitute.org
 
-import aicsimageio
-
 import math
-import numpy as np
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
 import platform
+from typing import List, Sequence, Tuple, Union
+
+import aicsimageio
+import numpy as np
 import skimage.transform
-from typing import List, Tuple, Sequence, Union
+from PIL import Image, ImageDraw, ImageFont
 
 COLORS_CMY = ((0.0, 1.0, 1.0), (1.0, 0.0, 1.0), (1.0, 1.0, 0.0))
 DEFAULT_SIZE = 128

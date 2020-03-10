@@ -1,8 +1,9 @@
 # author: Zach Crabtree zacharyc@alleninstitute.org
 
-from skimage import measure
 import os
+
 from aicsimageio import AICSImage
+from skimage import measure
 
 
 class Mesh:
