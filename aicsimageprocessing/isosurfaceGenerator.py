@@ -9,15 +9,18 @@ from skimage import measure
 class Mesh:
     """
 
-    A cell mesh class contains the necessary information to generate a display a 3D isosurface.
+    A cell mesh class contains the necessary information to generate a display a 3D
+    isosurface.
 
-    Example:
-        image = AICSImage("some/bio/image.ome.tif")
-        mesh0 = generate_mesh(image, isovalue=0, channel=0)
-        # will generate a different mesh due to the different isovalue
-        mesh1 = generate_mesh(image, isovalue=1, channel=0)
-        mesh0.save_as_obj("some/bio/image/mesh.obj")
-        # mesh.obj can be imported into 3D viewers and represents a 3D rendering of image.ome.tif
+    Examples
+    --------
+    >>> image = AICSImage("some/bio/image.ome.tif")
+    ... mesh0 = generate_mesh(image, isovalue=0, channel=0)
+    ... # will generate a different mesh due to the different isovalue
+    ... mesh1 = generate_mesh(image, isovalue=1, channel=0)
+    ... mesh0.save_as_obj("some/bio/image/mesh.obj")
+    ... # mesh.obj can be imported into 3D viewers and represents a 3D rendering of
+    ... # image.ome.tif
     """
 
     def __init__(self, verts, faces, normals, values):
@@ -47,18 +50,31 @@ class Mesh:
                         "vn  {:.6f}  {:.6f}  {:.6f}\n".format(n[0], n[1], n[2])
                     )
             for f in self.faces:
-                # obj file vertex arrays are not 0-indexed :( must add 1 in order to reference the right vertices
+                # obj file vertex arrays are not 0-indexed :( must add 1 in order to
+                # reference the right vertices
                 writer.write("f  {}  {}  {}\n".format(f[0] + 1, f[1] + 1, f[2] + 1))
 
 
 def generate_mesh(image, isovalue=0, channel=0):
     """
     Creates and returns a Mesh object
-    :param image: an AICSImage object
-    :param isovalue: The value that is used to pick the isosurface returned by the marching cubes algorithm
-                     For more info: https://www.youtube.com/watch?v=5fNbCFjqWao @ 40:00 mins
-    :param channel: The channel in the image that is used to extract the isosurface
-    :return: A Mesh object
+
+    Parameters
+    ----------
+    image
+        an AICSImage object
+
+    isovalue
+        The value that is used to pick the isosurface returned by the marching cubes
+        algorithm
+        For more info: https://www.youtube.com/watch?v=5fNbCFjqWao @ 40:00 mins
+
+    channel
+        The channel in the image that is used to extract the isosurface
+
+    Returns
+    -------
+    A Mesh object
     """
     if not isinstance(image, AICSImage):
         raise ValueError("Meshes can only be generated with AICSImage objects!")

@@ -8,24 +8,25 @@ from skimage import measure
 import mcubes
 import vtk
 from aicsimageprocessing import isosurfaceGenerator
-from vtk.util.numpy_support import (numpy_to_vtk, numpy_to_vtkIdTypeArray,
-                                    vtk_to_numpy)
+from vtk.util.numpy_support import numpy_to_vtk, numpy_to_vtkIdTypeArray, vtk_to_numpy
 
 
 # pass in a 3d numpy array of intensities
 def make_vtkvolume(npvol):
-    # For VTK to be able to use the data, it must be stored as a VTK-image. This can be done by the vtkImageImport-class which
+    # For VTK to be able to use the data, it must be stored as a VTK-image. This can be
+    # done by the vtkImageImport-class which
     # imports raw data and stores it.
     dataImporter = vtk.vtkImageImport()
     dataImporter.CopyImportVoidPointer(npvol, npvol.nbytes)
     # The type of the newly imported data is set to unsigned char (uint8)
     dataImporter.SetDataScalarTypeToUnsignedShort()
-    # Because the data that is imported only contains an intensity value (it isnt RGB-coded or someting similar), the importer
-    # must be told this is the case.
+    # Because the data that is imported only contains an intensity value (it isnt RGB
+    # coded or someting similar), the importer must be told this is the case.
     dataImporter.SetNumberOfScalarComponents(1)
-    # The following two functions describe how the data is stored and the dimensions of the array it is stored in.
-    # I have to admit however, that I honestly dont know the difference between SetDataExtent() and SetWholeExtent() although
-    # VTK complains if not both are used.
+    # The following two functions describe how the data is stored and the dimensions of
+    # the array it is stored in. I have to admit however, that I honestly dont know the
+    # difference between SetDataExtent() and SetWholeExtent() although VTK complains if
+    # not both are used.
     dataImporter.SetDataExtent(
         0, npvol.shape[2] - 1, 0, npvol.shape[1] - 1, 0, npvol.shape[0] - 1
     )
@@ -77,7 +78,8 @@ def _generate_mesh_vtkmcubes(im, isovalue):
     start = time.perf_counter()
     vtkdataimporter = make_vtkvolume(im)
     # Flying Edges is WAYYYY faster than marching cubes, from vtk.
-    # need to compare outputs.  poly count is similar and still 5x the other methods shown.
+    # need to compare outputs. poly count is similar and still 5x the other methods
+    # shown.
     vmc = vtk.vtkFlyingEdges3D()
     vmc.SetInputData(vtkdataimporter.GetOutput())
     vmc.ComputeNormalsOn()
@@ -99,7 +101,8 @@ def _generate_mesh_scikitmcubes(im, isovalue):
     )
     end = time.perf_counter()
     print(
-        f"Generate mesh with skimage.measure.marching_cubes_lewiner: {end-start} seconds"
+        f"Generate mesh with skimage.measure.marching_cubes_lewiner: {end-start} "
+        f"seconds"
     )
     print(f"{len(faces)} polygons")
     return verts, faces, normals, values
@@ -249,7 +252,8 @@ def volume_to_obj(im, isovalue, outpath, method=0):
 
 
 # take two signed distance fields.
-# A has positive values where its mask is 0, and that is considered the "empty" available space to fill
+# A has positive values where its mask is 0, and that is considered the "empty"
+# available space to fill
 # B has positive values where its mask is 0
 # result has space between A and B positive
 def combine_sdf(A, Amask, B, Bmask):

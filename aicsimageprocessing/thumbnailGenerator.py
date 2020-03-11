@@ -20,9 +20,17 @@ def resize_cyx_image(image, new_size):
     """
     This function resizes a CYX image.
 
-    :param image: CYX ndarray
-    :param new_size: tuple of shape of desired image dimensions in CYX
-    :return: image with shape of new_size
+    Parameters
+    ----------
+    image
+        CYX ndarray
+
+    new_size
+        tuple of shape of desired image dimensions in CYX
+
+    Returns
+    -------
+    image with shape of new_size
     """
     scaling = float(image.shape[1]) / float(new_size[1])
     # get the shape of the image that is resized by the scaling factor
@@ -33,8 +41,8 @@ def resize_cyx_image(image, new_size):
         # getting the scaling from the other dimension solves this rounding problem
         scaling = float(image.shape[2]) / float(new_size[2])
         test_shape = np.ceil(np.divide(image.shape, [1, scaling, scaling]))
-        # if neither scaling factors achieve the desired shape, then the aspect ratio of the image
-        # is different than the aspect ratio of new_size
+        # if neither scaling factors achieve the desired shape, then the aspect ratio
+        # of the image is different than the aspect ratio of new_size
         if not np.array_equal(test_shape, new_size):
             raise ValueError(
                 "This image does not have the same aspect ratio as new_size"
@@ -70,19 +78,36 @@ def create_projection(
     """
     This function creates a 2D projection out of an n-dimensional image.
 
-    :param image: ZCYX array
-    :param axis: the axis that the projection should be performed along
-    :param method: the method that will be used to create the projection
-                   Options: ["max", "mean", "sum", "slice", "sections"]
-                   - max will look through each axis-slice, and determine the max value for each pixel
-                   - mean will look through each axis-slice, and determine the mean value for each pixel
-                   - sum will look through each axis-slice, and sum all pixels together
-                   - slice will take the pixel values from the middle slice of the stack
-                   - sections will split the stack into `sections` number of sections, and take a
-                   max projection for each.
-    :param slice_index: index to use for the 'slice' projection method
-    :param sections: number of sections to select and max-intensity project for the 'sections' projection method
-    :return:
+    Parameters
+    ----------
+    image
+        ZCYX array
+
+    axis
+        the axis that the projection should be performed along
+
+    method
+        the method that will be used to create the projection
+        Options: ["max", "mean", "sum", "slice", "sections"]
+        - max will look through each axis-slice, and determine the max value for each
+        pixel
+        - mean will look through each axis-slice, and determine the mean value for each
+        pixel
+        - sum will look through each axis-slice, and sum all pixels together
+        - slice will take the pixel values from the middle slice of the stack
+        - sections will split the stack into `sections` number of sections, and take a
+        max projection for each.
+
+    slice_index
+        index to use for the 'slice' projection method
+
+    sections
+        number of sections to select and max-intensity project for the 'sections'
+        projection method
+
+    Returns
+    -------
+    The 2D image projection
     """
     if method == "max":
         image = np.max(image, axis)
@@ -99,10 +124,11 @@ def create_projection(
         for i in range(sections - 1):
             bottom_bound = separator * i
             top_bound = separator + bottom_bound
-            # TODO: this line assumes the stack is separated through the z-axis, instead of the designated axis param
+            # TODO: this line assumes the stack is separated through the z-axis,
+            # instead of the designated axis param
             section = np.max(image[bottom_bound:top_bound], axis)
             stack += section
-        stack += np.max(image[separator * sections - 1 :])
+        stack += np.max(image[separator * sections - 1:])
 
         return stack
     # returns 2D image, YX
@@ -159,32 +185,42 @@ class ThumbnailGenerator:
         return_rgb: bool = True,
     ):
         """
-        :param colors: The color palette that will be used to color each channel. The default palette
-                       colors are magenta=membrane, nucleus=cyan, structure=yellow.
-                       Keep color-blind accessibility in mind.
+        Parameters
+        ----------
+        colors
+            The color palette that will be used to color each channel. The default
+            palette colors are magenta=membrane, nucleus=cyan, structure=yellow.
+            Keep color-blind accessibility in mind.
 
-        :param size: This constrains the image to have the X or Y dims max out at this value, but keep
-                     the original aspect ratio of the image.
+        size
+            This constrains the image to have the X or Y dims max out at this value,
+            but keep the original aspect ratio of the image.
 
-        :param channel_indices: An array of channel indices to represent the three main channels of the cell
+        channel_indices
+            An array of channel indices to represent the three main channels of the cell
 
-        :param mask_channel_index: The index for the segmentation channel in image that will be used to mask
-                                   the thumbnail
+        mask_channel_index
+            The index for the segmentation channel in image that will be used to mask
+            the thumbnail
 
-        :param projection: The method that will be used to generate each channel's projection. This is done
-                           for each pixel, through the z-axis
-                           Options: ["max", "slice", "sections"]
-                           - max will look through each z-slice, and determine the max value for each pixel
-                           - slice will take the pixel values from the middle slice of the z-stack
-                           - sections will split the zstack into projection_sections number of sections, and take a
-                             max projection for each.
+        projection
+            The method that will be used to generate each channel's projection. This is
+            done for each pixel, through the z-axis
+            Options: ["max", "slice", "sections"]
+            - max will look through each z-slice, and determine the max value for each
+            pixel
+            - slice will take the pixel values from the middle slice of the z-stack
+            - sections will split the zstack into projection_sections number of
+            sections, and take a  max projection for each.
 
-        :param projection_sections: The number of sections that will be used to determine projections,
-                                    if projection="sections"
+        projection_sections
+            The number of sections that will be used to determine projections, if
+            projection="sections"
 
-        :param return_rgb: Return an array that has been clipped and cast as uint8 to make it RGB compatible.
-                           Setting this to False will return the float array that is (generally) bounded between
-                           0 and 1.
+        return_rgb
+            Return an array that has been clipped and cast as uint8 to make it RGB
+            compatible. Setting this to False will return the float array that is
+            (generally) bounded between 0 and 1.
         """
 
         if channel_indices is None:
@@ -237,9 +273,6 @@ class ThumbnailGenerator:
             shape_out_rgb = new_size
 
             # apply the cell segmentation mask.  bye bye to data outside the cell
-            # for i in range(len(self.channel_indices)):
-            #     image[:, i] = np.multiply(image[:, i], image[:, self.mask_channel_index] > 0)
-
             num_noise_floor_bins = 32
             composite = np.zeros(
                 (shape_out_rgb[0], output_size_dim[1], output_size_dim[2])
@@ -247,7 +280,8 @@ class ThumbnailGenerator:
             for i in range(len(self.channel_indices)):
                 ch = self.channel_indices[i]
                 # try to subtract out the noise floor.
-                # range is chosen to ignore zeros due to masking.  alternative is to pass mask image as weights=im1[-1]
+                # range is chosen to ignore zeros due to masking.  alternative is to
+                # pass mask image as weights=im1[-1]
                 thumb = subtract_noise_floor(image[:, ch], bins=num_noise_floor_bins)
                 # apply mask
                 thumb = np.multiply(thumb, image[:, self.mask_channel_index] > 0)
@@ -341,11 +375,18 @@ class ThumbnailGenerator:
         self, im_size: Union[Tuple[int, int, int], np.ndarray]
     ) -> Tuple[int, int, int]:
         """
-        This method will take in a 3D ZYX shape and return a 3D XYC of the final thumbnail
+        This method will take in a 3D ZYX shape and return a 3D XYC of the final
+        thumbnail
 
-        :param im_size: 3D ZYX shape of original image
-        :return: CYX dims for a resized thumbnail where the maximum X or Y dimension is the one
-                 specified in the constructor.
+        Parameters
+        ----------
+        im_size
+            3D ZYX shape of original image
+
+        Returns
+        -------
+        CYX dims for a resized thumbnail where the maximum X or Y dimension is the one
+        specified in the constructor.
         """
         # size down to this edge size, maintaining aspect ratio.
         max_edge = self.size
@@ -367,13 +408,22 @@ class ThumbnailGenerator:
         self, image: np.ndarray, apply_cell_mask: bool = False
     ) -> np.ndarray:
         """
-        This method is the primary interface with the ThumbnailGenerator. It can be used many times with different
-        images in order to save the configuration that was specified at the beginning of the generator.
+        This method is the primary interface with the ThumbnailGenerator. It can be
+        used many times with different images in order to save the configuration that
+        was specified at the beginning of the generator.
 
-        :param image: ZCYX image that is the source of the thumbnail
-        :param apply_cell_mask: boolean value that designates whether the image is a fullfield or segmented cell
-                                False -> fullfield, True -> segmented cell
-        :return: a CYX image, scaled down to the size designated in the constructor
+        Parameters
+        ----------
+        image
+            ZCYX image that is the source of the thumbnail
+        apply_cell_mask
+            boolean value that designates whether the image is a fullfield or segmented
+            cell
+            False -> fullfield, True -> segmented cell
+
+        Returns
+        -------
+        a CYX image, scaled down to the size designated in the constructor
         """
 
         image = image.astype(np.float32)
@@ -401,8 +451,8 @@ class ThumbnailGenerator:
         if not self.return_rgb:
             return thumbnail
 
-        # Clip the values of the float array between 0 and 1, rescale to the bit depth of uint8,
-        # and cast to uint8
+        # Clip the values of the float array between 0 and 1, rescale to the bit depth
+        # of uint8, and cast to uint8
         rgb_thumbnail = (thumbnail.clip(0, 1) * 255.0).astype(np.uint8)
 
         return rgb_thumbnail

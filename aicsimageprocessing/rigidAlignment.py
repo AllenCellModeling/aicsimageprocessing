@@ -175,8 +175,6 @@ def pad_to_position(img, ch_crop, ch_com, com_target, imsize_target):
 
     com = get_center_of_mass(get_channel(img, ch_com))
 
-    pad_com = com - com_target
-
     pad_pre = (com_target - (com + 1))[1:]
     pad_post = (imsize_target - com_target - (np.array(img.shape) - (com + 1)))[1:]
 
@@ -190,17 +188,17 @@ def pad_to_position(img, ch_crop, ch_com, com_target, imsize_target):
     return img_out
 
 
-def pad_to_center(img, com):
-    _, croprange_pt2 = crop_img(get_channel(img, ch_crop))
-    img = img[croprange_pt2]
-
-    com = get_center_of_mass(get_channel(img, ch_com))
-
-    pad_dims = img.shape - (com + 1) - com
-
-    img = pad_to_com(img, pad_dims)
-
-    return img
+# def pad_to_center(img, com):
+#     _, croprange_pt2 = crop_img(get_channel(img, ch_crop))
+#     img = img[croprange_pt2]
+#
+#     com = get_center_of_mass(get_channel(img, ch_com))
+#
+#     pad_dims = img.shape - (com + 1) - com
+#
+#     img = pad_to_com(img, pad_dims)
+#
+#     return img
 
 
 def pad_to_com(img, pad_dims):

@@ -122,7 +122,7 @@ class TextureAtlasGroup:
             # if no pack order is specified, pack 4 channels per png and move on
             channel_list = list(range(aics_image.size_c))
             pack_order = [
-                channel_list[x : x + max_channels_per_png]
+                channel_list[x: x + max_channels_per_png]
                 for x in range(0, len(channel_list), max_channels_per_png)
             ]
         png_count = 0
@@ -231,12 +231,22 @@ class TextureAtlasGroup:
 
     def save(self, output_dir, name=None, user_data=None):
         """
-        Saves a TextureAtlasGroup into one json file and 1 to many png files. Files are named with format:
-        name+'_atlas.json'
-        name+'_atlas_N.png'
-        :param output_dir: directory in which to write the files
-        :param name: if not supplied, then use the name given when creating the TextureAtlasGroup
-        :param user_data: optional dictionary of additional data to add to json file; to be used by client application
+        Saves a TextureAtlasGroup into one json file and 1 to many png files. Files are
+        named with format:
+            name+'_atlas.json'
+            name+'_atlas_N.png'
+
+        Parameters
+        ----------
+        output_dir
+            directory in which to write the files
+
+        name
+            if not supplied, then use the name given when creating the TextureAtlasGroup
+
+        user_data
+            optional dictionary of additional data to add to json file; to be used by
+            client application
         """
         if name is None:
             name = self.name
@@ -262,13 +272,28 @@ class TextureAtlasGroup:
 def generate_texture_atlas(im, name="texture_atlas", max_edge=2048, pack_order=None):
     """
     Creates a TextureAtlasGroup object
-    :param im: aicsImage object
-    :param name: will be stored in metadata and used at save time if no name is supplied at that time
-    :param max_edge: this designates the largest side in the texture atlas
-    :param pack_order: a 2d list that contains what channel in the image should be saved to the RGBA values in the
-                       final png. for example, a 7 channel image might be saved like [[0, 1, 2, 3], [4, 5], [6]]
-                       where the first texture atlas will code channel 0 as r, channel 1 as g, and so on.
-    :return: TextureAtlasGroup object
+
+    Parameters
+    ----------
+    im
+        aicsImage object
+
+    name
+        will be stored in metadata and used at save time if no name is supplied at that
+        time
+
+    max_edge
+        this designates the largest side in the texture atlas
+
+    pack_order
+        a 2d list that contains what channel in the image should be saved to the RGBA
+        values in the final png. for example, a 7 channel image might be saved like
+        [[0, 1, 2, 3], [4, 5], [6]] where the first texture atlas will code channel 0
+        as r, channel 1 as g, and so on.
+
+    Returns
+    -------
+    TextureAtlasGroup object
     """
     atlas_group = TextureAtlasGroup(
         im, name=name, max_edge=max_edge, pack_order=pack_order

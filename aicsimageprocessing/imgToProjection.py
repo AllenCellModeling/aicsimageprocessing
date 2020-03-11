@@ -30,17 +30,38 @@ def imgtoprojection(
     local_adjust=False,
 ):
     """
-    Outputs projections of a 4d CZYX numpy array into a CYX numpy array, allowing for color masks for each input channel
-    as well as adjustment options
-    :param im1: Either a 4d numpy array or a list of 3D or 2D numpy arrays. The input that will be projected
-    :param proj_all: boolean. True outputs XY, YZ, and XZ projections in a grid, False just outputs XY. False by default
-    :param proj_method: string. Method by which to do projections. 'Max' by default
-    :param colors: Can be either a string which corresponds to a cmap function in matplotlib, a function that
-    takes in the channel index and returns a list of numbers, or a list of lists containing the color multipliers.
-    :param global_adjust: boolean. If true, scales each color channel to set its max to be 255
-    after combining all channels. False by default
-    :param local_adjust: boolean. If true, performs contrast adjustment on each channel individually. False by default
-    :return: a CYX numpy array containing the requested projections
+    Outputs projections of a 4d CZYX numpy array into a CYX numpy array, allowing for
+    color masks for each input channel as well as adjustment options
+
+    Parameters
+    ----------
+    im1
+        Either a 4d numpy array or a list of 3D or 2D numpy arrays. The input that will
+        be projected
+
+    proj_all
+        boolean. True outputs XY, YZ, and XZ projections in a grid, False just outputs
+        XY. False by default
+
+    proj_method
+        string. Method by which to do projections. 'Max' by default
+
+    colors
+        Can be either a string which corresponds to a cmap function in matplotlib, a
+        function that takes in the channel index and returns a list of numbers, or a
+        list of lists containing the color multipliers.
+
+    global_adjust
+        boolean. If true, scales each color channel to set its max to be 255 after
+        combining all channels. False by default
+
+    local_adjust
+        boolean. If true, performs contrast adjustment on each channel individually.
+        False by default
+
+    Returns
+    -------
+    a CYX numpy array containing the requested projections
     """
 
     # turn list of 2d or 3d arrays into single 4d array if needed
@@ -76,7 +97,7 @@ def imgtoprojection(
         # if its a function
         try:
             colors = [colors(i) for i in range(im.shape[0])]
-        except:
+        except:  # noqa: E722
             raise ValueError("Invalid color function")
 
     # else, were assuming it's a list
@@ -103,7 +124,7 @@ def imgtoprojection(
                 # flipping to get them facing the right way
                 proj_x = np.transpose(proj_x, (1, 0))
                 proj_y = np.flipud(proj_y)
-                sx, sy, sz = proj_z.shape[1], proj_z.shape[0], proj_y.shape[0]
+                _, sy, sz = proj_z.shape[1], proj_z.shape[0], proj_y.shape[0]
                 img_piece[:, :sy, :sz] = proj_x
                 img_piece[:, :sy, sz:] = proj_z
                 img_piece[:, sy:, sz:] = proj_y

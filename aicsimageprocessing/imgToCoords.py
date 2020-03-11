@@ -11,15 +11,32 @@ from . import rigidAlignment
 def img_to_coords(im_cell, im_nuc, major_angle_object="cell"):
     """
     Return unit vector of v
-    :param im_cell: zyx binary image of a cell shape
-    :param im_nuc: zyx binary image of a nuclear shape
-    :major_angle_object: string that specifies from which object the major angle is determined can be 'cell' or 'nuc'
 
-    :return: im_ratio - channels corresponding to ratio image (1 at cell boundary, 0 on nuclear boundary, -1 inside nucleus)
-             im_th - spherical coordinate system theta (radians)
-             im_phi - spherical coordinate system phi (radians)
-             im_r - radial distance from center of nucleus
-             major_angle - angle of cell or nuclear shape (radians)
+    Parameters
+    ----------
+    im_cell
+        zyx binary image of a cell shape
+
+    im_nuc
+        zyx binary image of a nuclear shape
+
+    major_angle_object
+        string that specifies from which object the major angle is determined can be
+        'cell' or 'nuc'
+
+    Returns
+    -------
+    im_ratio
+        channels corresponding to ratio image (1 at cell boundary, 0 on nuclear
+        boundary, -1 inside nucleus)
+    im_th
+        spherical coordinate system theta (radians)
+    im_phi
+        spherical coordinate system phi (radians)
+    im_r
+        radial distance from center of nucleus
+    major_angle
+        angle of cell or nuclear shape (radians)
     """
 
     cell_dist_in = skfmm.distance(np.ma.MaskedArray(im_cell, im_nuc)).data

@@ -7,7 +7,11 @@ from .imgToProjection import imgtoprojection as im2proj
 def imshow(img, scale=False, proj_method="max", colors=None, cmap="jet"):
     """
     Helper function to display a CZYX image in a jupyter notebook
-    :param img: CZYX numpy array
+
+    Parameters
+    ----------
+    img
+        CZYX numpy array
     """
 
     from IPython.core.display import display

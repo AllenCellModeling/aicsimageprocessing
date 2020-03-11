@@ -5,12 +5,23 @@ import numpy as np
 def get_edges(img, bg_val=0, axis=(-3, -2, -1)):
     """
     Returns the indices of the edges of the structure in the image
-    :param img: CZYX image as a 4d numpy array
-    :param bg_val: value to use for background
-    :param axis: axis to get the edges for. Output length will be equal to axis length.
-    Default is the last three axis
-    :return: tuple of the same length as axis parameter. Contains lists the contain the left and right edges
-    for each axis specified.
+
+    Parameters
+    ----------
+    img
+        CZYX image as a 4d numpy array
+
+    bg_val
+        value to use for background
+
+    axis
+        axis to get the edges for. Output length will be equal to axis length.
+        Default is the last three axis
+
+    Returns
+    -------
+    tuple of the same length as axis parameter. Contains lists the contain the left and
+    right edges for each axis specified.
     """
     try:
         ndim = img.ndim
@@ -32,7 +43,8 @@ def get_edges(img, bg_val=0, axis=(-3, -2, -1)):
         # loop from front to find min
         for s_i in range(axis_length):
             axis_slice[a] = s_i
-            # iterate through until we find a slice that contains values other than bg_val,
+            # iterate through until we find a slice that contains values other than
+            # bg_val,
             if not np.all(
                 np.isnan(img[tuple(axis_slice)])
                 if np.isnan(bg_val)
@@ -56,17 +68,32 @@ def get_edges(img, bg_val=0, axis=(-3, -2, -1)):
 def crop(img, bg_val=0, axis=(-3, -2, -1), padding=0, get_slices=False):
     """
     Crops an image to remove the background color bg_val along arbitrary axis
-    :param img: numpy array to crop
-    :param bg_val: value to crop out. Default is 0
-    :param axis: tuple or list of axis indices to crop along. Can be either positive or negative values.
-    Negative values will be from the end of the array as opposed to the start. By default, it crops along the last
-    three axes
-    :param padding: integer. Specifies how much of the background value to leave in the output. Will be applied
-    on all axis that are being cropped
-    :param get_slices: boolean. If True, will return the slice indices that were taken out of the original image
-    along with the cropped image. Default is False
-    :return: either the cropped numpy array, or a tuple containing the cropped array and a tuple of slices taken
-    out of the original data
+
+    Parameters
+    ----------
+    img
+        numpy array to crop
+
+    bg_val
+        value to crop out. Default is 0
+
+    axis
+        tuple or list of axis indices to crop along. Can be either positive or negative
+        values. Negative values will be from the end of the array as opposed to the
+        start. By default, it crops along the last three axes
+
+    padding
+        integer. Specifies how much of the background value to leave in the output.
+        Will be applied on all axis that are being cropped
+
+    get_slices
+        boolean. If True, will return the slice indices that were taken out of the
+        original image along with the cropped image. Default is False
+
+    Returns
+    -------
+    either the cropped numpy array, or a tuple containing the cropped array and a tuple
+    of slices taken out of the original data
     """
     # check that padding is a positive integer
     if not isinstance(padding, int) or padding < 0:

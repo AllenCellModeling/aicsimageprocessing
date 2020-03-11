@@ -34,11 +34,23 @@ def _median(img):
 def background_sub(img, mask=None, method="mean"):
     """
     Performs background subtraction on image using chosen method with optional mask
-    :param img: numpy array, image to perform subtraction on
-    :param mask: numpy mask, subtraction is calculated and performed on the area specified by the mask
-    i.e. the mask should specify the background of the image
-    :param method: string, selects the subtraction method to use. Default is 'mean'. Options are: mean, median, common.
-    :return: numpy array, copy of input image with background subtracted out
+
+    Parameters
+    ----------
+    img
+        numpy array, image to perform subtraction on
+
+    mask
+        numpy mask, subtraction is calculated and performed on the area specified by
+        the mask i.e. the mask should specify the background of the image
+
+    method
+        string, selects the subtraction method to use. Default is 'mean'.
+        Options are: mean, median, common.
+
+    Returns
+    -------
+    numpy array, copy of input image with background subtracted out
     """
     # apply mask if there is one
     func_map = {"mean": _mean, "common": _most_common, "median": _median}
