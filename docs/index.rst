@@ -10,7 +10,6 @@ Welcome to aicsimageprocessing's documentation!
    installation
    Package modules <modules>
    contributing
-   math
 
 .. mdinclude:: ../README.md
 
