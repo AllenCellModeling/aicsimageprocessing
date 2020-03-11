@@ -232,9 +232,7 @@ class TextureAtlasGroup:
     def save(self, output_dir, name=None, user_data=None):
         """
         Saves a TextureAtlasGroup into one json file and 1 to many png files. Files are
-        named with format:
-            name+'_atlas.json'
-            name+'_atlas_N.png'
+        named with formats `name+'_atlas.json'` and `name+'_atlas_N.png'`
 
         Parameters
         ----------
