@@ -2,13 +2,14 @@ import time
 
 import numpy as np
 import skfmm
+import vtk
 from aicsimageio import writers
 from skimage import measure
-
-import vtk
-from aicsimageprocessing import isosurfaceGenerator
 from vtk.util.numpy_support import (numpy_to_vtk, numpy_to_vtkIdTypeArray,
                                     vtk_to_numpy)
+
+import mcubes
+from aicsimageprocessing import isosurfaceGenerator
 
 
 # pass in a 3d numpy array of intensities
@@ -65,7 +66,6 @@ def _generate_sdf_skfmm(im, isovalue, save=False):
 
 
 def _generate_mesh_pymcubes(im, isovalue):
-    import mcubes
     # generate a mesh using marching cubes:
     start = time.perf_counter()
     vertices, triangles = mcubes.marching_cubes(im, isovalue)

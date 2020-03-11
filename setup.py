@@ -50,10 +50,12 @@ requirements = [
     "matplotlib>=3.1.1",
     "numpy>=1.16.4",
     "Pillow>=5.2.0",
+    "PyMCubes",
     "scikit-image>=0.15.0",
     "scikit-learn",
     "scikit-fmm==2019.1.30",
     "scipy>=1.3.0",
+    "vtk",
 ]
 
 extra_requirements = {
