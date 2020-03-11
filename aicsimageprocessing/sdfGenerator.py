@@ -5,8 +5,7 @@ import skfmm
 import vtk
 from aicsimageio import writers
 from skimage import measure
-from vtk.util.numpy_support import (numpy_to_vtk, numpy_to_vtkIdTypeArray,
-                                    vtk_to_numpy)
+from vtk.util.numpy_support import numpy_to_vtk, numpy_to_vtkIdTypeArray, vtk_to_numpy
 
 import mcubes
 from aicsimageprocessing import isosurfaceGenerator
