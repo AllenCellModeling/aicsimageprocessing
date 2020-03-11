@@ -1,13 +1,13 @@
 # author: Zach Crabtree zacharyc@alleninstitute.org
 
-import math as m
-import numpy as np
-import os
 import json
-import skimage.transform as sktransform
+import math as m
+import os
 
-from aicsimageio.writers import PngWriter
+import numpy as np
+import skimage.transform as sktransform
 from aicsimageio import AICSImage
+from aicsimageio.writers import PngWriter
 
 
 class TextureAtlasDims:
@@ -31,30 +31,47 @@ class TextureAtlasDims:
 class TextureAtlas:
     def __init__(self, aics_image, pack_order, dims):
         if not isinstance(dims, TextureAtlasDims):
-            raise ValueError("Texture atlas dimension data must be of type TextureAtlasDims!")
+            raise ValueError(
+                "Texture atlas dimension data must be of type TextureAtlasDims!"
+            )
         if not isinstance(aics_image, AICSImage):
-            raise ValueError("Texture atlases can only be generated with AICSImage objects!")
+            raise ValueError(
+                "Texture atlases can only be generated with AICSImage objects!"
+            )
         self.aics_image = aics_image
 
         if len(pack_order) > 4:
-            raise ValueError("An atlas with more than 4 channels ({}) cannot be created!".format(pack_order))
+            raise ValueError(
+                "An atlas with more than 4 channels ({}) cannot be created!".format(
+                    pack_order
+                )
+            )
         if any(channel > self.aics_image.size_c for channel in pack_order):
-            raise IndexError(("A channel specified in the ordering {} is out-of-bounds in"
-                              " the AICSImage object!").format(pack_order))
+            raise IndexError(
+                (
+                    "A channel specified in the ordering {} is out-of-bounds in"
+                    " the AICSImage object!"
+                ).format(pack_order)
+            )
 
         self.pack_order = pack_order
-        self.metadata = {
-            "name": "NOT_YET_ASSIGNED",
-            "channels": self.pack_order
-        }
+        self.metadata = {"name": "NOT_YET_ASSIGNED", "channels": self.pack_order}
         self.atlas = self.generate_atlas(dims)
 
     def generate_atlas(self, dims):
-        atlas = np.stack([self._atlas_single_channel(image_channel, dims) for image_channel in self.pack_order])
+        atlas = np.stack(
+            [
+                self._atlas_single_channel(image_channel, dims)
+                for image_channel in self.pack_order
+            ]
+        )
         return atlas
 
     def _atlas_single_channel(self, channel, dims):
-        scale = (float(dims.tile_width) / float(self.aics_image.size_x), float(dims.tile_height) / float(self.aics_image.size_y))
+        scale = (
+            float(dims.tile_width) / float(self.aics_image.size_x),
+            float(dims.tile_height) / float(self.aics_image.size_y),
+        )
 
         channel_data = self.aics_image.get_image_data("XYZ", C=channel)
         # renormalize
@@ -63,11 +80,19 @@ class TextureAtlas:
         atlas = np.zeros((dims.atlas_width, dims.atlas_height))
         i = 0
         for row in range(dims.rows):
-            top_bound, bottom_bound = (dims.tile_height * row), (dims.tile_height * (row + 1))
+            top_bound, bottom_bound = (
+                (dims.tile_height * row),
+                (dims.tile_height * (row + 1)),
+            )
             for col in range(dims.cols):
                 if i < self.aics_image.size_z:
-                    left_bound, right_bound = (dims.tile_width * col), (dims.tile_width * (col + 1))
-                    tile = sktransform.rescale(channel_data[:, :, i], scale, preserve_range=True)
+                    left_bound, right_bound = (
+                        (dims.tile_width * col),
+                        (dims.tile_width * (col + 1)),
+                    )
+                    tile = sktransform.rescale(
+                        channel_data[:, :, i], scale, preserve_range=True
+                    )
                     atlas[left_bound:right_bound, top_bound:bottom_bound] = tile
                     i += 1
                 else:
@@ -76,14 +101,16 @@ class TextureAtlas:
         # rescale min to 0 and max to 255
         mn = min(0, atlas.min())
         mx = atlas.max()
-        atlas = 255.0 * (atlas-mn) / (mx-mn)
+        atlas = 255.0 * (atlas - mn) / (mx - mn)
         # atlas = np.interp(atlas, (min(0, atlas.min()), atlas.max()), (0.0, 255.0))
         atlas = atlas.astype(np.uint8)
         return atlas
 
 
 class TextureAtlasGroup:
-    def __init__(self, aics_image, name="texture_atlas", pack_order=None, max_edge=2048):
+    def __init__(
+        self, aics_image, name="texture_atlas", pack_order=None, max_edge=2048
+    ):
         self.name = name
         self.max_edge = max_edge
         self.stack_height = aics_image.size_z
@@ -94,14 +121,21 @@ class TextureAtlasGroup:
         if pack_order is None:
             # if no pack order is specified, pack 4 channels per png and move on
             channel_list = list(range(aics_image.size_c))
-            pack_order = [channel_list[x:x+max_channels_per_png] for x in range(0, len(channel_list), max_channels_per_png)]
+            pack_order = [
+                channel_list[x : x + max_channels_per_png]
+                for x in range(0, len(channel_list), max_channels_per_png)
+            ]
         png_count = 0
         for png in pack_order:
             self._append(TextureAtlas(aics_image, pack_order=png, dims=self.dims))
             png_count += 1
 
     def _calc_atlas_dimensions(self, aics_image):
-        tile_width, tile_height, stack_height = aics_image.size_x, aics_image.size_y, aics_image.size_z
+        tile_width, tile_height, stack_height = (
+            aics_image.size_x,
+            aics_image.size_y,
+            aics_image.size_z,
+        )
         # maintain aspect ratio of images
         # initialize atlas with one row of all slices
         atlas_width = tile_width * stack_height
@@ -113,7 +147,9 @@ class TextureAtlasGroup:
             new_rows = m.ceil(float(stack_height) / r)
             adjusted_width = int(tile_width * new_rows)
             adjusted_height = int(tile_height * r)
-            new_ratio = float(max(adjusted_width, adjusted_height)) / float(min(adjusted_width, adjusted_height))
+            new_ratio = float(max(adjusted_width, adjusted_height)) / float(
+                min(adjusted_width, adjusted_height)
+            )
             if new_ratio < ratio:
                 ratio = new_ratio
                 atlas_width = adjusted_width
@@ -125,8 +161,8 @@ class TextureAtlasGroup:
         rows = int(atlas_height // tile_height)
 
         if self.max_edge < atlas_width or self.max_edge < atlas_height:
-            tile_width = m.floor(self.max_edge/cols)
-            tile_height = m.floor(self.max_edge/rows)
+            tile_width = m.floor(self.max_edge / cols)
+            tile_height = m.floor(self.max_edge / rows)
             atlas_width = tile_width * cols
             atlas_height = tile_height * rows
 
@@ -146,7 +182,7 @@ class TextureAtlasGroup:
         if channel_names is not None:
             dims.channel_names = channel_names
         else:
-            dims.channel_names = ['CH_'+str(i) for i in range(aics_image.size_c)]
+            dims.channel_names = ["CH_" + str(i) for i in range(aics_image.size_c)]
 
         try:
             physical_pixel_size = aics_image.reader.get_physical_pixel_size()
@@ -183,7 +219,9 @@ class TextureAtlasGroup:
         if self._is_valid_atlas(atlas):
             self.atlas_list.append(atlas)
         else:
-            raise ValueError("Attempted to add atlas that doesn't match the rest of atlasGroup")
+            raise ValueError(
+                "Attempted to add atlas that doesn't match the rest of atlasGroup"
+            )
 
     def get_metadata(self):
         metadata = self.dims.__dict__
@@ -193,12 +231,20 @@ class TextureAtlasGroup:
 
     def save(self, output_dir, name=None, user_data=None):
         """
-        Saves a TextureAtlasGroup into one json file and 1 to many png files. Files are named with format:
-        name+'_atlas.json'
-        name+'_atlas_N.png'
-        :param output_dir: directory in which to write the files
-        :param name: if not supplied, then use the name given when creating the TextureAtlasGroup
-        :param user_data: optional dictionary of additional data to add to json file; to be used by client application
+        Saves a TextureAtlasGroup into one json file and 1 to many png files. Files are
+        named with formats `name+'_atlas.json'` and `name+'_atlas_N.png'`
+
+        Parameters
+        ----------
+        output_dir
+            directory in which to write the files
+
+        name
+            if not supplied, then use the name given when creating the TextureAtlasGroup
+
+        user_data
+            optional dictionary of additional data to add to json file; to be used by
+            client application
         """
         if name is None:
             name = self.name
@@ -217,20 +263,37 @@ class TextureAtlasGroup:
         metadata = self.get_metadata()
         if user_data is not None:
             metadata["userData"] = user_data
-        with open(os.path.join(output_dir, name + "_atlas.json"), 'w') as json_output:
+        with open(os.path.join(output_dir, name + "_atlas.json"), "w") as json_output:
             json.dump(metadata, json_output)
 
 
 def generate_texture_atlas(im, name="texture_atlas", max_edge=2048, pack_order=None):
     """
     Creates a TextureAtlasGroup object
-    :param im: aicsImage object
-    :param name: will be stored in metadata and used at save time if no name is supplied at that time
-    :param max_edge: this designates the largest side in the texture atlas
-    :param pack_order: a 2d list that contains what channel in the image should be saved to the RGBA values in the
-                       final png. for example, a 7 channel image might be saved like [[0, 1, 2, 3], [4, 5], [6]]
-                       where the first texture atlas will code channel 0 as r, channel 1 as g, and so on.
-    :return: TextureAtlasGroup object
+
+    Parameters
+    ----------
+    im
+        aicsImage object
+
+    name
+        will be stored in metadata and used at save time if no name is supplied at that
+        time
+
+    max_edge
+        this designates the largest side in the texture atlas
+
+    pack_order
+        a 2d list that contains what channel in the image should be saved to the RGBA
+        values in the final png. for example, a 7 channel image might be saved like
+        [[0, 1, 2, 3], [4, 5], [6]] where the first texture atlas will code channel 0
+        as r, channel 1 as g, and so on.
+
+    Returns
+    -------
+    TextureAtlasGroup object
     """
-    atlas_group = TextureAtlasGroup(im, name=name, max_edge=max_edge, pack_order=pack_order)
+    atlas_group = TextureAtlasGroup(
+        im, name=name, max_edge=max_edge, pack_order=pack_order
+    )
     return atlas_group

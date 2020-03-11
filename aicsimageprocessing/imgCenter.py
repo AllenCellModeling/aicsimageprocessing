@@ -1,8 +1,9 @@
 # Author: Evan Wiederspan <evanw@alleninstitute.org>
 
 import numpy as np
-from .backgroundCrop import crop, get_edges
 from scipy.ndimage.measurements import center_of_mass
+
+from .backgroundCrop import get_edges
 
 
 def _shape_to(img, out_shape, val=0):
@@ -45,12 +46,22 @@ def _shape_to(img, out_shape, val=0):
 def crop_all(images, axis=(-3, -2, -1)):
     """
     Crop all images by the same amount. The amount to crop will be calculated
-    so that an equal amount is removed on both sides of each axis to keep the center of mass
-    in the center
-    :param images: List of images to crop. The images can be any shape or dimensionality but must
-    all have the same shape
-    :param axis: List of axis to crop along. Default is the last three axis (meant to correspond to ZYX)
-    :return: List of cropped images, in the same order as they were passed in
+    so that an equal amount is removed on both sides of each axis to keep the center of
+    mass in the center
+
+    Parameters
+    ----------
+    images
+        List of images to crop. The images can be any shape or dimensionality but must
+        all have the same shape
+
+    axis
+        List of axis to crop along. Default is the last three axis (meant to correspond
+        to ZYX)
+
+    Returns
+    -------
+    List of cropped images, in the same order as they were passed in
     """
     try:
         if not isinstance(images, (tuple, list)):
@@ -79,11 +90,20 @@ def get_center_moves(image, axes=(-3, -2, -1)):
     """
     Calculates moves needed to center an image based on its center of mass.
     Meant to be passed in to center_image
-    :param image: N-dimensional image to be used for calculation. The image will not be altered
-    :param axis: Iterable containing the axis to center the image on. Order does not affect the output.
-    Default is the last three axis (meant to be ZYX). Can be positive or negative to index from the front
-    or back
-    :return: List of integers, meant to be passed to center_image
+
+    Parameters
+    ----------
+    image
+        N-dimensional image to be used for calculation. The image will not be altered
+
+    axis
+        Iterable containing the axis to center the image on. Order does not affect the
+        output. Default is the last three axis (meant to be ZYX). Can be positive or
+        negative to index from the front or back
+
+    Returns
+    -------
+    List of integers, meant to be passed to center_image
     """
     if not isinstance(image, np.ndarray):
         raise ValueError("image must be a numpy array")
@@ -100,12 +120,25 @@ def get_center_moves(image, axes=(-3, -2, -1)):
 def center(images, moves, fill=0):
     """
     Aligns images based on the center of mass.
-    :param images: Either an n-dimensional image as a numpy array or a list of them. All images must be the same shape
-    :param moves: List of integers, returned from a previous call to get_center_moves. Tells the function
-    how to center the images
-    :param fill: Value to use when adding padding. Default is 0
-    :return: If a single image was passed in, will return a centered copy of the input. If a list was passed
-    in, it will return a list of centered images in the same order that they were passed in
+
+    Parameters
+    ----------
+    images
+        Either an n-dimensional image as a numpy array or a list of them. All images
+        must be the same shape
+
+    moves
+        List of integers, returned from a previous call to get_center_moves. Tells the
+        function how to center the images
+
+    fill
+        Value to use when adding padding. Default is 0
+
+    Returns
+    -------
+    If a single image was passed in, will return a centered copy of the input. If a
+    list was passed in, it will return a list of centered images in the same order that
+    they were passed in
     """
     if isinstance(images, (list, tuple)):
         return_list = True

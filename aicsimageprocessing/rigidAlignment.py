@@ -1,12 +1,15 @@
 import numpy as np
-import sklearn.decomposition
 import scipy
+import sklearn.decomposition
+
 from .alignMajor import align_major, angle_between
 
 # img - a CYXZ numpy array, channel order is generally [DNA, NUCLEUS, ... ]
 
 
-def cell_rigid_registration(img, ch_crop=1, ch_angle=1, ch_com=0, ch_flipdim=1, bbox_size=None):
+def cell_rigid_registration(
+    img, ch_crop=1, ch_angle=1, ch_com=0, ch_flipdim=1, bbox_size=None
+):
     # If bbox_size is not None ch_crop is ignored
     # rotate
     angle = get_major_angle(get_channel(img, ch_angle))
@@ -19,7 +22,7 @@ def cell_rigid_registration(img, ch_crop=1, ch_angle=1, ch_com=0, ch_flipdim=1, 
 
     img = align_major(img, angle)
 
-    com = np.floor(get_center_of_mass(get_channel(img, ch_com))+0.5)
+    com = np.floor(get_center_of_mass(get_channel(img, ch_com)) + 0.5)
 
     # make sure we symmetrically crop around the COM
     if bbox_size is None:
@@ -36,9 +39,9 @@ def cell_rigid_registration(img, ch_crop=1, ch_angle=1, ch_com=0, ch_flipdim=1, 
 
     else:
         bbox_size = np.array(bbox_size)
-        pad_size = bbox_size/2
+        pad_size = bbox_size / 2
         ranges = np.transpose(np.vstack([com - pad_size, com + pad_size]))
-        ranges = np.floor(ranges+0.5).astype(int).astype(object)
+        ranges = np.floor(ranges + 0.5).astype(int).astype(object)
         ranges[0] = [0, None]
 
     pad_pre = np.hstack([0, ranges[1:, 0]])
@@ -57,7 +60,7 @@ def cell_rigid_registration(img, ch_crop=1, ch_angle=1, ch_com=0, ch_flipdim=1, 
 
     img = img[croprange]
 
-    img = np.pad(img, pad_width, mode='constant', constant_values=0)
+    img = np.pad(img, pad_width, mode="constant", constant_values=0)
 
     # flipdim
     flipdim = get_flipdims(get_channel(img, ch_flipdim))
@@ -66,7 +69,9 @@ def cell_rigid_registration(img, ch_crop=1, ch_angle=1, ch_com=0, ch_flipdim=1, 
     return img, angle, flipdim
 
 
-def cell_rigid_deregistration(img, flipdim_orig, angle_orig, com_orig, imsize_orig, ch_crop=1, ch_com=0):
+def cell_rigid_deregistration(
+    img, flipdim_orig, angle_orig, com_orig, imsize_orig, ch_crop=1, ch_com=0
+):
     # deflip the image
     img = flipdims(img, flipdim_orig)
 
@@ -84,11 +89,11 @@ def get_channel(img, channel):
     return np.expand_dims(img[channel], 0)
 
 
-def get_rigid_reg_stats(img, com_method='nuc'):
+def get_rigid_reg_stats(img, com_method="nuc"):
     imsize = img.shape
     com = get_center_of_mass(img, com_method)
 
-    return imsize, com, angle, flipdim
+    return imsize, com
 
 
 def get_major_angle(img, degrees_or_radians="degrees"):
@@ -126,14 +131,14 @@ def get_center_of_mass(img):
     return com
 
 
-def crop_img(img, method='tight'):
+def crop_img(img, method="tight"):
 
     inds = np.stack(np.where(img > 0))
 
     starts = np.min(inds, axis=1)
-    ends = np.max(inds, axis=1)+1
+    ends = np.max(inds, axis=1) + 1
 
-    if method == 'bigger':
+    if method == "bigger":
         width = ends - starts
 
         starts_tmp = starts - width
@@ -170,8 +175,6 @@ def pad_to_position(img, ch_crop, ch_com, com_target, imsize_target):
 
     com = get_center_of_mass(get_channel(img, ch_com))
 
-    pad_com = com-com_target
-
     pad_pre = (com_target - (com + 1))[1:]
     pad_post = (imsize_target - com_target - (np.array(img.shape) - (com + 1)))[1:]
 
@@ -180,22 +183,22 @@ def pad_to_position(img, ch_crop, ch_com, com_target, imsize_target):
     for pre, post in zip(pad_pre, pad_post):
         pad_width += [[int(np.ceil(pre)), int(np.floor(post))]]
 
-    img_out = np.pad(img, pad_width, mode='constant', constant_values=0)
+    img_out = np.pad(img, pad_width, mode="constant", constant_values=0)
 
     return img_out
 
 
-def pad_to_center(img, com):
-    _, croprange_pt2 = crop_img(get_channel(img, ch_crop))
-    img = img[croprange_pt2]
-
-    com = get_center_of_mass(get_channel(img, ch_com))
-
-    pad_dims = img.shape - (com+1) - com
-
-    img = pad_to_com(img, pad_dims)
-
-    return img
+# def pad_to_center(img, com):
+#     _, croprange_pt2 = crop_img(get_channel(img, ch_crop))
+#     img = img[croprange_pt2]
+#
+#     com = get_center_of_mass(get_channel(img, ch_com))
+#
+#     pad_dims = img.shape - (com + 1) - com
+#
+#     img = pad_to_com(img, pad_dims)
+#
+#     return img
 
 
 def pad_to_com(img, pad_dims):
@@ -213,6 +216,6 @@ def pad_to_com(img, pad_dims):
 
         pad_width += pad
 
-    img = np.pad(img, pad_width, mode='constant', constant_values=0)
+    img = np.pad(img, pad_width, mode="constant", constant_values=0)
 
     return img

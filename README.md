@@ -1,11 +1,28 @@
-# AICS Image Processing library
-The aicsimageprocessing package has a number of utility functions to help users generate, crop, and format 2D and 3D images.
+# aicsimageprocessing
 
-## Level of Support
-We are not currently supporting this code for external use, but simply releasing it 
-to the community AS IS. It is used for within our organization. We are not able to 
-provide any guarantees of support. The community is welcome to submit issues, but 
-you should not expect an active response.
+[![Build Status](https://github.com/AllenCellModeling/aicsimageprocessing/workflows/Build%20Master/badge.svg)](https://github.com/AllenCellModeling/aicsimageprocessing/actions)
+[![Documentation](https://github.com/AllenCellModeling/aicsimageprocessing/workflows/Documentation/badge.svg)](https://AllenCellModeling.github.io/aicsimageprocessing)
+[![Code Coverage](https://codecov.io/gh/AllenCellModeling/aicsimageprocessing/branch/master/graph/badge.svg)](https://codecov.io/gh/AllenCellModeling/aicsimageprocessing)
+
+A generalized scientific image processing module from the Allen Institute for Cell Science.
+
+---
+
+## Installation
+**Install Requires:** Prior to installing this package, you must have `numpy` installed.
+
+```bash
+pip install numpy
+```
+
+**Stable Release:** `pip install aicsimageprocessing`<br>
+**Development Head:** `pip install git+https://github.com/AllenCellModeling/aicsimageprocessing.git`
+
+## Documentation
+For full package documentation please visit [AllenCellModeling.github.io/aicsimageprocessing](https://AllenCellModeling.github.io/aicsimageprocessing).
 
 ## Development
-See [BUILD.md](BUILD.md) for information operations related to developing the code.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for information related to developing the code.
+
+
+***Free software: Allen Institute Software License***

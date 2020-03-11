@@ -1,23 +1,42 @@
+import math
+
 import numpy as np
-from . import rigidAlignment
 import skfmm
 from scipy.ndimage.morphology import distance_transform_edt as bwdist
-import math
 from skimage.measure import regionprops
+
+from . import rigidAlignment
 
 
 def img_to_coords(im_cell, im_nuc, major_angle_object="cell"):
     """
     Return unit vector of v
-    :param im_cell: zyx binary image of a cell shape
-    :param im_nuc: zyx binary image of a nuclear shape
-    :major_angle_object: string that specifies from which object the major angle is determined can be 'cell' or 'nuc'
 
-    :return: im_ratio - channels corresponding to ratio image (1 at cell boundary, 0 on nuclear boundary, -1 inside nucleus)
-             im_th - spherical coordinate system theta (radians)
-             im_phi - spherical coordinate system phi (radians)
-             im_r - radial distance from center of nucleus
-             major_angle - angle of cell or nuclear shape (radians)
+    Parameters
+    ----------
+    im_cell
+        zyx binary image of a cell shape
+
+    im_nuc
+        zyx binary image of a nuclear shape
+
+    major_angle_object
+        string that specifies from which object the major angle is determined can be
+        'cell' or 'nuc'
+
+    Returns
+    -------
+    im_ratio
+        channels corresponding to ratio image (1 at cell boundary, 0 on nuclear
+        boundary, -1 inside nucleus)
+    im_th
+        spherical coordinate system theta (radians)
+    im_phi
+        spherical coordinate system phi (radians)
+    im_r
+        radial distance from center of nucleus
+    major_angle
+        angle of cell or nuclear shape (radians)
     """
 
     cell_dist_in = skfmm.distance(np.ma.MaskedArray(im_cell, im_nuc)).data
@@ -39,9 +58,13 @@ def img_to_coords(im_cell, im_nuc, major_angle_object="cell"):
     centroid = regionprops((im_nuc > 0).astype("uint8"))[0]["centroid"]
 
     if major_angle_object == "nuc":
-        major_angle = rigidAlignment.get_major_angle(im_nuc, degrees_or_radians="radians")[0][1]
+        major_angle = rigidAlignment.get_major_angle(
+            im_nuc, degrees_or_radians="radians"
+        )[0][1]
     elif major_angle_object == "cell":
-        major_angle = rigidAlignment.get_major_angle(im_cell, degrees_or_radians="radians")[0][1]
+        major_angle = rigidAlignment.get_major_angle(
+            im_cell, degrees_or_radians="radians"
+        )[0][1]
 
     coords = np.where(im_cell > 0)
 

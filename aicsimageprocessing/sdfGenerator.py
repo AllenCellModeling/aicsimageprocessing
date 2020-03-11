@@ -1,31 +1,38 @@
-from aicsimageprocessing import isosurfaceGenerator
+import time
 
-from aicsimageio import writers
-import mcubes
 import numpy as np
 import skfmm
-from skimage import measure
-import time
 import vtk
+from aicsimageio import writers
+from skimage import measure
 from vtk.util.numpy_support import numpy_to_vtk, numpy_to_vtkIdTypeArray, vtk_to_numpy
+
+import mcubes
+from aicsimageprocessing import isosurfaceGenerator
 
 
 # pass in a 3d numpy array of intensities
 def make_vtkvolume(npvol):
-    # For VTK to be able to use the data, it must be stored as a VTK-image. This can be done by the vtkImageImport-class which
+    # For VTK to be able to use the data, it must be stored as a VTK-image. This can be
+    # done by the vtkImageImport-class which
     # imports raw data and stores it.
     dataImporter = vtk.vtkImageImport()
     dataImporter.CopyImportVoidPointer(npvol, npvol.nbytes)
     # The type of the newly imported data is set to unsigned char (uint8)
     dataImporter.SetDataScalarTypeToUnsignedShort()
-    # Because the data that is imported only contains an intensity value (it isnt RGB-coded or someting similar), the importer
-    # must be told this is the case.
+    # Because the data that is imported only contains an intensity value (it isnt RGB
+    # coded or someting similar), the importer must be told this is the case.
     dataImporter.SetNumberOfScalarComponents(1)
-    # The following two functions describe how the data is stored and the dimensions of the array it is stored in.
-    # I have to admit however, that I honestly dont know the difference between SetDataExtent() and SetWholeExtent() although
-    # VTK complains if not both are used.
-    dataImporter.SetDataExtent(0, npvol.shape[2]-1, 0, npvol.shape[1]-1, 0, npvol.shape[0]-1)
-    dataImporter.SetWholeExtent(0, npvol.shape[2]-1, 0, npvol.shape[1]-1, 0, npvol.shape[0]-1)
+    # The following two functions describe how the data is stored and the dimensions of
+    # the array it is stored in. I have to admit however, that I honestly dont know the
+    # difference between SetDataExtent() and SetWholeExtent() although VTK complains if
+    # not both are used.
+    dataImporter.SetDataExtent(
+        0, npvol.shape[2] - 1, 0, npvol.shape[1] - 1, 0, npvol.shape[0] - 1
+    )
+    dataImporter.SetWholeExtent(
+        0, npvol.shape[2] - 1, 0, npvol.shape[1] - 1, 0, npvol.shape[0] - 1
+    )
     dataImporter.Update()
     return dataImporter
 
@@ -71,7 +78,8 @@ def _generate_mesh_vtkmcubes(im, isovalue):
     start = time.perf_counter()
     vtkdataimporter = make_vtkvolume(im)
     # Flying Edges is WAYYYY faster than marching cubes, from vtk.
-    # need to compare outputs.  poly count is similar and still 5x the other methods shown.
+    # need to compare outputs. poly count is similar and still 5x the other methods
+    # shown.
     vmc = vtk.vtkFlyingEdges3D()
     vmc.SetInputData(vtkdataimporter.GetOutput())
     vmc.ComputeNormalsOn()
@@ -88,9 +96,14 @@ def _generate_mesh_vtkmcubes(im, isovalue):
 
 def _generate_mesh_scikitmcubes(im, isovalue):
     start = time.perf_counter()
-    verts, faces, normals, values = measure.marching_cubes_lewiner(im, level=isovalue, step_size=1)
+    verts, faces, normals, values = measure.marching_cubes_lewiner(
+        im, level=isovalue, step_size=1
+    )
     end = time.perf_counter()
-    print(f"Generate mesh with skimage.measure.marching_cubes_lewiner: {end-start} seconds")
+    print(
+        f"Generate mesh with skimage.measure.marching_cubes_lewiner: {end-start} "
+        f"seconds"
+    )
     print(f"{len(faces)} polygons")
     return verts, faces, normals, values
 
@@ -123,12 +136,10 @@ def _generate_sdf2_vtkmesh(vtkpolydata, im):
     start = time.perf_counter()
     pdd = vtk.vtkSignedDistance()
     pdd.SetInputData(vtkpolydata)
-    pdd.SetRadius(0.5*max(im.shape[2], im.shape[1], im.shape[0]))
+    pdd.SetRadius(0.5 * max(im.shape[2], im.shape[1], im.shape[0]))
     pdd.SetDimensions(im.shape[2], im.shape[1], im.shape[0])
     pdd.SetBounds(
-        0, im.shape[2],
-        0, im.shape[1],
-        0, im.shape[0],
+        0, im.shape[2], 0, im.shape[1], 0, im.shape[0],
     )
     pdd.Update()
     vtkimagedata = pdd.GetOutput()
@@ -194,7 +205,11 @@ def obj_to_sdf(filepath, volume_res):
     xform.PostMultiply()
     xform.Identity()
     xform.Translate(-bounds[0], -bounds[2], -bounds[4])
-    xform.Scale(volume_res[0]/(bounds[1]-bounds[0]), volume_res[1]/(bounds[3]-bounds[2]), volume_res[2]/(bounds[5]-bounds[4]))
+    xform.Scale(
+        volume_res[0] / (bounds[1] - bounds[0]),
+        volume_res[1] / (bounds[3] - bounds[2]),
+        volume_res[2] / (bounds[5] - bounds[4]),
+    )
     xformoperator = vtk.vtkTransformPolyDataFilter()
     xformoperator.SetTransform(xform)
     xformoperator.SetInputConnection(reader.GetOutputPort())
@@ -237,14 +252,15 @@ def volume_to_obj(im, isovalue, outpath, method=0):
 
 
 # take two signed distance fields.
-# A has positive values where its mask is 0, and that is considered the "empty" available space to fill
+# A has positive values where its mask is 0, and that is considered the "empty"
+# available space to fill
 # B has positive values where its mask is 0
 # result has space between A and B positive
 def combine_sdf(A, Amask, B, Bmask):
     start = time.perf_counter()
 
-    Aspace = (Amask == 0)
-    Bspace = (Bmask == 0)
+    Aspace = Amask == 0
+    Bspace = Bmask == 0
 
     inter = Bspace * Aspace
 
