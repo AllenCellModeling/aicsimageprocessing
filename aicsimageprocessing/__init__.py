@@ -13,17 +13,17 @@ def get_module_version():
     return __version__
 
 
-from .alignMajor import *  # noqa: E402
-from .backgroundCrop import *  # noqa: E402
-from .backgroundSub import *  # noqa: E402
-from .crop_img import *  # noqa: E402
-from .flip import *  # noqa: E402
-from .imgCenter import *  # noqa: E402
-from .imgToCoords import *  # noqa: E402
-from .imgToProjection import *  # noqa: E402
-from .imshow import *  # noqa: E402
-from .isosurfaceGenerator import *  # noqa: E402
-from .normalization import *  # noqa: E402
-from .resize import *  # noqa: E402
-from .rigidAlignment import *  # noqa: E402
-from .thumbnailGenerator import *  # noqa: E402
+from .alignMajor import *  # noqa
+from .backgroundCrop import *  # noqa
+from .backgroundSub import *  # noqa
+from .crop_img import *  # noqa
+from .flip import *  # noqa
+from .imgCenter import *  # noqa
+from .imgToCoords import *  # noqa
+from .imgToProjection import *  # noqa
+from .imshow import *  # noqa
+from .isosurfaceGenerator import *  # noqa
+from .normalization import *  # noqa
+from .resize import *  # noqa
+from .rigidAlignment import *  # noqa
+from .thumbnailGenerator import *  # noqa

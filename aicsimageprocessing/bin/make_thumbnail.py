@@ -71,7 +71,7 @@ def main():
         args = Args()
         dbg = args.debug
         colors = [
-            (tuple(int(h[i: i + 2], 16) / 255.0 for i in (0, 2, 4)))
+            (tuple(int(h[i : i + 2], 16) / 255.0 for i in (0, 2, 4)))
             for h in args.colors
         ]
         thumbnailGenerator.make_one_thumbnail(

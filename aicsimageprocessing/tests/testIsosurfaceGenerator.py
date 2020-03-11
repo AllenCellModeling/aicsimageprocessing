@@ -1,9 +1,10 @@
-import unittest
-import numpy as np
 import math as m
+import unittest
+
+import numpy as np
+from aicsimageio import AICSImage
 
 from aicsimageprocessing import isosurfaceGenerator
-from aicsimageio import AICSImage
 
 
 class TestIsosurfaceGenerator(unittest.TestCase):
@@ -38,7 +39,8 @@ class TestIsosurfaceGenerator(unittest.TestCase):
     @staticmethod
     @unittest.skip("temporarily disabled")
     def testCube(size=3):
-        # these cubes appear to have strangely beveled edges but I think that is an artifact of the
+        # these cubes appear to have strangely beveled edges but I think that is an
+        # artifact of the
         # linear interpolation between values of the marching cubes algorithm.
         cube = np.zeros((size, size, size))
         # set all pixels/voxels between 1 and size-1 to 1

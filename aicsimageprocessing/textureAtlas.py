@@ -122,7 +122,7 @@ class TextureAtlasGroup:
             # if no pack order is specified, pack 4 channels per png and move on
             channel_list = list(range(aics_image.size_c))
             pack_order = [
-                channel_list[x: x + max_channels_per_png]
+                channel_list[x : x + max_channels_per_png]
                 for x in range(0, len(channel_list), max_channels_per_png)
             ]
         png_count = 0

@@ -128,7 +128,7 @@ def create_projection(
             # instead of the designated axis param
             section = np.max(image[bottom_bound:top_bound], axis)
             stack += section
-        stack += np.max(image[separator * sections - 1:])
+        stack += np.max(image[separator * sections - 1 :])
 
         return stack
     # returns 2D image, YX
