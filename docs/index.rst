@@ -1,5 +1,5 @@
 Welcome to aicsimageprocessing's documentation!
-======================================
+===============================================
 
 .. toctree::
    :hidden:
