@@ -164,10 +164,11 @@ class ThumbnailGenerator:
 
     This class is used to generate thumbnails for 4D CZYX images.
 
-    Example:
-        generator = ThumbnailGenerator()
-        for image in image_array:
-            thumbnail = generator.make_thumbnail(image)
+    Examples
+    --------
+    >>> generator = ThumbnailGenerator()
+    ... for image in image_array:
+    ...     thumbnail = generator.make_thumbnail(image)
 
     """
 
