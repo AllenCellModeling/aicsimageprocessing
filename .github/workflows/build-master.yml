@@ -49,4 +49,4 @@ jobs:
         pip install .[test]
     - name: Lint with flake8
       run: |
-        flake8 aicsimageprocessing --count --verbose --max-line-length=127 --show-source --statistics
+        flake8 aicsimageprocessing --count --verbose --show-source --statistics
