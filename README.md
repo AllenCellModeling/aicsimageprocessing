@@ -9,6 +9,12 @@ A generalized scientific image processing module from the Allen Institute for Ce
 ---
 
 ## Installation
+**Install Requires:** Prior to installing this package, you must have `numpy` installed.
+
+```bash
+pip install numpy
+```
+
 **Stable Release:** `pip install aicsimageprocessing`<br>
 **Development Head:** `pip install git+https://github.com/AllenCellModeling/aicsimageprocessing.git`
 
