@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>aicsimageprocessing.flip &mdash; aicsimageprocessing 0.7.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> aicsimageprocessing
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../aicsimageprocessing.html">aicsimageprocessing package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.bin.html">aicsimageprocessing.bin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.segmentation.html">aicsimageprocessing.segmentation package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.alignMajor">aicsimageprocessing.alignMajor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundCrop">aicsimageprocessing.backgroundCrop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundSub">aicsimageprocessing.backgroundSub module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.crop_img">aicsimageprocessing.crop_img module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.flip">aicsimageprocessing.flip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgCenter">aicsimageprocessing.imgCenter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToCoords">aicsimageprocessing.imgToCoords module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToProjection">aicsimageprocessing.imgToProjection module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imshow">aicsimageprocessing.imshow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.isosurfaceGenerator">aicsimageprocessing.isosurfaceGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.normalization">aicsimageprocessing.normalization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.resize">aicsimageprocessing.resize module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.rigidAlignment">aicsimageprocessing.rigidAlignment module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.sdfGenerator">aicsimageprocessing.sdfGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.textureAtlas">aicsimageprocessing.textureAtlas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.thumbnailGenerator">aicsimageprocessing.thumbnailGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.transformation">aicsimageprocessing.transformation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">aicsimageprocessing</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../aicsimageprocessing.html">aicsimageprocessing</a> &raquo;</li>
+        
+      <li>aicsimageprocessing.flip</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aicsimageprocessing.flip</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Author: Evan Wiederspan &lt;evanw@alleninstitute.org&gt;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.ndimage.measurements</span> <span class="kn">import</span> <span class="n">center_of_mass</span>
+
+
+<div class="viewcode-block" id="get_flips"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.flip.get_flips">[docs]</a><span class="k">def</span> <span class="nf">get_flips</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">sec</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates which axes to flip in order to have the center of mass of the image</span>
+<span class="sd">    be located in the desired sector. Meant to be passed to flip()</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img</span>
+<span class="sd">        image as an n-dimensional numpy array to perform the calculations on. The image</span>
+<span class="sd">        will not be modified by this function</span>
+
+<span class="sd">    sec</span>
+<span class="sd">        String containing &#39;+&#39; and &#39;-&#39;, same length as &#39;axes&#39;. Tells the function which</span>
+<span class="sd">        side of each axis the center of mass should be on, &#39;+&#39; meaning the upper half</span>
+<span class="sd">        and &#39;-&#39; meaning the lower half</span>
+
+<span class="sd">        &gt;&gt;&gt; get_flips(img, &quot;++-&quot;, axes=(-3, -2, -1))</span>
+<span class="sd">        This, for example, would mean to have the center of mass be on the upper half</span>
+<span class="sd">        of the z axis (index -3 for a CZYX image), the upper half of the y axis, and</span>
+<span class="sd">        the lower half of the x axis</span>
+
+<span class="sd">    axes</span>
+<span class="sd">        List or tuple of integers, specifies which axes to calculate the needed flips</span>
+<span class="sd">        for. Default is the last three axes, meant to be the 3 spatial dimensions for a</span>
+<span class="sd">        ZYX, CZYX, or TCZYX image. Must be the same length as &#39;sec&#39; parameter</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A list of integers, representing the indices of the axes to flip the image along</span>
+<span class="sd">    Should be passed to flip()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;img must be a numpy array&quot;</span><span class="p">)</span>
+    <span class="n">com</span> <span class="o">=</span> <span class="n">center_of_mass</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sec</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;sec and axes must be the same length&quot;</span><span class="p">)</span>
+    <span class="c1"># return object, list of axis indices to flip on</span>
+    <span class="n">flips</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">side</span><span class="p">,</span> <span class="n">axis</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">axes</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># if we want the center of mass on the upper half</span>
+            <span class="k">if</span> <span class="n">side</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">com</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+                    <span class="n">flips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+            <span class="c1"># if we want it on the lower half</span>
+            <span class="k">elif</span> <span class="n">side</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">com</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+                    <span class="n">flips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Invalid sector char &#39;</span><span class="si">{}</span><span class="s2">&#39;, must be &#39;+&#39; or &#39;-&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">side</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Out of range axis value &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">axis</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid axis value &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, must be an integer&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">flips</span></div>
+
+
+<div class="viewcode-block" id="flip"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.flip.flip">[docs]</a><span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">flips</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flips images based on the calculations from get_flips()</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    images</span>
+<span class="sd">        Either a single n-dimensional image as a numpy array or a list of them. The</span>
+<span class="sd">        images to flip</span>
+
+<span class="sd">    flips</span>
+<span class="sd">        The output from get_flips(), tells the function which axes to flip the images</span>
+<span class="sd">        along. All images will be flipped the same way</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Either a single flipped copy of the input image, or a list of them in the same</span>
+<span class="sd">    order that they were passed in, depending on whether the &#39;images&#39; parameter was a</span>
+<span class="sd">    single picture or a list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="n">return_list</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">image_list</span> <span class="o">=</span> <span class="n">images</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">return_list</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">image_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">images</span><span class="p">]</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">image_list</span><span class="p">:</span>
+        <span class="c1"># probably the most I&#39;ve type &#39;flip&#39; in my life</span>
+        <span class="n">flipped</span> <span class="o">=</span> <span class="n">img</span>
+        <span class="k">for</span> <span class="n">flip_axis</span> <span class="ow">in</span> <span class="n">flips</span><span class="p">:</span>
+            <span class="n">flipped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">flipped</span><span class="p">,</span> <span class="n">flip_axis</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flipped</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">return_list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">out</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Allen Institute for Cell Science
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

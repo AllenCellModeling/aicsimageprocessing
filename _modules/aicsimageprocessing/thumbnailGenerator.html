@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>aicsimageprocessing.thumbnailGenerator &mdash; aicsimageprocessing 0.7.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> aicsimageprocessing
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../aicsimageprocessing.html">aicsimageprocessing package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.bin.html">aicsimageprocessing.bin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.segmentation.html">aicsimageprocessing.segmentation package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.alignMajor">aicsimageprocessing.alignMajor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundCrop">aicsimageprocessing.backgroundCrop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundSub">aicsimageprocessing.backgroundSub module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.crop_img">aicsimageprocessing.crop_img module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.flip">aicsimageprocessing.flip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgCenter">aicsimageprocessing.imgCenter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToCoords">aicsimageprocessing.imgToCoords module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToProjection">aicsimageprocessing.imgToProjection module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imshow">aicsimageprocessing.imshow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.isosurfaceGenerator">aicsimageprocessing.isosurfaceGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.normalization">aicsimageprocessing.normalization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.resize">aicsimageprocessing.resize module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.rigidAlignment">aicsimageprocessing.rigidAlignment module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.sdfGenerator">aicsimageprocessing.sdfGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.textureAtlas">aicsimageprocessing.textureAtlas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.thumbnailGenerator">aicsimageprocessing.thumbnailGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.transformation">aicsimageprocessing.transformation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">aicsimageprocessing</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../aicsimageprocessing.html">aicsimageprocessing</a> &raquo;</li>
+        
+      <li>aicsimageprocessing.thumbnailGenerator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aicsimageprocessing.thumbnailGenerator</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+
+<span class="c1"># authors: Dan Toloudis danielt@alleninstitute.org</span>
+<span class="c1">#          Zach Crabtree zacharyc@alleninstitute.org</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">aicsimageio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">skimage.transform</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageDraw</span><span class="p">,</span> <span class="n">ImageFont</span>
+
+<span class="n">COLORS_CMY</span> <span class="o">=</span> <span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="n">DEFAULT_SIZE</span> <span class="o">=</span> <span class="mi">128</span>
+
+
+<div class="viewcode-block" id="resize_cyx_image"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.thumbnailGenerator.resize_cyx_image">[docs]</a><span class="k">def</span> <span class="nf">resize_cyx_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">new_size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function resizes a CYX image.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    image</span>
+<span class="sd">        CYX ndarray</span>
+
+<span class="sd">    new_size</span>
+<span class="sd">        tuple of shape of desired image dimensions in CYX</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    image with shape of new_size</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">scaling</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">new_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># get the shape of the image that is resized by the scaling factor</span>
+    <span class="n">test_shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">scaling</span><span class="p">,</span> <span class="n">scaling</span><span class="p">]))</span>
+    <span class="c1"># sometimes the scaling can be rounded incorrectly and scale the image to</span>
+    <span class="c1"># one pixel too high or too low</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">test_shape</span><span class="p">,</span> <span class="n">new_size</span><span class="p">):</span>
+        <span class="c1"># getting the scaling from the other dimension solves this rounding problem</span>
+        <span class="n">scaling</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">new_size</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">test_shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">scaling</span><span class="p">,</span> <span class="n">scaling</span><span class="p">]))</span>
+        <span class="c1"># if neither scaling factors achieve the desired shape, then the aspect ratio</span>
+        <span class="c1"># of the image is different than the aspect ratio of new_size</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">test_shape</span><span class="p">,</span> <span class="n">new_size</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;This image does not have the same aspect ratio as new_size&quot;</span>
+            <span class="p">)</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">scaling</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">scaling</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">scaling</span>
+        <span class="n">im_out</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">pyramid_expand</span><span class="p">(</span>
+            <span class="n">image</span><span class="p">,</span> <span class="n">upscale</span><span class="o">=</span><span class="n">scaling</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">scaling</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">im_out</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">pyramid_reduce</span><span class="p">(</span>
+            <span class="n">image</span><span class="p">,</span> <span class="n">downscale</span><span class="o">=</span><span class="n">scaling</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">im_out</span> <span class="o">=</span> <span class="n">image</span>
+
+    <span class="n">im_out</span> <span class="o">=</span> <span class="n">im_out</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">im_out</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">new_size</span>
+
+    <span class="k">return</span> <span class="n">im_out</span></div>
+
+
+<div class="viewcode-block" id="create_projection"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.thumbnailGenerator.create_projection">[docs]</a><span class="k">def</span> <span class="nf">create_projection</span><span class="p">(</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;max&quot;</span><span class="p">,</span>
+    <span class="n">slice_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">sections</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function creates a 2D projection out of an n-dimensional image.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    image</span>
+<span class="sd">        ZCYX array</span>
+
+<span class="sd">    axis</span>
+<span class="sd">        the axis that the projection should be performed along</span>
+
+<span class="sd">    method</span>
+<span class="sd">        the method that will be used to create the projection</span>
+<span class="sd">        Options: [&quot;max&quot;, &quot;mean&quot;, &quot;sum&quot;, &quot;slice&quot;, &quot;sections&quot;]</span>
+<span class="sd">        - max will look through each axis-slice, and determine the max value for each</span>
+<span class="sd">        pixel</span>
+<span class="sd">        - mean will look through each axis-slice, and determine the mean value for each</span>
+<span class="sd">        pixel</span>
+<span class="sd">        - sum will look through each axis-slice, and sum all pixels together</span>
+<span class="sd">        - slice will take the pixel values from the middle slice of the stack</span>
+<span class="sd">        - sections will split the stack into `sections` number of sections, and take a</span>
+<span class="sd">        max projection for each.</span>
+
+<span class="sd">    slice_index</span>
+<span class="sd">        index to use for the &#39;slice&#39; projection method</span>
+
+<span class="sd">    sections</span>
+<span class="sd">        number of sections to select and max-intensity project for the &#39;sections&#39;</span>
+<span class="sd">        projection method</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    The 2D image projection</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;mean&quot;</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;sum&quot;</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;slice&quot;</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">slice_index</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;sections&quot;</span><span class="p">:</span>
+        <span class="n">separator</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">sections</span><span class="p">))</span>
+        <span class="c1"># stack is a 2D YX im</span>
+        <span class="n">stack</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sections</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">bottom_bound</span> <span class="o">=</span> <span class="n">separator</span> <span class="o">*</span> <span class="n">i</span>
+            <span class="n">top_bound</span> <span class="o">=</span> <span class="n">separator</span> <span class="o">+</span> <span class="n">bottom_bound</span>
+            <span class="c1"># TODO: this line assumes the stack is separated through the z-axis,</span>
+            <span class="c1"># instead of the designated axis param</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="n">bottom_bound</span><span class="p">:</span><span class="n">top_bound</span><span class="p">],</span> <span class="n">axis</span><span class="p">)</span>
+            <span class="n">stack</span> <span class="o">+=</span> <span class="n">section</span>
+        <span class="n">stack</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="n">separator</span> <span class="o">*</span> <span class="n">sections</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:])</span>
+
+        <span class="k">return</span> <span class="n">stack</span>
+    <span class="c1"># returns 2D image, YX</span>
+    <span class="k">return</span> <span class="n">image</span></div>
+
+
+<div class="viewcode-block" id="subtract_noise_floor"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.thumbnailGenerator.subtract_noise_floor">[docs]</a><span class="k">def</span> <span class="nf">subtract_noise_floor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>
+    <span class="c1"># image is a 3D ZYX image</span>
+    <span class="n">immin</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">immax</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">hi</span><span class="p">,</span> <span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="n">immin</span><span class="p">,</span> <span class="n">immax</span><span class="p">))</span>
+    <span class="c1"># index of tallest peak in histogram</span>
+    <span class="n">peakind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span>
+    <span class="c1"># subtract this out</span>
+    <span class="n">subtracted</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">subtracted</span> <span class="o">-=</span> <span class="n">bin_edges</span><span class="p">[</span><span class="n">peakind</span><span class="p">]</span>
+    <span class="c1"># don&#39;t go negative</span>
+    <span class="n">subtracted</span><span class="p">[</span><span class="n">subtracted</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">subtracted</span></div>
+
+
+<span class="c1"># assumes sizes are c, x, y so the 1 and 2 indices are the x and y</span>
+<span class="k">def</span> <span class="nf">_get_letterbox_bounds</span><span class="p">(</span><span class="n">full_size</span><span class="p">,</span> <span class="n">scaled_size</span><span class="p">):</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="p">(</span><span class="n">full_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">scaled_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">scaled_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">(</span><span class="n">full_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">scaled_size</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">+</span> <span class="n">scaled_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span>
+
+
+<div class="viewcode-block" id="ThumbnailGenerator"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.thumbnailGenerator.ThumbnailGenerator">[docs]</a><span class="k">class</span> <span class="nc">ThumbnailGenerator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    This class is used to generate thumbnails for 4D CZYX images.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; generator = ThumbnailGenerator()</span>
+<span class="sd">    ... for image in image_array:</span>
+<span class="sd">    ...     thumbnail = generator.make_thumbnail(image)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">colors</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">COLORS_CMY</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_SIZE</span><span class="p">,</span>
+        <span class="n">channel_indices</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">channel_thresholds</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">channel_multipliers</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mask_channel_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">letterbox</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">projection</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;max&quot;</span><span class="p">,</span>
+        <span class="n">projection_sections</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">return_rgb</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        colors</span>
+<span class="sd">            The color palette that will be used to color each channel. The default</span>
+<span class="sd">            palette colors are magenta=membrane, nucleus=cyan, structure=yellow.</span>
+<span class="sd">            Keep color-blind accessibility in mind.</span>
+
+<span class="sd">        size</span>
+<span class="sd">            This constrains the image to have the X or Y dims max out at this value,</span>
+<span class="sd">            but keep the original aspect ratio of the image.</span>
+
+<span class="sd">        channel_indices</span>
+<span class="sd">            An array of channel indices to represent the three main channels of the cell</span>
+
+<span class="sd">        mask_channel_index</span>
+<span class="sd">            The index for the segmentation channel in image that will be used to mask</span>
+<span class="sd">            the thumbnail</span>
+
+<span class="sd">        projection</span>
+<span class="sd">            The method that will be used to generate each channel&#39;s projection. This is</span>
+<span class="sd">            done for each pixel, through the z-axis</span>
+<span class="sd">            Options: [&quot;max&quot;, &quot;slice&quot;, &quot;sections&quot;]</span>
+<span class="sd">            - max will look through each z-slice, and determine the max value for each</span>
+<span class="sd">            pixel</span>
+<span class="sd">            - slice will take the pixel values from the middle slice of the z-stack</span>
+<span class="sd">            - sections will split the zstack into projection_sections number of</span>
+<span class="sd">            sections, and take a  max projection for each.</span>
+
+<span class="sd">        projection_sections</span>
+<span class="sd">            The number of sections that will be used to determine projections, if</span>
+<span class="sd">            projection=&quot;sections&quot;</span>
+
+<span class="sd">        return_rgb</span>
+<span class="sd">            Return an array that has been clipped and cast as uint8 to make it RGB</span>
+<span class="sd">            compatible. Setting this to False will return the float array that is</span>
+<span class="sd">            (generally) bounded between 0 and 1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">channel_indices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">channel_indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">channel_thresholds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">channel_thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">channel_multipliers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">channel_multipliers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">colors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span> <span class="o">=</span> <span class="n">channel_indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel_thresholds</span> <span class="o">=</span> <span class="n">channel_thresholds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel_multipliers</span> <span class="o">=</span> <span class="n">channel_multipliers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_channel_index</span> <span class="o">=</span> <span class="n">mask_channel_index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letterbox</span> <span class="o">=</span> <span class="n">letterbox</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">projection</span> <span class="o">=</span> <span class="n">projection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">projection_sections</span> <span class="o">=</span> <span class="n">projection_sections</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_rgb</span> <span class="o">=</span> <span class="n">return_rgb</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_settings</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_validate_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;slice&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="s2">&quot;sections&quot;</span><span class="p">]</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">colors</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Colors </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="si">}</span><span class="s2"> are invalid&quot;</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span><span class="p">),</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Colors palette is a different size than the channel indices &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;(len(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="si">}</span><span class="s2">) != len(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span><span class="si">}</span><span class="s2">))&quot;</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="p">),</span> <span class="s2">&quot;Minimum channel index must be greater than or equal to 0&quot;</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_thresholds</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_multipliers</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_make_thumbnail</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">new_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+        <span class="n">output_size_dim</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">apply_cell_mask</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">apply_cell_mask</span><span class="p">:</span>
+            <span class="n">shape_out_rgb</span> <span class="o">=</span> <span class="n">new_size</span>
+
+            <span class="c1"># apply the cell segmentation mask.  bye bye to data outside the cell</span>
+            <span class="n">num_noise_floor_bins</span> <span class="o">=</span> <span class="mi">32</span>
+            <span class="n">composite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">shape_out_rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">output_size_dim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">output_size_dim</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span><span class="p">)):</span>
+                <span class="n">ch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="c1"># try to subtract out the noise floor.</span>
+                <span class="c1"># range is chosen to ignore zeros due to masking.  alternative is to</span>
+                <span class="c1"># pass mask image as weights=im1[-1]</span>
+                <span class="n">thumb</span> <span class="o">=</span> <span class="n">subtract_noise_floor</span><span class="p">(</span><span class="n">image</span><span class="p">[:,</span> <span class="n">ch</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_noise_floor_bins</span><span class="p">)</span>
+                <span class="c1"># apply mask</span>
+                <span class="n">thumb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">thumb</span><span class="p">,</span> <span class="n">image</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_channel_index</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+                <span class="c1"># renormalize</span>
+                <span class="n">thmax</span> <span class="o">=</span> <span class="n">thumb</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                <span class="n">thumb</span> <span class="o">/=</span> <span class="n">thmax</span>
+
+                <span class="c1"># resize before projection?</span>
+                <span class="n">rgbproj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">thumb</span><span class="p">)</span>
+                <span class="n">rgbproj</span> <span class="o">=</span> <span class="n">create_projection</span><span class="p">(</span>
+                    <span class="n">rgbproj</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">,</span> <span class="n">slice_index</span><span class="o">=</span><span class="n">rgbproj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="p">)</span>
+                <span class="n">rgb_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">rgbproj</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">rgb_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">rgb_out</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+                <span class="c1"># inject color.  careful of type mismatches.</span>
+                <span class="n">rgb_out</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                <span class="n">rgb_out</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">rgb_out</span><span class="p">)</span>
+
+                <span class="n">rgb_out</span> <span class="o">=</span> <span class="n">resize_cyx_image</span><span class="p">(</span>
+                    <span class="n">rgb_out</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">shape_out_rgb</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+                <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">_get_letterbox_bounds</span><span class="p">(</span><span class="n">output_size_dim</span><span class="p">,</span> <span class="n">shape_out_rgb</span><span class="p">)</span>
+                <span class="n">composite</span><span class="p">[:,</span> <span class="n">x0</span><span class="p">:</span><span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">:</span><span class="n">y1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">rgb_out</span>
+            <span class="c1"># renormalize</span>
+            <span class="n">composite</span> <span class="o">/=</span> <span class="n">composite</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="c1"># return as cyx for pngwriter</span>
+            <span class="k">return</span> <span class="n">composite</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">shape_out_rgb</span> <span class="o">=</span> <span class="n">new_size</span>
+
+            <span class="n">num_noise_floor_bins</span> <span class="o">=</span> <span class="mi">16</span>
+            <span class="n">composite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">shape_out_rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">output_size_dim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">output_size_dim</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="p">)</span>
+            <span class="n">channel_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span>
+            <span class="n">rgb_image</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">channel_indices</span><span class="p">:</span>
+                <span class="c1"># subtract out the noise floor.</span>
+                <span class="n">immin</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+                <span class="n">immax</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                <span class="n">hi</span><span class="p">,</span> <span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span>
+                    <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">num_noise_floor_bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">immin</span><span class="p">),</span> <span class="n">immax</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="c1"># index of tallest peak in histogram</span>
+                <span class="n">peakind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span>
+                <span class="c1"># subtract this out</span>
+                <span class="n">thumb</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+                <span class="n">thumb</span> <span class="o">-=</span> <span class="n">bin_edges</span><span class="p">[</span><span class="n">peakind</span><span class="p">]</span>
+                <span class="c1"># don&#39;t go negative</span>
+                <span class="n">thumb</span><span class="p">[</span><span class="n">thumb</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="c1"># renormalize</span>
+                <span class="n">thmax</span> <span class="o">=</span> <span class="n">thumb</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                <span class="n">thumb</span> <span class="o">/=</span> <span class="n">thmax</span>
+
+                <span class="n">imdbl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">thumb</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;double&quot;</span><span class="p">)</span>
+                <span class="n">im_proj</span> <span class="o">=</span> <span class="n">create_projection</span><span class="p">(</span>
+                    <span class="n">imdbl</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">,</span> <span class="n">slice_index</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">thumb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Add the modified channel to the list of channels to composite</span>
+                <span class="n">rgb_image</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im_proj</span><span class="p">)</span>
+
+            <span class="c1"># Composite the desired channels</span>
+            <span class="c1"># rgb_image and self.colors can safely be assumed the same length because</span>
+            <span class="c1"># rgb_image is the same length as self.channel_indices and an assertion</span>
+            <span class="c1"># is made to that effect when constructing the class</span>
+            <span class="k">for</span> <span class="n">channel</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rgb_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="p">):</span>
+                <span class="c1"># turn into RGB</span>
+                <span class="n">rgb_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">rgb_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">rgb_out</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">)</span>
+
+                <span class="c1"># inject color.  careful of type mismatches.</span>
+                <span class="n">rgb_out</span> <span class="o">*=</span> <span class="n">color</span>
+
+                <span class="n">rgb_out</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">rgb_out</span><span class="p">)</span>
+
+                <span class="n">rgb_out</span> <span class="o">=</span> <span class="n">resize_cyx_image</span><span class="p">(</span><span class="n">rgb_out</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">shape_out_rgb</span><span class="p">)</span>
+
+                <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">_get_letterbox_bounds</span><span class="p">(</span><span class="n">output_size_dim</span><span class="p">,</span> <span class="n">shape_out_rgb</span><span class="p">)</span>
+                <span class="n">composite</span><span class="p">[:,</span> <span class="n">x0</span><span class="p">:</span><span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">:</span><span class="n">y1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">rgb_out</span>
+
+            <span class="c1"># returns a CYX array for the pngwriter</span>
+            <span class="k">return</span> <span class="n">composite</span>
+
+    <span class="k">def</span> <span class="nf">_get_output_shape</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">im_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method will take in a 3D ZYX shape and return a 3D XYC of the final</span>
+<span class="sd">        thumbnail</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        im_size</span>
+<span class="sd">            3D ZYX shape of original image</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        CYX dims for a resized thumbnail where the maximum X or Y dimension is the one</span>
+<span class="sd">        specified in the constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># size down to this edge size, maintaining aspect ratio.</span>
+        <span class="n">max_edge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+        <span class="c1"># keep same number of z slices.</span>
+        <span class="n">shape_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">im_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">max_edge</span>
+                <span class="k">if</span> <span class="n">im_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">im_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">else</span> <span class="n">max_edge</span> <span class="o">*</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">im_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">im_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+                <span class="n">max_edge</span>
+                <span class="k">if</span> <span class="n">im_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">im_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">else</span> <span class="n">max_edge</span> <span class="o">*</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">im_size</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="n">im_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">shape_out</span><span class="p">[</span><span class="mi">2</span><span class="p">])),</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">shape_out</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+<div class="viewcode-block" id="ThumbnailGenerator.make_thumbnail"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.thumbnailGenerator.ThumbnailGenerator.make_thumbnail">[docs]</a>    <span class="k">def</span> <span class="nf">make_thumbnail</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">apply_cell_mask</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is the primary interface with the ThumbnailGenerator. It can be</span>
+<span class="sd">        used many times with different images in order to save the configuration that</span>
+<span class="sd">        was specified at the beginning of the generator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        image</span>
+<span class="sd">            ZCYX image that is the source of the thumbnail</span>
+<span class="sd">        apply_cell_mask</span>
+<span class="sd">            boolean value that designates whether the image is a fullfield or segmented</span>
+<span class="sd">            cell</span>
+<span class="sd">            False -&gt; fullfield, True -&gt; segmented cell</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        a CYX image, scaled down to the size designated in the constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="c1"># check to make sure there are 3 or more channels</span>
+        <span class="k">assert</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;The image did not have 3 or more channels&quot;</span>
+        <span class="k">assert</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">apply_cell_mask</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_channel_index</span> <span class="o">&lt;=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">im_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">im_size</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="n">shape_out_rgb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_output_shape</span><span class="p">(</span><span class="n">im_size</span><span class="p">)</span>
+
+        <span class="n">final_size</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">shape_out_rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">letterbox</span>
+            <span class="k">else</span> <span class="n">shape_out_rgb</span>
+        <span class="p">)</span>
+
+        <span class="n">thumbnail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_thumbnail</span><span class="p">(</span>
+            <span class="n">image</span><span class="p">,</span> <span class="n">shape_out_rgb</span><span class="p">,</span> <span class="n">final_size</span><span class="p">,</span> <span class="n">apply_cell_mask</span><span class="o">=</span><span class="n">apply_cell_mask</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_rgb</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">thumbnail</span>
+
+        <span class="c1"># Clip the values of the float array between 0 and 1, rescale to the bit depth</span>
+        <span class="c1"># of uint8, and cast to uint8</span>
+        <span class="n">rgb_thumbnail</span> <span class="o">=</span> <span class="p">(</span><span class="n">thumbnail</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">255.0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rgb_thumbnail</span></div></div>
+
+
+<div class="viewcode-block" id="make_one_thumbnail"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.thumbnailGenerator.make_one_thumbnail">[docs]</a><span class="k">def</span> <span class="nf">make_one_thumbnail</span><span class="p">(</span>
+    <span class="n">infile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">channels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">colors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
+    <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">projection</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;max&quot;</span><span class="p">,</span>
+    <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">apply_mask</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">mask_channel</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">axistranspose</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Z</span>
+        <span class="n">axistranspose</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># X</span>
+        <span class="n">axistranspose</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Y</span>
+        <span class="n">axistranspose</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown axis value: </span><span class="si">{</span><span class="n">axis</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">aicsimageio</span><span class="o">.</span><span class="n">AICSImage</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span> <span class="k">as</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">imagedata</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">get_image_data</span><span class="p">(</span><span class="s2">&quot;CZYX&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">generator</span> <span class="o">=</span> <span class="n">ThumbnailGenerator</span><span class="p">(</span>
+        <span class="n">channel_indices</span><span class="o">=</span><span class="n">channels</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+        <span class="n">mask_channel_index</span><span class="o">=</span><span class="n">mask_channel</span><span class="p">,</span>
+        <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span>
+        <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># take zeroth time, and transpose projection axis and c</span>
+    <span class="n">thumbnail</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">make_thumbnail</span><span class="p">(</span>
+        <span class="n">imagedata</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">axistranspose</span><span class="p">),</span> <span class="n">apply_cell_mask</span><span class="o">=</span><span class="n">apply_mask</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">label</span><span class="p">:</span>
+        <span class="c1"># Untested on MacOS</span>
+        <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+            <span class="n">font_path</span> <span class="o">=</span> <span class="s2">&quot;/Windows/Fonts/consola.ttf&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">font_path</span> <span class="o">=</span> <span class="s2">&quot;/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf&quot;</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="n">font_path</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">thumbnail</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+        <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">label</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>
+        <span class="n">thumbnail</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">thumbnail</span> <span class="o">=</span> <span class="n">thumbnail</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">aicsimageio</span><span class="o">.</span><span class="n">writers</span><span class="o">.</span><span class="n">PngWriter</span><span class="p">(</span>
+        <span class="n">file_path</span><span class="o">=</span><span class="n">outfile</span><span class="p">,</span> <span class="n">overwrite_file</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">thumbnail</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">thumbnail</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Allen Institute for Cell Science
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

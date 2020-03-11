@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>aicsimageprocessing.isosurfaceGenerator &mdash; aicsimageprocessing 0.7.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> aicsimageprocessing
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../aicsimageprocessing.html">aicsimageprocessing package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.bin.html">aicsimageprocessing.bin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.segmentation.html">aicsimageprocessing.segmentation package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.alignMajor">aicsimageprocessing.alignMajor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundCrop">aicsimageprocessing.backgroundCrop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundSub">aicsimageprocessing.backgroundSub module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.crop_img">aicsimageprocessing.crop_img module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.flip">aicsimageprocessing.flip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgCenter">aicsimageprocessing.imgCenter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToCoords">aicsimageprocessing.imgToCoords module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToProjection">aicsimageprocessing.imgToProjection module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imshow">aicsimageprocessing.imshow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.isosurfaceGenerator">aicsimageprocessing.isosurfaceGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.normalization">aicsimageprocessing.normalization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.resize">aicsimageprocessing.resize module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.rigidAlignment">aicsimageprocessing.rigidAlignment module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.sdfGenerator">aicsimageprocessing.sdfGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.textureAtlas">aicsimageprocessing.textureAtlas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.thumbnailGenerator">aicsimageprocessing.thumbnailGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.transformation">aicsimageprocessing.transformation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">aicsimageprocessing</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../aicsimageprocessing.html">aicsimageprocessing</a> &raquo;</li>
+        
+      <li>aicsimageprocessing.isosurfaceGenerator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aicsimageprocessing.isosurfaceGenerator</h1><div class="highlight"><pre>
+<span></span><span class="c1"># author: Zach Crabtree zacharyc@alleninstitute.org</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">aicsimageio</span> <span class="kn">import</span> <span class="n">AICSImage</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">measure</span>
+
+
+<div class="viewcode-block" id="Mesh"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.isosurfaceGenerator.Mesh">[docs]</a><span class="k">class</span> <span class="nc">Mesh</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    A cell mesh class contains the necessary information to generate a display a 3D</span>
+<span class="sd">    isosurface.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; image = AICSImage(&quot;some/bio/image.ome.tif&quot;)</span>
+<span class="sd">    ... mesh0 = generate_mesh(image, isovalue=0, channel=0)</span>
+<span class="sd">    ... # will generate a different mesh due to the different isovalue</span>
+<span class="sd">    ... mesh1 = generate_mesh(image, isovalue=1, channel=0)</span>
+<span class="sd">    ... mesh0.save_as_obj(&quot;some/bio/image/mesh.obj&quot;)</span>
+<span class="sd">    ... # mesh.obj can be imported into 3D viewers and represents a 3D rendering of</span>
+<span class="sd">    ... # image.ome.tif</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verts</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">normals</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verts</span> <span class="o">=</span> <span class="n">verts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">faces</span> <span class="o">=</span> <span class="n">faces</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normals</span> <span class="o">=</span> <span class="n">normals</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">values</span>
+
+<div class="viewcode-block" id="Mesh.save_as_obj"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.isosurfaceGenerator.Mesh.save_as_obj">[docs]</a>    <span class="k">def</span> <span class="nf">save_as_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save a mesh object as an .obj file</span>
+<span class="sd">        :param file_path: The filepath to the saved file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">file_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.obj&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">file_path</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.obj&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">file_path</span> <span class="o">+=</span> <span class="s2">&quot;.obj&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# OBJ file</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;g Object001</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verts</span><span class="p">:</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;v  </span><span class="si">{:.6f}</span><span class="s2">  </span><span class="si">{:.6f}</span><span class="s2">  </span><span class="si">{:.6f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normals</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">normals</span><span class="p">:</span>
+                    <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                        <span class="s2">&quot;vn  </span><span class="si">{:.6f}</span><span class="s2">  </span><span class="si">{:.6f}</span><span class="s2">  </span><span class="si">{:.6f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">n</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="p">)</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">faces</span><span class="p">:</span>
+                <span class="c1"># obj file vertex arrays are not 0-indexed :( must add 1 in order to</span>
+                <span class="c1"># reference the right vertices</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;f  </span><span class="si">{}</span><span class="s2">  </span><span class="si">{}</span><span class="s2">  </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="generate_mesh"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.isosurfaceGenerator.generate_mesh">[docs]</a><span class="k">def</span> <span class="nf">generate_mesh</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">isovalue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates and returns a Mesh object</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    image</span>
+<span class="sd">        an AICSImage object</span>
+
+<span class="sd">    isovalue</span>
+<span class="sd">        The value that is used to pick the isosurface returned by the marching cubes</span>
+<span class="sd">        algorithm</span>
+<span class="sd">        For more info: https://www.youtube.com/watch?v=5fNbCFjqWao @ 40:00 mins</span>
+
+<span class="sd">    channel</span>
+<span class="sd">        The channel in the image that is used to extract the isosurface</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A Mesh object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">AICSImage</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Meshes can only be generated with AICSImage objects!&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">channel</span> <span class="o">&gt;=</span> <span class="n">image</span><span class="o">.</span><span class="n">size_c</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span>
+            <span class="s2">&quot;Channel provided for mesh generation is out of bounds for image data!&quot;</span>
+        <span class="p">)</span>
+    <span class="n">image_stack</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">get_image_data</span><span class="p">(</span><span class="s2">&quot;ZYX&quot;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">channel</span><span class="p">)</span>
+    <span class="c1"># Use marching cubes to obtain the surface mesh of the membrane wall</span>
+    <span class="n">verts</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">normals</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">marching_cubes</span><span class="p">(</span>
+        <span class="n">image_stack</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">,</span> <span class="n">allow_degenerate</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">normals</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Allen Institute for Cell Science
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

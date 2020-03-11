@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>aicsimageprocessing.sdfGenerator &mdash; aicsimageprocessing 0.7.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> aicsimageprocessing
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../aicsimageprocessing.html">aicsimageprocessing package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.bin.html">aicsimageprocessing.bin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.segmentation.html">aicsimageprocessing.segmentation package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.alignMajor">aicsimageprocessing.alignMajor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundCrop">aicsimageprocessing.backgroundCrop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundSub">aicsimageprocessing.backgroundSub module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.crop_img">aicsimageprocessing.crop_img module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.flip">aicsimageprocessing.flip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgCenter">aicsimageprocessing.imgCenter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToCoords">aicsimageprocessing.imgToCoords module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToProjection">aicsimageprocessing.imgToProjection module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imshow">aicsimageprocessing.imshow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.isosurfaceGenerator">aicsimageprocessing.isosurfaceGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.normalization">aicsimageprocessing.normalization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.resize">aicsimageprocessing.resize module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.rigidAlignment">aicsimageprocessing.rigidAlignment module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.sdfGenerator">aicsimageprocessing.sdfGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.textureAtlas">aicsimageprocessing.textureAtlas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.thumbnailGenerator">aicsimageprocessing.thumbnailGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.transformation">aicsimageprocessing.transformation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">aicsimageprocessing</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../aicsimageprocessing.html">aicsimageprocessing</a> &raquo;</li>
+        
+      <li>aicsimageprocessing.sdfGenerator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aicsimageprocessing.sdfGenerator</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">skfmm</span>
+<span class="kn">import</span> <span class="nn">vtk</span>
+<span class="kn">from</span> <span class="nn">aicsimageio</span> <span class="kn">import</span> <span class="n">writers</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">measure</span>
+<span class="kn">from</span> <span class="nn">vtk.util.numpy_support</span> <span class="kn">import</span> <span class="n">numpy_to_vtk</span><span class="p">,</span> <span class="n">numpy_to_vtkIdTypeArray</span><span class="p">,</span> <span class="n">vtk_to_numpy</span>
+
+<span class="kn">import</span> <span class="nn">mcubes</span>
+<span class="kn">from</span> <span class="nn">aicsimageprocessing</span> <span class="kn">import</span> <span class="n">isosurfaceGenerator</span>
+
+
+<span class="c1"># pass in a 3d numpy array of intensities</span>
+<div class="viewcode-block" id="make_vtkvolume"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.make_vtkvolume">[docs]</a><span class="k">def</span> <span class="nf">make_vtkvolume</span><span class="p">(</span><span class="n">npvol</span><span class="p">):</span>
+    <span class="c1"># For VTK to be able to use the data, it must be stored as a VTK-image. This can be</span>
+    <span class="c1"># done by the vtkImageImport-class which</span>
+    <span class="c1"># imports raw data and stores it.</span>
+    <span class="n">dataImporter</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkImageImport</span><span class="p">()</span>
+    <span class="n">dataImporter</span><span class="o">.</span><span class="n">CopyImportVoidPointer</span><span class="p">(</span><span class="n">npvol</span><span class="p">,</span> <span class="n">npvol</span><span class="o">.</span><span class="n">nbytes</span><span class="p">)</span>
+    <span class="c1"># The type of the newly imported data is set to unsigned char (uint8)</span>
+    <span class="n">dataImporter</span><span class="o">.</span><span class="n">SetDataScalarTypeToUnsignedShort</span><span class="p">()</span>
+    <span class="c1"># Because the data that is imported only contains an intensity value (it isnt RGB</span>
+    <span class="c1"># coded or someting similar), the importer must be told this is the case.</span>
+    <span class="n">dataImporter</span><span class="o">.</span><span class="n">SetNumberOfScalarComponents</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># The following two functions describe how the data is stored and the dimensions of</span>
+    <span class="c1"># the array it is stored in. I have to admit however, that I honestly dont know the</span>
+    <span class="c1"># difference between SetDataExtent() and SetWholeExtent() although VTK complains if</span>
+    <span class="c1"># not both are used.</span>
+    <span class="n">dataImporter</span><span class="o">.</span><span class="n">SetDataExtent</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="n">npvol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">npvol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">npvol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="p">)</span>
+    <span class="n">dataImporter</span><span class="o">.</span><span class="n">SetWholeExtent</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="n">npvol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">npvol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">npvol</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="p">)</span>
+    <span class="n">dataImporter</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">dataImporter</span></div>
+
+
+<div class="viewcode-block" id="make_vtkpolydata"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.make_vtkpolydata">[docs]</a><span class="k">def</span> <span class="nf">make_vtkpolydata</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">normals</span><span class="p">):</span>
+    <span class="n">vtkpolydata</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyData</span><span class="p">()</span>
+
+    <span class="n">vtkpoints</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
+    <span class="n">vtkpoints</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">numpy_to_vtk</span><span class="p">(</span><span class="n">verts</span><span class="p">))</span>
+    <span class="n">vtkpolydata</span><span class="o">.</span><span class="n">SetPoints</span><span class="p">(</span><span class="n">vtkpoints</span><span class="p">)</span>
+
+    <span class="c1"># TODO insert normals</span>
+
+    <span class="c1"># Convert to a vtk array</span>
+    <span class="n">vtkcells</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkCellArray</span><span class="p">()</span>
+    <span class="c1"># get number of faces</span>
+    <span class="n">nfaces</span> <span class="o">=</span> <span class="n">faces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">idarr</span> <span class="o">=</span> <span class="n">numpy_to_vtkIdTypeArray</span><span class="p">(</span><span class="n">faces</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+    <span class="n">vtkcells</span><span class="o">.</span><span class="n">SetCells</span><span class="p">(</span><span class="n">nfaces</span><span class="p">,</span> <span class="n">idarr</span><span class="p">)</span>
+    <span class="n">vtkpolydata</span><span class="o">.</span><span class="n">SetPolys</span><span class="p">(</span><span class="n">vtkcells</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vtkpolydata</span></div>
+
+
+<span class="k">def</span> <span class="nf">_generate_sdf_skfmm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">sdf</span> <span class="o">=</span> <span class="n">skfmm</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">-</span> <span class="n">isovalue</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generate SDF with skfmm.distance: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sdf</span>
+
+
+<span class="k">def</span> <span class="nf">_generate_mesh_pymcubes</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">):</span>
+    <span class="c1"># generate a mesh using marching cubes:</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span> <span class="o">=</span> <span class="n">mcubes</span><span class="o">.</span><span class="n">marching_cubes</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generate mesh with PyMCubes: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">triangles</span><span class="p">)</span><span class="si">}</span><span class="s2"> polygons&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span>
+
+
+<span class="k">def</span> <span class="nf">_generate_mesh_vtkmcubes</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">vtkdataimporter</span> <span class="o">=</span> <span class="n">make_vtkvolume</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+    <span class="c1"># Flying Edges is WAYYYY faster than marching cubes, from vtk.</span>
+    <span class="c1"># need to compare outputs. poly count is similar and still 5x the other methods</span>
+    <span class="c1"># shown.</span>
+    <span class="n">vmc</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkFlyingEdges3D</span><span class="p">()</span>
+    <span class="n">vmc</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">vtkdataimporter</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">())</span>
+    <span class="n">vmc</span><span class="o">.</span><span class="n">ComputeNormalsOn</span><span class="p">()</span>
+    <span class="n">vmc</span><span class="o">.</span><span class="n">ComputeGradientsOff</span><span class="p">()</span>
+    <span class="n">vmc</span><span class="o">.</span><span class="n">ComputeScalarsOff</span><span class="p">()</span>
+    <span class="n">vmc</span><span class="o">.</span><span class="n">SetValue</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">)</span>
+    <span class="n">vmc</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+    <span class="n">ret_vpolydata</span> <span class="o">=</span> <span class="n">vmc</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generate mesh with vtkFlyingEdges3D: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ret_vpolydata</span><span class="o">.</span><span class="n">GetPolys</span><span class="p">()</span><span class="o">.</span><span class="n">GetNumberOfCells</span><span class="p">()</span><span class="si">}</span><span class="s2"> polygons&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ret_vpolydata</span>
+
+
+<span class="k">def</span> <span class="nf">_generate_mesh_scikitmcubes</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">verts</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">normals</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">marching_cubes_lewiner</span><span class="p">(</span>
+        <span class="n">im</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">isovalue</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Generate mesh with skimage.measure.marching_cubes_lewiner: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;seconds&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span><span class="si">}</span><span class="s2"> polygons&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">verts</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">normals</span><span class="p">,</span> <span class="n">values</span>
+
+
+<span class="k">def</span> <span class="nf">_generate_sdf_vtkmesh</span><span class="p">(</span><span class="n">vtkpolydata</span><span class="p">,</span> <span class="n">im</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">pdd</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkImplicitPolyDataDistance</span><span class="p">()</span>
+    <span class="n">pdd</span><span class="o">.</span><span class="n">SetInput</span><span class="p">(</span><span class="n">vtkpolydata</span><span class="p">)</span>
+    <span class="c1"># for each point in 3d volume grid:</span>
+    <span class="n">sdf_vtk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                <span class="n">sdf_vtk</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdd</span><span class="o">.</span><span class="n">EvaluateFunction</span><span class="p">([</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">])</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generate SDF with vtkImplicitPolyDataDistance: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sdf_vtk</span>
+
+
+<div class="viewcode-block" id="vtkImg3dToNumpyArray"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.vtkImg3dToNumpyArray">[docs]</a><span class="k">def</span> <span class="nf">vtkImg3dToNumpyArray</span><span class="p">(</span><span class="n">vtkimageiata</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">vtkimageiata</span><span class="o">.</span><span class="n">GetDimensions</span><span class="p">()</span>
+    <span class="n">scalars</span> <span class="o">=</span> <span class="n">vtkimageiata</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetScalars</span><span class="p">()</span>
+    <span class="n">resultingNumpyArray</span> <span class="o">=</span> <span class="n">vtk_to_numpy</span><span class="p">(</span><span class="n">scalars</span><span class="p">)</span>
+    <span class="n">resultingNumpyArray</span> <span class="o">=</span> <span class="n">resultingNumpyArray</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="c1"># transpose?</span>
+    <span class="k">return</span> <span class="n">resultingNumpyArray</span></div>
+
+
+<span class="k">def</span> <span class="nf">_generate_sdf2_vtkmesh</span><span class="p">(</span><span class="n">vtkpolydata</span><span class="p">,</span> <span class="n">im</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">pdd</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkSignedDistance</span><span class="p">()</span>
+    <span class="n">pdd</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">vtkpolydata</span><span class="p">)</span>
+    <span class="n">pdd</span><span class="o">.</span><span class="n">SetRadius</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">pdd</span><span class="o">.</span><span class="n">SetDimensions</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">pdd</span><span class="o">.</span><span class="n">SetBounds</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">pdd</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+    <span class="n">vtkimagedata</span> <span class="o">=</span> <span class="n">pdd</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span>
+    <span class="n">sdf_vtk</span> <span class="o">=</span> <span class="n">vtkImg3dToNumpyArray</span><span class="p">(</span><span class="n">vtkimagedata</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generate SDF with vtkSignedDistance from vtkPolyData: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sdf_vtk</span>
+
+
+<div class="viewcode-block" id="save_sdf"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.save_sdf">[docs]</a><span class="k">def</span> <span class="nf">save_sdf</span><span class="p">(</span><span class="n">outpath</span><span class="p">,</span> <span class="n">im</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">wr</span> <span class="o">=</span> <span class="n">writers</span><span class="o">.</span><span class="n">ome_tiff_writer</span><span class="o">.</span><span class="n">OmeTiffWriter</span><span class="p">(</span><span class="n">outpath</span><span class="p">,</span> <span class="n">overwrite_file</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">wr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">dimension_order</span><span class="o">=</span><span class="s2">&quot;ZYX&quot;</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Save SDF to ome-tiff: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="save_mesh"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.save_mesh">[docs]</a><span class="k">def</span> <span class="nf">save_mesh</span><span class="p">(</span><span class="n">outpath</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">normals</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">isosurfaceGenerator</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">normals</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">save_as_obj</span><span class="p">(</span><span class="n">outpath</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Save mesh to OBJ: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="vtk_iterate_cells"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.vtk_iterate_cells">[docs]</a><span class="k">def</span> <span class="nf">vtk_iterate_cells</span><span class="p">(</span><span class="n">vtkpolydata</span><span class="p">):</span>
+    <span class="n">faces</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="n">vtkpolydata</span><span class="o">.</span><span class="n">GetPolys</span><span class="p">()</span>
+    <span class="n">idList</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkIdList</span><span class="p">()</span>
+    <span class="n">cells</span><span class="o">.</span><span class="n">InitTraversal</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">cells</span><span class="o">.</span><span class="n">GetNextCell</span><span class="p">(</span><span class="n">idList</span><span class="p">):</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idList</span><span class="o">.</span><span class="n">GetNumberOfIds</span><span class="p">()):</span>
+            <span class="n">pId</span> <span class="o">=</span> <span class="n">idList</span><span class="o">.</span><span class="n">GetId</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pId</span><span class="p">)</span>
+        <span class="n">faces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">faces</span></div>
+
+
+<div class="viewcode-block" id="save_mesh_vtk"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.save_mesh_vtk">[docs]</a><span class="k">def</span> <span class="nf">save_mesh_vtk</span><span class="p">(</span><span class="n">outpath</span><span class="p">,</span> <span class="n">vtkpolydata</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">vtkpolydata</span><span class="o">.</span><span class="n">GetPoints</span><span class="p">()</span>
+    <span class="n">array</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">GetData</span><span class="p">()</span>
+    <span class="n">numpy_points</span> <span class="o">=</span> <span class="n">vtk_to_numpy</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="n">numpy_faces</span> <span class="o">=</span> <span class="n">vtk_iterate_cells</span><span class="p">(</span><span class="n">vtkpolydata</span><span class="p">)</span>
+    <span class="c1"># TODO extract normals and maybe uvs too.</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">isosurfaceGenerator</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">numpy_points</span><span class="p">,</span> <span class="n">numpy_faces</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">save_as_obj</span><span class="p">(</span><span class="n">outpath</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Save vtk mesh to OBJ: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="obj_to_sdf"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.obj_to_sdf">[docs]</a><span class="k">def</span> <span class="nf">obj_to_sdf</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">volume_res</span><span class="p">):</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkOBJReader</span><span class="p">()</span>
+    <span class="n">reader</span><span class="o">.</span><span class="n">SetFileName</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="n">reader</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+
+    <span class="n">vpolydata</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="n">vpolydata</span><span class="o">.</span><span class="n">GetBounds</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
+
+    <span class="n">xform</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTransform</span><span class="p">()</span>
+    <span class="n">xform</span><span class="o">.</span><span class="n">PostMultiply</span><span class="p">()</span>
+    <span class="n">xform</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
+    <span class="n">xform</span><span class="o">.</span><span class="n">Translate</span><span class="p">(</span><span class="o">-</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="n">bounds</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">xform</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span>
+        <span class="n">volume_res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+        <span class="n">volume_res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+        <span class="n">volume_res</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+    <span class="p">)</span>
+    <span class="n">xformoperator</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTransformPolyDataFilter</span><span class="p">()</span>
+    <span class="n">xformoperator</span><span class="o">.</span><span class="n">SetTransform</span><span class="p">(</span><span class="n">xform</span><span class="p">)</span>
+    <span class="n">xformoperator</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="n">xformoperator</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+
+    <span class="n">vpolydata</span> <span class="o">=</span> <span class="n">xformoperator</span><span class="o">.</span><span class="n">GetOutput</span><span class="p">()</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="n">vpolydata</span><span class="o">.</span><span class="n">GetBounds</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
+
+    <span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">volume_res</span><span class="p">)</span>
+    <span class="n">sdf</span> <span class="o">=</span> <span class="n">_generate_sdf_vtkmesh</span><span class="p">(</span><span class="n">vpolydata</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sdf</span></div>
+
+
+<span class="c1"># return sdf at same resolution as volume</span>
+<div class="viewcode-block" id="volume_to_sdf"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.volume_to_sdf">[docs]</a><span class="k">def</span> <span class="nf">volume_to_sdf</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">vpolydata</span> <span class="o">=</span> <span class="n">_generate_mesh_vtkmcubes</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">)</span>
+        <span class="n">sdf</span> <span class="o">=</span> <span class="n">_generate_sdf2_vtkmesh</span><span class="p">(</span><span class="n">vpolydata</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sdf</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">sdf</span> <span class="o">=</span> <span class="n">_generate_sdf_skfmm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sdf</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">vpolydata</span> <span class="o">=</span> <span class="n">_generate_mesh_vtkmcubes</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">)</span>
+        <span class="n">sdf</span> <span class="o">=</span> <span class="n">_generate_sdf_vtkmesh</span><span class="p">(</span><span class="n">vpolydata</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sdf</span></div>
+
+
+<div class="viewcode-block" id="volume_to_obj"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.volume_to_obj">[docs]</a><span class="k">def</span> <span class="nf">volume_to_obj</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">,</span> <span class="n">outpath</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">vpolydata</span> <span class="o">=</span> <span class="n">_generate_mesh_vtkmcubes</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">)</span>
+        <span class="n">save_mesh_vtk</span><span class="p">(</span><span class="n">outpath</span><span class="p">,</span> <span class="n">vpolydata</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">v</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">_generate_mesh_pymcubes</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">)</span>
+        <span class="n">save_mesh</span><span class="p">(</span><span class="n">outpath</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">_generate_mesh_scikitmcubes</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">isovalue</span><span class="p">)</span>
+        <span class="n">save_mesh</span><span class="p">(</span><span class="n">outpath</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span></div>
+
+
+<span class="c1"># take two signed distance fields.</span>
+<span class="c1"># A has positive values where its mask is 0, and that is considered the &quot;empty&quot;</span>
+<span class="c1"># available space to fill</span>
+<span class="c1"># B has positive values where its mask is 0</span>
+<span class="c1"># result has space between A and B positive</span>
+<div class="viewcode-block" id="combine_sdf"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.combine_sdf">[docs]</a><span class="k">def</span> <span class="nf">combine_sdf</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Amask</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Bmask</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+    <span class="n">Aspace</span> <span class="o">=</span> <span class="n">Amask</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">Bspace</span> <span class="o">=</span> <span class="n">Bmask</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="n">inter</span> <span class="o">=</span> <span class="n">Bspace</span> <span class="o">*</span> <span class="n">Aspace</span>
+
+    <span class="n">Aabs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">Babs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+    <span class="c1"># pick a distance value.  where A and B overlap this could be wrong.</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">Aabs</span><span class="p">,</span> <span class="n">Babs</span><span class="p">)</span>
+    <span class="c1"># invert the spaces that should be positive, in the intersecting &quot;empty&quot; space</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">inter</span><span class="p">,</span> <span class="o">-</span><span class="n">sub</span><span class="p">,</span> <span class="n">sub</span><span class="p">)</span>
+
+    <span class="n">submask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">Amask</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Bmask</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;combine_sdf: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sub</span><span class="p">,</span> <span class="n">submask</span></div>
+
+
+<span class="c1"># in mask: 1 means filled space resulting in &quot;negative&quot; distances</span>
+<span class="c1"># 0 means available empty space resulting in &quot;positive&quot; distances</span>
+<div class="viewcode-block" id="combine_mask_sdf"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.sdfGenerator.combine_mask_sdf">[docs]</a><span class="k">def</span> <span class="nf">combine_mask_sdf</span><span class="p">(</span><span class="n">Amask</span><span class="p">,</span> <span class="n">Bmask</span><span class="p">):</span>
+    <span class="n">Cmask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">Amask</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Bmask</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">volume_to_sdf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Cmask</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">C</span><span class="p">,</span> <span class="n">Cmask</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Allen Institute for Cell Science
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

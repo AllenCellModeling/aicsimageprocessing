@@ -1,0 +1,1152 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>aicsimageprocessing package &mdash; aicsimageprocessing 0.7.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="aicsimageprocessing.bin package" href="aicsimageprocessing.bin.html" />
+    <link rel="prev" title="aicsimageprocessing" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> aicsimageprocessing
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Package modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">aicsimageprocessing package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="aicsimageprocessing.bin.html">aicsimageprocessing.bin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="aicsimageprocessing.segmentation.html">aicsimageprocessing.segmentation package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.alignMajor">aicsimageprocessing.alignMajor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.backgroundCrop">aicsimageprocessing.backgroundCrop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.backgroundSub">aicsimageprocessing.backgroundSub module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.crop_img">aicsimageprocessing.crop_img module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.flip">aicsimageprocessing.flip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.imgCenter">aicsimageprocessing.imgCenter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.imgToCoords">aicsimageprocessing.imgToCoords module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.imgToProjection">aicsimageprocessing.imgToProjection module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.imshow">aicsimageprocessing.imshow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.isosurfaceGenerator">aicsimageprocessing.isosurfaceGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.normalization">aicsimageprocessing.normalization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.resize">aicsimageprocessing.resize module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.rigidAlignment">aicsimageprocessing.rigidAlignment module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.sdfGenerator">aicsimageprocessing.sdfGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.textureAtlas">aicsimageprocessing.textureAtlas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.thumbnailGenerator">aicsimageprocessing.thumbnailGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing.transformation">aicsimageprocessing.transformation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-aicsimageprocessing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">aicsimageprocessing</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">aicsimageprocessing</a> &raquo;</li>
+        
+      <li>aicsimageprocessing package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/aicsimageprocessing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="aicsimageprocessing.bin.html" class="btn btn-neutral float-right" title="aicsimageprocessing.bin package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="aicsimageprocessing" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="aicsimageprocessing-package">
+<h1>aicsimageprocessing package<a class="headerlink" href="#aicsimageprocessing-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aicsimageprocessing.bin.html">aicsimageprocessing.bin package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aicsimageprocessing.bin.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aicsimageprocessing.bin.html#module-aicsimageprocessing.bin.make_thumbnail">aicsimageprocessing.bin.make_thumbnail module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aicsimageprocessing.bin.html#module-aicsimageprocessing.bin">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aicsimageprocessing.segmentation.html">aicsimageprocessing.segmentation package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="aicsimageprocessing.segmentation.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aicsimageprocessing.segmentation.html#module-aicsimageprocessing.segmentation.nucleusSegmentation">aicsimageprocessing.segmentation.nucleusSegmentation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aicsimageprocessing.segmentation.html#module-aicsimageprocessing.segmentation">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-aicsimageprocessing.alignMajor">
+<span id="aicsimageprocessing-alignmajor-module"></span><h2>aicsimageprocessing.alignMajor module<a class="headerlink" href="#module-aicsimageprocessing.alignMajor" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.alignMajor.align_major">
+<code class="sig-prename descclassname">aicsimageprocessing.alignMajor.</code><code class="sig-name descname">align_major</code><span class="sig-paren">(</span><em class="sig-param">images</em>, <em class="sig-param">angles</em>, <em class="sig-param">reshape=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/alignMajor.html#align_major"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.alignMajor.align_major" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates images based on the angles passed in</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> – Either a single image or a list of them. Must be at least 3d
+numpy arrays, ordered as TCZYX</p></li>
+<li><p><strong>angles</strong> – The tuple returned by get_align_angles. Tells the function how to rotate the
+images</p></li>
+<li><p><strong>reshape</strong> – boolean. If True, the output will be resized to ensure that no data
+from img is lost. If False, the output will be the same size as the input, with
+potential to lose data that lies outside of the input shape after rotation.
+Default is True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>If a single image was passed in, it will will return a rotated copy of that image.</em></p></li>
+<li><p><em>If a list was passed in, it will return a list of rotated images in the same order</em></p></li>
+<li><p><em>that they were passed in</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.alignMajor.angle_between">
+<code class="sig-prename descclassname">aicsimageprocessing.alignMajor.</code><code class="sig-name descname">angle_between</code><span class="sig-paren">(</span><em class="sig-param">v1</em>, <em class="sig-param">v2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/alignMajor.html#angle_between"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.alignMajor.angle_between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds angle between two 2d vectors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v1</strong> – first vector as a numpy array</p></li>
+<li><p><strong>v2</strong> – second vector as a numpy array</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>angle between v1 and v2 in degrees</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.alignMajor.get_align_angles">
+<code class="sig-prename descclassname">aicsimageprocessing.alignMajor.</code><code class="sig-name descname">get_align_angles</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">axes='zyx'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/alignMajor.html#get_align_angles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.alignMajor.get_align_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the angles needed to rotate an image to align it with the specified axes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> – A CZYX image as a 4d numpy array. The image that will be measured to get the
+alignment angles. The image will not be altered by this function</p></li>
+<li><p><strong>axes</strong> – string, that must be an arrangement of ‘xyz’
+The major axis will be aligned with the first one, the minor with the last one.
+‘zyx’ by default</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>A list of tuple pairs, containing the axis indices and angles to rotate along the</em></p></li>
+<li><p><em>paired axis. Meant to be passed into align_major</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.alignMajor.get_major_minor_axis">
+<code class="sig-prename descclassname">aicsimageprocessing.alignMajor.</code><code class="sig-name descname">get_major_minor_axis</code><span class="sig-paren">(</span><em class="sig-param">img</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/alignMajor.html#get_major_minor_axis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.alignMajor.get_major_minor_axis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the major and minor axis as 3d vectors of the passed in image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> – CZYX numpy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Tuple containing two numpy arrays representing the major and minor axis as 3d</em></p></li>
+<li><p><em>vectors</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.alignMajor.unit_vector">
+<code class="sig-prename descclassname">aicsimageprocessing.alignMajor.</code><code class="sig-name descname">unit_vector</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/alignMajor.html#unit_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.alignMajor.unit_vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit vector of v</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> – vector as numpy array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>unit vector of same length as v</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.backgroundCrop">
+<span id="aicsimageprocessing-backgroundcrop-module"></span><h2>aicsimageprocessing.backgroundCrop module<a class="headerlink" href="#module-aicsimageprocessing.backgroundCrop" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.backgroundCrop.crop">
+<code class="sig-prename descclassname">aicsimageprocessing.backgroundCrop.</code><code class="sig-name descname">crop</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">bg_val=0</em>, <em class="sig-param">axis=(-3</em>, <em class="sig-param">-2</em>, <em class="sig-param">-1)</em>, <em class="sig-param">padding=0</em>, <em class="sig-param">get_slices=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/backgroundCrop.html#crop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.backgroundCrop.crop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crops an image to remove the background color bg_val along arbitrary axis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> – numpy array to crop</p></li>
+<li><p><strong>bg_val</strong> – value to crop out. Default is 0</p></li>
+<li><p><strong>axis</strong> – tuple or list of axis indices to crop along. Can be either positive or negative
+values. Negative values will be from the end of the array as opposed to the
+start. By default, it crops along the last three axes</p></li>
+<li><p><strong>padding</strong> – integer. Specifies how much of the background value to leave in the output.
+Will be applied on all axis that are being cropped</p></li>
+<li><p><strong>get_slices</strong> – boolean. If True, will return the slice indices that were taken out of the
+original image along with the cropped image. Default is False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>either the cropped numpy array, or a tuple containing the cropped array and a tuple</em></p></li>
+<li><p><em>of slices taken out of the original data</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.backgroundCrop.get_edges">
+<code class="sig-prename descclassname">aicsimageprocessing.backgroundCrop.</code><code class="sig-name descname">get_edges</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">bg_val=0</em>, <em class="sig-param">axis=(-3</em>, <em class="sig-param">-2</em>, <em class="sig-param">-1)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/backgroundCrop.html#get_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.backgroundCrop.get_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the indices of the edges of the structure in the image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> – CZYX image as a 4d numpy array</p></li>
+<li><p><strong>bg_val</strong> – value to use for background</p></li>
+<li><p><strong>axis</strong> – axis to get the edges for. Output length will be equal to axis length.
+Default is the last three axis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>tuple of the same length as axis parameter. Contains lists the contain the left and</em></p></li>
+<li><p><em>right edges for each axis specified.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.backgroundSub">
+<span id="aicsimageprocessing-backgroundsub-module"></span><h2>aicsimageprocessing.backgroundSub module<a class="headerlink" href="#module-aicsimageprocessing.backgroundSub" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.backgroundSub.background_sub">
+<code class="sig-prename descclassname">aicsimageprocessing.backgroundSub.</code><code class="sig-name descname">background_sub</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">mask=None</em>, <em class="sig-param">method='mean'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/backgroundSub.html#background_sub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.backgroundSub.background_sub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs background subtraction on image using chosen method with optional mask</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> – numpy array, image to perform subtraction on</p></li>
+<li><p><strong>mask</strong> – numpy mask, subtraction is calculated and performed on the area specified by
+the mask i.e. the mask should specify the background of the image</p></li>
+<li><p><strong>method</strong> – string, selects the subtraction method to use. Default is ‘mean’.
+Options are: mean, median, common.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy array, copy of input image with background subtracted out</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.crop_img">
+<span id="aicsimageprocessing-crop-img-module"></span><h2>aicsimageprocessing.crop_img module<a class="headerlink" href="#module-aicsimageprocessing.crop_img" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.crop_img.crop_img">
+<code class="sig-prename descclassname">aicsimageprocessing.crop_img.</code><code class="sig-name descname">crop_img</code><span class="sig-paren">(</span><em class="sig-param">img</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/crop_img.html#crop_img"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.crop_img.crop_img" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.flip">
+<span id="aicsimageprocessing-flip-module"></span><h2>aicsimageprocessing.flip module<a class="headerlink" href="#module-aicsimageprocessing.flip" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.flip.flip">
+<code class="sig-prename descclassname">aicsimageprocessing.flip.</code><code class="sig-name descname">flip</code><span class="sig-paren">(</span><em class="sig-param">images</em>, <em class="sig-param">flips</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/flip.html#flip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.flip.flip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flips images based on the calculations from get_flips()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> – Either a single n-dimensional image as a numpy array or a list of them. The
+images to flip</p></li>
+<li><p><strong>flips</strong> – The output from get_flips(), tells the function which axes to flip the images
+along. All images will be flipped the same way</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Either a single flipped copy of the input image, or a list of them in the same</em></p></li>
+<li><p><em>order that they were passed in, depending on whether the ‘images’ parameter was a</em></p></li>
+<li><p><em>single picture or a list</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.flip.get_flips">
+<code class="sig-prename descclassname">aicsimageprocessing.flip.</code><code class="sig-name descname">get_flips</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">sec</em>, <em class="sig-param">axes=(-3</em>, <em class="sig-param">-2</em>, <em class="sig-param">-1)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/flip.html#get_flips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.flip.get_flips" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates which axes to flip in order to have the center of mass of the image
+be located in the desired sector. Meant to be passed to flip()</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul>
+<li><p><strong>img</strong> – image as an n-dimensional numpy array to perform the calculations on. The image
+will not be modified by this function</p></li>
+<li><p><strong>sec</strong> – String containing ‘+’ and ‘-‘, same length as ‘axes’. Tells the function which
+side of each axis the center of mass should be on, ‘+’ meaning the upper half
+and ‘-‘ meaning the lower half</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_flips</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="s2">&quot;++-&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">This, for example, would mean to have the center of mass be on the upper half</span>
+<span class="go">of the z axis (index -3 for a CZYX image), the upper half of the y axis, and</span>
+<span class="go">the lower half of the x axis</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>axes</strong> – List or tuple of integers, specifies which axes to calculate the needed flips
+for. Default is the last three axes, meant to be the 3 spatial dimensions for a
+ZYX, CZYX, or TCZYX image. Must be the same length as ‘sec’ parameter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>A list of integers, representing the indices of the axes to flip the image along</em></p></li>
+<li><p><em>Should be passed to flip()</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.imgCenter">
+<span id="aicsimageprocessing-imgcenter-module"></span><h2>aicsimageprocessing.imgCenter module<a class="headerlink" href="#module-aicsimageprocessing.imgCenter" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.imgCenter.center">
+<code class="sig-prename descclassname">aicsimageprocessing.imgCenter.</code><code class="sig-name descname">center</code><span class="sig-paren">(</span><em class="sig-param">images</em>, <em class="sig-param">moves</em>, <em class="sig-param">fill=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/imgCenter.html#center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.imgCenter.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aligns images based on the center of mass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> – Either an n-dimensional image as a numpy array or a list of them. All images
+must be the same shape</p></li>
+<li><p><strong>moves</strong> – List of integers, returned from a previous call to get_center_moves. Tells the
+function how to center the images</p></li>
+<li><p><strong>fill</strong> – Value to use when adding padding. Default is 0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>If a single image was passed in, will return a centered copy of the input. If a</em></p></li>
+<li><p><em>list was passed in, it will return a list of centered images in the same order that</em></p></li>
+<li><p><em>they were passed in</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.imgCenter.crop_all">
+<code class="sig-prename descclassname">aicsimageprocessing.imgCenter.</code><code class="sig-name descname">crop_all</code><span class="sig-paren">(</span><em class="sig-param">images</em>, <em class="sig-param">axis=(-3</em>, <em class="sig-param">-2</em>, <em class="sig-param">-1)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/imgCenter.html#crop_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.imgCenter.crop_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crop all images by the same amount. The amount to crop will be calculated
+so that an equal amount is removed on both sides of each axis to keep the center of
+mass in the center</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> – List of images to crop. The images can be any shape or dimensionality but must
+all have the same shape</p></li>
+<li><p><strong>axis</strong> – List of axis to crop along. Default is the last three axis (meant to correspond
+to ZYX)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List of cropped images, in the same order as they were passed in</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.imgCenter.get_center_moves">
+<code class="sig-prename descclassname">aicsimageprocessing.imgCenter.</code><code class="sig-name descname">get_center_moves</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">axes=(-3</em>, <em class="sig-param">-2</em>, <em class="sig-param">-1)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/imgCenter.html#get_center_moves"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.imgCenter.get_center_moves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates moves needed to center an image based on its center of mass.
+Meant to be passed in to center_image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – N-dimensional image to be used for calculation. The image will not be altered</p></li>
+<li><p><strong>axis</strong> – Iterable containing the axis to center the image on. Order does not affect the
+output. Default is the last three axis (meant to be ZYX). Can be positive or
+negative to index from the front or back</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List of integers, meant to be passed to center_image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.imgToCoords">
+<span id="aicsimageprocessing-imgtocoords-module"></span><h2>aicsimageprocessing.imgToCoords module<a class="headerlink" href="#module-aicsimageprocessing.imgToCoords" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.imgToCoords.cart2sph">
+<code class="sig-prename descclassname">aicsimageprocessing.imgToCoords.</code><code class="sig-name descname">cart2sph</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">z</em>, <em class="sig-param">degrees_or_radians='radians'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/imgToCoords.html#cart2sph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.imgToCoords.cart2sph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.imgToCoords.img_to_coords">
+<code class="sig-prename descclassname">aicsimageprocessing.imgToCoords.</code><code class="sig-name descname">img_to_coords</code><span class="sig-paren">(</span><em class="sig-param">im_cell</em>, <em class="sig-param">im_nuc</em>, <em class="sig-param">major_angle_object='cell'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/imgToCoords.html#img_to_coords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.imgToCoords.img_to_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit vector of v</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im_cell</strong> – zyx binary image of a cell shape</p></li>
+<li><p><strong>im_nuc</strong> – zyx binary image of a nuclear shape</p></li>
+<li><p><strong>major_angle_object</strong> – string that specifies from which object the major angle is determined can be
+‘cell’ or ‘nuc’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>im_ratio</em> – channels corresponding to ratio image (1 at cell boundary, 0 on nuclear
+boundary, -1 inside nucleus)</p></li>
+<li><p><em>im_th</em> – spherical coordinate system theta (radians)</p></li>
+<li><p><em>im_phi</em> – spherical coordinate system phi (radians)</p></li>
+<li><p><em>im_r</em> – radial distance from center of nucleus</p></li>
+<li><p><em>major_angle</em> – angle of cell or nuclear shape (radians)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.imgToCoords.sph2cart">
+<code class="sig-prename descclassname">aicsimageprocessing.imgToCoords.</code><code class="sig-name descname">sph2cart</code><span class="sig-paren">(</span><em class="sig-param">azimuth</em>, <em class="sig-param">elevation</em>, <em class="sig-param">r</em>, <em class="sig-param">degrees_or_radians='radians'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/imgToCoords.html#sph2cart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.imgToCoords.sph2cart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.imgToProjection">
+<span id="aicsimageprocessing-imgtoprojection-module"></span><h2>aicsimageprocessing.imgToProjection module<a class="headerlink" href="#module-aicsimageprocessing.imgToProjection" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.imgToProjection.imgtoprojection">
+<code class="sig-prename descclassname">aicsimageprocessing.imgToProjection.</code><code class="sig-name descname">imgtoprojection</code><span class="sig-paren">(</span><em class="sig-param">im1</em>, <em class="sig-param">proj_all=False</em>, <em class="sig-param">proj_method='max'</em>, <em class="sig-param">colors=&lt;function &lt;lambda&gt;&gt;</em>, <em class="sig-param">global_adjust=False</em>, <em class="sig-param">local_adjust=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/imgToProjection.html#imgtoprojection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.imgToProjection.imgtoprojection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outputs projections of a 4d CZYX numpy array into a CYX numpy array, allowing for
+color masks for each input channel as well as adjustment options</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im1</strong> – Either a 4d numpy array or a list of 3D or 2D numpy arrays. The input that will
+be projected</p></li>
+<li><p><strong>proj_all</strong> – boolean. True outputs XY, YZ, and XZ projections in a grid, False just outputs
+XY. False by default</p></li>
+<li><p><strong>proj_method</strong> – string. Method by which to do projections. ‘Max’ by default</p></li>
+<li><p><strong>colors</strong> – Can be either a string which corresponds to a cmap function in matplotlib, a
+function that takes in the channel index and returns a list of numbers, or a
+list of lists containing the color multipliers.</p></li>
+<li><p><strong>global_adjust</strong> – boolean. If true, scales each color channel to set its max to be 255 after
+combining all channels. False by default</p></li>
+<li><p><strong>local_adjust</strong> – boolean. If true, performs contrast adjustment on each channel individually.
+False by default</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>a CYX numpy array containing the requested projections</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.imgToProjection.matproj">
+<code class="sig-prename descclassname">aicsimageprocessing.imgToProjection.</code><code class="sig-name descname">matproj</code><span class="sig-paren">(</span><em class="sig-param">im</em>, <em class="sig-param">dim</em>, <em class="sig-param">method='max'</em>, <em class="sig-param">slice_index=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/imgToProjection.html#matproj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.imgToProjection.matproj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.imshow">
+<span id="aicsimageprocessing-imshow-module"></span><h2>aicsimageprocessing.imshow module<a class="headerlink" href="#module-aicsimageprocessing.imshow" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.imshow.imshow">
+<code class="sig-prename descclassname">aicsimageprocessing.imshow.</code><code class="sig-name descname">imshow</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">scale=False</em>, <em class="sig-param">proj_method='max'</em>, <em class="sig-param">colors=None</em>, <em class="sig-param">cmap='jet'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/imshow.html#imshow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.imshow.imshow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to display a CZYX image in a jupyter notebook</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>img</strong> – CZYX numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.isosurfaceGenerator">
+<span id="aicsimageprocessing-isosurfacegenerator-module"></span><h2>aicsimageprocessing.isosurfaceGenerator module<a class="headerlink" href="#module-aicsimageprocessing.isosurfaceGenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="aicsimageprocessing.isosurfaceGenerator.Mesh">
+<em class="property">class </em><code class="sig-prename descclassname">aicsimageprocessing.isosurfaceGenerator.</code><code class="sig-name descname">Mesh</code><span class="sig-paren">(</span><em class="sig-param">verts</em>, <em class="sig-param">faces</em>, <em class="sig-param">normals</em>, <em class="sig-param">values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/isosurfaceGenerator.html#Mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.isosurfaceGenerator.Mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A cell mesh class contains the necessary information to generate a display a 3D
+isosurface.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">image</span> <span class="o">=</span> <span class="n">AICSImage</span><span class="p">(</span><span class="s2">&quot;some/bio/image.ome.tif&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="n">mesh0</span> <span class="o">=</span> <span class="n">generate_mesh</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">isovalue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">... </span><span class="c1"># will generate a different mesh due to the different isovalue</span>
+<span class="gp">... </span><span class="n">mesh1</span> <span class="o">=</span> <span class="n">generate_mesh</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">isovalue</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">... </span><span class="n">mesh0</span><span class="o">.</span><span class="n">save_as_obj</span><span class="p">(</span><span class="s2">&quot;some/bio/image/mesh.obj&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="c1"># mesh.obj can be imported into 3D viewers and represents a 3D rendering of</span>
+<span class="gp">... </span><span class="c1"># image.ome.tif</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="aicsimageprocessing.isosurfaceGenerator.Mesh.save_as_obj">
+<code class="sig-name descname">save_as_obj</code><span class="sig-paren">(</span><em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/isosurfaceGenerator.html#Mesh.save_as_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.isosurfaceGenerator.Mesh.save_as_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save a mesh object as an .obj file
+:param file_path: The filepath to the saved file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.isosurfaceGenerator.generate_mesh">
+<code class="sig-prename descclassname">aicsimageprocessing.isosurfaceGenerator.</code><code class="sig-name descname">generate_mesh</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">isovalue=0</em>, <em class="sig-param">channel=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/isosurfaceGenerator.html#generate_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.isosurfaceGenerator.generate_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and returns a Mesh object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – an AICSImage object</p></li>
+<li><p><strong>isovalue</strong> – The value that is used to pick the isosurface returned by the marching cubes
+algorithm
+For more info: <a class="reference external" href="https://www.youtube.com/watch?v=5fNbCFjqWao">https://www.youtube.com/watch?v=5fNbCFjqWao</a> &#64; 40:00 mins</p></li>
+<li><p><strong>channel</strong> – The channel in the image that is used to extract the isosurface</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A Mesh object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.normalization">
+<span id="aicsimageprocessing-normalization-module"></span><h2>aicsimageprocessing.normalization module<a class="headerlink" href="#module-aicsimageprocessing.normalization" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.normalization.mask_normalization">
+<code class="sig-prename descclassname">aicsimageprocessing.normalization.</code><code class="sig-name descname">mask_normalization</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">mask</em>, <em class="sig-param">method</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/normalization.html#mask_normalization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.normalization.mask_normalization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.normalization.normalize_img">
+<code class="sig-prename descclassname">aicsimageprocessing.normalization.</code><code class="sig-name descname">normalize_img</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">mask=None</em>, <em class="sig-param">method='img_bg_sub'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/normalization.html#normalize_img"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.normalization.normalize_img" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.resize">
+<span id="aicsimageprocessing-resize-module"></span><h2>aicsimageprocessing.resize module<a class="headerlink" href="#module-aicsimageprocessing.resize" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.resize.resize">
+<code class="sig-prename descclassname">aicsimageprocessing.resize.</code><code class="sig-name descname">resize</code><span class="sig-paren">(</span><em class="sig-param">orig</em>, <em class="sig-param">factor</em>, <em class="sig-param">method='nearest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/resize.html#resize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.resize.resize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scales a numpy array to a new size using a specified scaling method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orig</strong> – n-dimen numpy array to resize</p></li>
+<li><p><strong>factor</strong> – integer, double, or n-tuple to scale orig by</p></li>
+<li><p><strong>method</strong> – string, interpolation method to use when resizing. Options are “nearest”,
+“bilinear”, and “cubic”. Default is “nearest”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>n-dimen numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.resize.resize_to">
+<code class="sig-prename descclassname">aicsimageprocessing.resize.</code><code class="sig-name descname">resize_to</code><span class="sig-paren">(</span><em class="sig-param">orig</em>, <em class="sig-param">out_size</em>, <em class="sig-param">method='nearest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/resize.html#resize_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.resize.resize_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scales a numpy array to fit within a specified output size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orig</strong> – n-dimen numpy array to resize</p></li>
+<li><p><strong>out_size</strong> – n-tuple, will be the shape of the output array.</p></li>
+<li><p><strong>method</strong> – string, interpolation method to use when resizing. Options are “nearest”,
+“bilinear”, and “cubic”. Default is “nearest”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>n-dimen numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.rigidAlignment">
+<span id="aicsimageprocessing-rigidalignment-module"></span><h2>aicsimageprocessing.rigidAlignment module<a class="headerlink" href="#module-aicsimageprocessing.rigidAlignment" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.cell_rigid_deregistration">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">cell_rigid_deregistration</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">flipdim_orig</em>, <em class="sig-param">angle_orig</em>, <em class="sig-param">com_orig</em>, <em class="sig-param">imsize_orig</em>, <em class="sig-param">ch_crop=1</em>, <em class="sig-param">ch_com=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#cell_rigid_deregistration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.cell_rigid_deregistration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.cell_rigid_registration">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">cell_rigid_registration</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">ch_crop=1</em>, <em class="sig-param">ch_angle=1</em>, <em class="sig-param">ch_com=0</em>, <em class="sig-param">ch_flipdim=1</em>, <em class="sig-param">bbox_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#cell_rigid_registration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.cell_rigid_registration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.crop_img">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">crop_img</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">method='tight'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#crop_img"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.crop_img" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.flipdims">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">flipdims</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">flipdim</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#flipdims"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.flipdims" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.get_center_of_mass">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">get_center_of_mass</code><span class="sig-paren">(</span><em class="sig-param">img</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#get_center_of_mass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.get_center_of_mass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.get_channel">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">get_channel</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">channel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#get_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.get_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.get_flipdims">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">get_flipdims</code><span class="sig-paren">(</span><em class="sig-param">img</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#get_flipdims"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.get_flipdims" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.get_major_angle">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">get_major_angle</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">degrees_or_radians='degrees'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#get_major_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.get_major_angle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.get_rigid_reg_stats">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">get_rigid_reg_stats</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">com_method='nuc'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#get_rigid_reg_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.get_rigid_reg_stats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.pad_to_com">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">pad_to_com</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">pad_dims</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#pad_to_com"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.pad_to_com" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.rigidAlignment.pad_to_position">
+<code class="sig-prename descclassname">aicsimageprocessing.rigidAlignment.</code><code class="sig-name descname">pad_to_position</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">ch_crop</em>, <em class="sig-param">ch_com</em>, <em class="sig-param">com_target</em>, <em class="sig-param">imsize_target</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/rigidAlignment.html#pad_to_position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.rigidAlignment.pad_to_position" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.sdfGenerator">
+<span id="aicsimageprocessing-sdfgenerator-module"></span><h2>aicsimageprocessing.sdfGenerator module<a class="headerlink" href="#module-aicsimageprocessing.sdfGenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.combine_mask_sdf">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">combine_mask_sdf</code><span class="sig-paren">(</span><em class="sig-param">Amask</em>, <em class="sig-param">Bmask</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#combine_mask_sdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.combine_mask_sdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.combine_sdf">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">combine_sdf</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">Amask</em>, <em class="sig-param">B</em>, <em class="sig-param">Bmask</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#combine_sdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.combine_sdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.make_vtkpolydata">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">make_vtkpolydata</code><span class="sig-paren">(</span><em class="sig-param">verts</em>, <em class="sig-param">faces</em>, <em class="sig-param">normals</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#make_vtkpolydata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.make_vtkpolydata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.make_vtkvolume">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">make_vtkvolume</code><span class="sig-paren">(</span><em class="sig-param">npvol</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#make_vtkvolume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.make_vtkvolume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.obj_to_sdf">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">obj_to_sdf</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">volume_res</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#obj_to_sdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.obj_to_sdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.save_mesh">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">save_mesh</code><span class="sig-paren">(</span><em class="sig-param">outpath</em>, <em class="sig-param">points</em>, <em class="sig-param">faces</em>, <em class="sig-param">normals=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#save_mesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.save_mesh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.save_mesh_vtk">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">save_mesh_vtk</code><span class="sig-paren">(</span><em class="sig-param">outpath</em>, <em class="sig-param">vtkpolydata</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#save_mesh_vtk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.save_mesh_vtk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.save_sdf">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">save_sdf</code><span class="sig-paren">(</span><em class="sig-param">outpath</em>, <em class="sig-param">im</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#save_sdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.save_sdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.volume_to_obj">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">volume_to_obj</code><span class="sig-paren">(</span><em class="sig-param">im</em>, <em class="sig-param">isovalue</em>, <em class="sig-param">outpath</em>, <em class="sig-param">method=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#volume_to_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.volume_to_obj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.volume_to_sdf">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">volume_to_sdf</code><span class="sig-paren">(</span><em class="sig-param">im</em>, <em class="sig-param">isovalue=0</em>, <em class="sig-param">method=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#volume_to_sdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.volume_to_sdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.vtkImg3dToNumpyArray">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">vtkImg3dToNumpyArray</code><span class="sig-paren">(</span><em class="sig-param">vtkimageiata</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#vtkImg3dToNumpyArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.vtkImg3dToNumpyArray" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.sdfGenerator.vtk_iterate_cells">
+<code class="sig-prename descclassname">aicsimageprocessing.sdfGenerator.</code><code class="sig-name descname">vtk_iterate_cells</code><span class="sig-paren">(</span><em class="sig-param">vtkpolydata</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/sdfGenerator.html#vtk_iterate_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.sdfGenerator.vtk_iterate_cells" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.textureAtlas">
+<span id="aicsimageprocessing-textureatlas-module"></span><h2>aicsimageprocessing.textureAtlas module<a class="headerlink" href="#module-aicsimageprocessing.textureAtlas" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="aicsimageprocessing.textureAtlas.TextureAtlas">
+<em class="property">class </em><code class="sig-prename descclassname">aicsimageprocessing.textureAtlas.</code><code class="sig-name descname">TextureAtlas</code><span class="sig-paren">(</span><em class="sig-param">aics_image</em>, <em class="sig-param">pack_order</em>, <em class="sig-param">dims</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/textureAtlas.html#TextureAtlas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.textureAtlas.TextureAtlas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="aicsimageprocessing.textureAtlas.TextureAtlas.generate_atlas">
+<code class="sig-name descname">generate_atlas</code><span class="sig-paren">(</span><em class="sig-param">dims</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/textureAtlas.html#TextureAtlas.generate_atlas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.textureAtlas.TextureAtlas.generate_atlas" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="aicsimageprocessing.textureAtlas.TextureAtlasDims">
+<em class="property">class </em><code class="sig-prename descclassname">aicsimageprocessing.textureAtlas.</code><code class="sig-name descname">TextureAtlasDims</code><a class="reference internal" href="_modules/aicsimageprocessing/textureAtlas.html#TextureAtlasDims"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.textureAtlas.TextureAtlasDims" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="aicsimageprocessing.textureAtlas.TextureAtlasGroup">
+<em class="property">class </em><code class="sig-prename descclassname">aicsimageprocessing.textureAtlas.</code><code class="sig-name descname">TextureAtlasGroup</code><span class="sig-paren">(</span><em class="sig-param">aics_image</em>, <em class="sig-param">name='texture_atlas'</em>, <em class="sig-param">pack_order=None</em>, <em class="sig-param">max_edge=2048</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/textureAtlas.html#TextureAtlasGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.textureAtlas.TextureAtlasGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="aicsimageprocessing.textureAtlas.TextureAtlasGroup.get_metadata">
+<code class="sig-name descname">get_metadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/textureAtlas.html#TextureAtlasGroup.get_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.textureAtlas.TextureAtlasGroup.get_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="aicsimageprocessing.textureAtlas.TextureAtlasGroup.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">output_dir</em>, <em class="sig-param">name=None</em>, <em class="sig-param">user_data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/textureAtlas.html#TextureAtlasGroup.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.textureAtlas.TextureAtlasGroup.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a TextureAtlasGroup into one json file and 1 to many png files. Files are
+named with formats <cite>name+’_atlas.json’</cite> and <cite>name+’_atlas_N.png’</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_dir</strong> – directory in which to write the files</p></li>
+<li><p><strong>name</strong> – if not supplied, then use the name given when creating the TextureAtlasGroup</p></li>
+<li><p><strong>user_data</strong> – optional dictionary of additional data to add to json file; to be used by
+client application</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.textureAtlas.generate_texture_atlas">
+<code class="sig-prename descclassname">aicsimageprocessing.textureAtlas.</code><code class="sig-name descname">generate_texture_atlas</code><span class="sig-paren">(</span><em class="sig-param">im</em>, <em class="sig-param">name='texture_atlas'</em>, <em class="sig-param">max_edge=2048</em>, <em class="sig-param">pack_order=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/textureAtlas.html#generate_texture_atlas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.textureAtlas.generate_texture_atlas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a TextureAtlasGroup object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im</strong> – aicsImage object</p></li>
+<li><p><strong>name</strong> – will be stored in metadata and used at save time if no name is supplied at that
+time</p></li>
+<li><p><strong>max_edge</strong> – this designates the largest side in the texture atlas</p></li>
+<li><p><strong>pack_order</strong> – a 2d list that contains what channel in the image should be saved to the RGBA
+values in the final png. for example, a 7 channel image might be saved like
+[[0, 1, 2, 3], [4, 5], [6]] where the first texture atlas will code channel 0
+as r, channel 1 as g, and so on.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TextureAtlasGroup object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.thumbnailGenerator">
+<span id="aicsimageprocessing-thumbnailgenerator-module"></span><h2>aicsimageprocessing.thumbnailGenerator module<a class="headerlink" href="#module-aicsimageprocessing.thumbnailGenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="aicsimageprocessing.thumbnailGenerator.ThumbnailGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">aicsimageprocessing.thumbnailGenerator.</code><code class="sig-name descname">ThumbnailGenerator</code><span class="sig-paren">(</span><em class="sig-param">colors: Sequence[Tuple[float</em>, <em class="sig-param">float</em>, <em class="sig-param">float]] = ((0.0</em>, <em class="sig-param">1.0</em>, <em class="sig-param">1.0)</em>, <em class="sig-param">(1.0</em>, <em class="sig-param">0.0</em>, <em class="sig-param">1.0)</em>, <em class="sig-param">(1.0</em>, <em class="sig-param">1.0</em>, <em class="sig-param">0.0))</em>, <em class="sig-param">size: int = 128</em>, <em class="sig-param">channel_indices: Sequence[int] = None</em>, <em class="sig-param">channel_thresholds: Sequence[float] = None</em>, <em class="sig-param">channel_multipliers: Sequence[int] = None</em>, <em class="sig-param">mask_channel_index: int = 5</em>, <em class="sig-param">letterbox: bool = True</em>, <em class="sig-param">projection: str = 'max'</em>, <em class="sig-param">projection_sections: int = 3</em>, <em class="sig-param">return_rgb: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/thumbnailGenerator.html#ThumbnailGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.thumbnailGenerator.ThumbnailGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class is used to generate thumbnails for 4D CZYX images.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generator</span> <span class="o">=</span> <span class="n">ThumbnailGenerator</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">image_array</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">thumbnail</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">make_thumbnail</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>colors</strong> – The color palette that will be used to color each channel. The default
+palette colors are magenta=membrane, nucleus=cyan, structure=yellow.
+Keep color-blind accessibility in mind.</p></li>
+<li><p><strong>size</strong> – This constrains the image to have the X or Y dims max out at this value,
+but keep the original aspect ratio of the image.</p></li>
+<li><p><strong>channel_indices</strong> – An array of channel indices to represent the three main channels of the cell</p></li>
+<li><p><strong>mask_channel_index</strong> – The index for the segmentation channel in image that will be used to mask
+the thumbnail</p></li>
+<li><p><strong>projection</strong> – The method that will be used to generate each channel’s projection. This is
+done for each pixel, through the z-axis
+Options: [“max”, “slice”, “sections”]
+- max will look through each z-slice, and determine the max value for each
+pixel
+- slice will take the pixel values from the middle slice of the z-stack
+- sections will split the zstack into projection_sections number of
+sections, and take a  max projection for each.</p></li>
+<li><p><strong>projection_sections</strong> – The number of sections that will be used to determine projections, if
+projection=”sections”</p></li>
+<li><p><strong>return_rgb</strong> – Return an array that has been clipped and cast as uint8 to make it RGB
+compatible. Setting this to False will return the float array that is
+(generally) bounded between 0 and 1.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="aicsimageprocessing.thumbnailGenerator.ThumbnailGenerator.make_thumbnail">
+<code class="sig-name descname">make_thumbnail</code><span class="sig-paren">(</span><em class="sig-param">image: numpy.ndarray</em>, <em class="sig-param">apply_cell_mask: bool = False</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/aicsimageprocessing/thumbnailGenerator.html#ThumbnailGenerator.make_thumbnail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.thumbnailGenerator.ThumbnailGenerator.make_thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is the primary interface with the ThumbnailGenerator. It can be
+used many times with different images in order to save the configuration that
+was specified at the beginning of the generator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – ZCYX image that is the source of the thumbnail</p></li>
+<li><p><strong>apply_cell_mask</strong> – boolean value that designates whether the image is a fullfield or segmented
+cell
+False -&gt; fullfield, True -&gt; segmented cell</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>a CYX image, scaled down to the size designated in the constructor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.thumbnailGenerator.create_projection">
+<code class="sig-prename descclassname">aicsimageprocessing.thumbnailGenerator.</code><code class="sig-name descname">create_projection</code><span class="sig-paren">(</span><em class="sig-param">image: numpy.ndarray</em>, <em class="sig-param">axis: int</em>, <em class="sig-param">method: str = 'max'</em>, <em class="sig-param">slice_index: int = 0</em>, <em class="sig-param">sections: int = 3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/thumbnailGenerator.html#create_projection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.thumbnailGenerator.create_projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function creates a 2D projection out of an n-dimensional image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – ZCYX array</p></li>
+<li><p><strong>axis</strong> – the axis that the projection should be performed along</p></li>
+<li><p><strong>method</strong> – the method that will be used to create the projection
+Options: [“max”, “mean”, “sum”, “slice”, “sections”]
+- max will look through each axis-slice, and determine the max value for each
+pixel
+- mean will look through each axis-slice, and determine the mean value for each
+pixel
+- sum will look through each axis-slice, and sum all pixels together
+- slice will take the pixel values from the middle slice of the stack
+- sections will split the stack into <cite>sections</cite> number of sections, and take a
+max projection for each.</p></li>
+<li><p><strong>slice_index</strong> – index to use for the ‘slice’ projection method</p></li>
+<li><p><strong>sections</strong> – number of sections to select and max-intensity project for the ‘sections’
+projection method</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>The 2D image projection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.thumbnailGenerator.make_one_thumbnail">
+<code class="sig-prename descclassname">aicsimageprocessing.thumbnailGenerator.</code><code class="sig-name descname">make_one_thumbnail</code><span class="sig-paren">(</span><em class="sig-param">infile: str, outfile: str, channels: List[int], colors: List[Tuple[float, float, float]], size: int, projection: str = 'max', axis: int = 2, apply_mask: bool = False, mask_channel: int = 0, label: str = ''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/thumbnailGenerator.html#make_one_thumbnail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.thumbnailGenerator.make_one_thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.thumbnailGenerator.resize_cyx_image">
+<code class="sig-prename descclassname">aicsimageprocessing.thumbnailGenerator.</code><code class="sig-name descname">resize_cyx_image</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">new_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/thumbnailGenerator.html#resize_cyx_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.thumbnailGenerator.resize_cyx_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function resizes a CYX image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – CYX ndarray</p></li>
+<li><p><strong>new_size</strong> – tuple of shape of desired image dimensions in CYX</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>image with shape of new_size</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="aicsimageprocessing.thumbnailGenerator.subtract_noise_floor">
+<code class="sig-prename descclassname">aicsimageprocessing.thumbnailGenerator.</code><code class="sig-name descname">subtract_noise_floor</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">bins=256</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/thumbnailGenerator.html#subtract_noise_floor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.thumbnailGenerator.subtract_noise_floor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing.transformation">
+<span id="aicsimageprocessing-transformation-module"></span><h2>aicsimageprocessing.transformation module<a class="headerlink" href="#module-aicsimageprocessing.transformation" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="aicsimageprocessing.transformation.transform">
+<code class="sig-prename descclassname">aicsimageprocessing.transformation.</code><code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing/transformation.html#transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.transformation.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-aicsimageprocessing">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-aicsimageprocessing" title="Permalink to this headline">¶</a></h2>
+<p>Top-level package for aicsimageprocessing.</p>
+<dl class="function">
+<dt id="aicsimageprocessing.get_module_version">
+<code class="sig-prename descclassname">aicsimageprocessing.</code><code class="sig-name descname">get_module_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/aicsimageprocessing.html#get_module_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#aicsimageprocessing.get_module_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Allen Institute for Cell Science
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

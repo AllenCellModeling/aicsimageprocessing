@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>aicsimageprocessing.rigidAlignment &mdash; aicsimageprocessing 0.7.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> aicsimageprocessing
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../aicsimageprocessing.html">aicsimageprocessing package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.bin.html">aicsimageprocessing.bin package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../aicsimageprocessing.segmentation.html">aicsimageprocessing.segmentation package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.alignMajor">aicsimageprocessing.alignMajor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundCrop">aicsimageprocessing.backgroundCrop module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.backgroundSub">aicsimageprocessing.backgroundSub module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.crop_img">aicsimageprocessing.crop_img module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.flip">aicsimageprocessing.flip module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgCenter">aicsimageprocessing.imgCenter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToCoords">aicsimageprocessing.imgToCoords module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imgToProjection">aicsimageprocessing.imgToProjection module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.imshow">aicsimageprocessing.imshow module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.isosurfaceGenerator">aicsimageprocessing.isosurfaceGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.normalization">aicsimageprocessing.normalization module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.resize">aicsimageprocessing.resize module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.rigidAlignment">aicsimageprocessing.rigidAlignment module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.sdfGenerator">aicsimageprocessing.sdfGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.textureAtlas">aicsimageprocessing.textureAtlas module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.thumbnailGenerator">aicsimageprocessing.thumbnailGenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing.transformation">aicsimageprocessing.transformation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../aicsimageprocessing.html#module-aicsimageprocessing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">aicsimageprocessing</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../aicsimageprocessing.html">aicsimageprocessing</a> &raquo;</li>
+        
+      <li>aicsimageprocessing.rigidAlignment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for aicsimageprocessing.rigidAlignment</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">sklearn.decomposition</span>
+
+<span class="kn">from</span> <span class="nn">.alignMajor</span> <span class="kn">import</span> <span class="n">align_major</span><span class="p">,</span> <span class="n">angle_between</span>
+
+<span class="c1"># img - a CYXZ numpy array, channel order is generally [DNA, NUCLEUS, ... ]</span>
+
+
+<div class="viewcode-block" id="cell_rigid_registration"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.cell_rigid_registration">[docs]</a><span class="k">def</span> <span class="nf">cell_rigid_registration</span><span class="p">(</span>
+    <span class="n">img</span><span class="p">,</span> <span class="n">ch_crop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ch_angle</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ch_com</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ch_flipdim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bbox_size</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">):</span>
+    <span class="c1"># If bbox_size is not None ch_crop is ignored</span>
+    <span class="c1"># rotate</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">get_major_angle</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_angle</span><span class="p">))</span>
+
+    <span class="n">angle</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">angle</span><span class="p">]</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">croprange</span> <span class="o">=</span> <span class="n">crop_img</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_crop</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bigger&quot;</span><span class="p">)</span>
+
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">croprange</span><span class="p">]</span>
+
+    <span class="n">img</span> <span class="o">=</span> <span class="n">align_major</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+    <span class="n">com</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">get_center_of_mass</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_com</span><span class="p">))</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># make sure we symmetrically crop around the COM</span>
+    <span class="k">if</span> <span class="n">bbox_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">croprange</span> <span class="o">=</span> <span class="n">crop_img</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_crop</span><span class="p">))</span>
+
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">s</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">stop</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">croprange</span><span class="p">])</span>
+        <span class="n">padranges</span> <span class="o">=</span> <span class="p">(</span><span class="n">com</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="n">ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">com</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+        <span class="n">pad_pre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">padranges</span> <span class="o">*</span> <span class="p">(</span><span class="n">padranges</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">pad_post</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">padranges</span> <span class="o">*</span> <span class="p">(</span><span class="n">padranges</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="n">ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">pad_pre</span>
+        <span class="n">ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">pad_post</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bbox_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bbox_size</span><span class="p">)</span>
+        <span class="n">pad_size</span> <span class="o">=</span> <span class="n">bbox_size</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">com</span> <span class="o">-</span> <span class="n">pad_size</span><span class="p">,</span> <span class="n">com</span> <span class="o">+</span> <span class="n">pad_size</span><span class="p">]))</span>
+        <span class="n">ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">ranges</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+        <span class="n">ranges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="n">pad_pre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]])</span>
+    <span class="n">pad_pre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pad_pre</span> <span class="o">*</span> <span class="p">(</span><span class="n">pad_pre</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">pad_post</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]])</span>
+    <span class="n">pad_post</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pad_post</span> <span class="o">*</span> <span class="p">(</span><span class="n">pad_post</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">pad_width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">pad_pre</span><span class="p">,</span> <span class="n">pad_post</span><span class="p">]))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">non_nones</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">ranges</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">range_vals</span> <span class="o">=</span> <span class="n">ranges</span><span class="p">[</span><span class="n">non_nones</span><span class="p">]</span>
+    <span class="n">ranges</span><span class="p">[</span><span class="n">non_nones</span><span class="p">]</span> <span class="o">=</span> <span class="n">range_vals</span> <span class="o">*</span> <span class="p">(</span><span class="n">range_vals</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">croprange</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ranges</span><span class="p">]</span>
+
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">croprange</span><span class="p">]</span>
+
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">pad_width</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># flipdim</span>
+    <span class="n">flipdim</span> <span class="o">=</span> <span class="n">get_flipdims</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_flipdim</span><span class="p">))</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">flipdims</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">flipdim</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">flipdim</span></div>
+
+
+<div class="viewcode-block" id="cell_rigid_deregistration"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.cell_rigid_deregistration">[docs]</a><span class="k">def</span> <span class="nf">cell_rigid_deregistration</span><span class="p">(</span>
+    <span class="n">img</span><span class="p">,</span> <span class="n">flipdim_orig</span><span class="p">,</span> <span class="n">angle_orig</span><span class="p">,</span> <span class="n">com_orig</span><span class="p">,</span> <span class="n">imsize_orig</span><span class="p">,</span> <span class="n">ch_crop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ch_com</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">):</span>
+    <span class="c1"># deflip the image</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">flipdims</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">flipdim_orig</span><span class="p">)</span>
+
+    <span class="c1"># derotate the image</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">angle_orig</span><span class="p">]</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">align_major</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+    <span class="c1"># depad the image</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">pad_to_position</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_crop</span><span class="p">,</span> <span class="n">ch_com</span><span class="p">,</span> <span class="n">com_orig</span><span class="p">,</span> <span class="n">imsize_orig</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">img</span></div>
+
+
+<div class="viewcode-block" id="get_channel"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.get_channel">[docs]</a><span class="k">def</span> <span class="nf">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">channel</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">channel</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_rigid_reg_stats"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.get_rigid_reg_stats">[docs]</a><span class="k">def</span> <span class="nf">get_rigid_reg_stats</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">com_method</span><span class="o">=</span><span class="s2">&quot;nuc&quot;</span><span class="p">):</span>
+    <span class="n">imsize</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">com</span> <span class="o">=</span> <span class="n">get_center_of_mass</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">com_method</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">imsize</span><span class="p">,</span> <span class="n">com</span></div>
+
+
+<div class="viewcode-block" id="get_major_angle"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.get_major_angle">[docs]</a><span class="k">def</span> <span class="nf">get_major_angle</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">degrees_or_radians</span><span class="o">=</span><span class="s2">&quot;degrees&quot;</span><span class="p">):</span>
+    <span class="c1"># align on the 2D projection</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">img</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pca</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">decomposition</span><span class="o">.</span><span class="n">PCA</span><span class="p">()</span>
+    <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">angle_between</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="n">angles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">-</span> <span class="n">angle</span>
+    <span class="k">if</span> <span class="n">degrees_or_radians</span> <span class="o">==</span> <span class="s2">&quot;radians&quot;</span><span class="p">:</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">*</span> <span class="mf">0.0174533</span>
+    <span class="k">return</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">angle</span><span class="p">]]</span></div>
+
+
+<div class="viewcode-block" id="flipdims"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.flipdims">[docs]</a><span class="k">def</span> <span class="nf">flipdims</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">flipdim</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">flip</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">flipdim</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flipdim</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">flip</span><span class="p">:</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+    <span class="c1"># dont flip on z for the time being</span>
+    <span class="n">flipdim</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">img</span></div>
+
+
+<div class="viewcode-block" id="get_center_of_mass"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.get_center_of_mass">[docs]</a><span class="k">def</span> <span class="nf">get_center_of_mass</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+
+    <span class="n">com</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">img</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">com</span></div>
+
+
+<div class="viewcode-block" id="crop_img"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.crop_img">[docs]</a><span class="k">def</span> <span class="nf">crop_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">):</span>
+
+    <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">img</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">starts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">inds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ends</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">inds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;bigger&quot;</span><span class="p">:</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="n">ends</span> <span class="o">-</span> <span class="n">starts</span>
+
+        <span class="n">starts_tmp</span> <span class="o">=</span> <span class="n">starts</span> <span class="o">-</span> <span class="n">width</span>
+        <span class="n">starts_tmp</span><span class="p">[</span><span class="n">starts_tmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">ends_tmp</span> <span class="o">=</span> <span class="n">ends</span> <span class="o">+</span> <span class="n">width</span>
+
+        <span class="n">starts</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">starts_tmp</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">ends</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">ends_tmp</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="n">starts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ends</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">croprange</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">)]</span>
+    <span class="c1"># dont crop the channel dimension</span>
+    <span class="n">croprange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">img_out</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">croprange</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">img_out</span><span class="p">,</span> <span class="n">croprange</span></div>
+
+
+<div class="viewcode-block" id="get_flipdims"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.get_flipdims">[docs]</a><span class="k">def</span> <span class="nf">get_flipdims</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="n">skew</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">skew</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">skew</span> <span class="o">&lt;</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="pad_to_position"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.pad_to_position">[docs]</a><span class="k">def</span> <span class="nf">pad_to_position</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_crop</span><span class="p">,</span> <span class="n">ch_com</span><span class="p">,</span> <span class="n">com_target</span><span class="p">,</span> <span class="n">imsize_target</span><span class="p">):</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">croprange_pt2</span> <span class="o">=</span> <span class="n">crop_img</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_crop</span><span class="p">))</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">croprange_pt2</span><span class="p">]</span>
+
+    <span class="n">com</span> <span class="o">=</span> <span class="n">get_center_of_mass</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_com</span><span class="p">))</span>
+
+    <span class="n">pad_pre</span> <span class="o">=</span> <span class="p">(</span><span class="n">com_target</span> <span class="o">-</span> <span class="p">(</span><span class="n">com</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">pad_post</span> <span class="o">=</span> <span class="p">(</span><span class="n">imsize_target</span> <span class="o">-</span> <span class="n">com_target</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">com</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="n">pad_width</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+
+    <span class="k">for</span> <span class="n">pre</span><span class="p">,</span> <span class="n">post</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pad_pre</span><span class="p">,</span> <span class="n">pad_post</span><span class="p">):</span>
+        <span class="n">pad_width</span> <span class="o">+=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">pre</span><span class="p">)),</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">post</span><span class="p">))]]</span>
+
+    <span class="n">img_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">pad_width</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">img_out</span></div>
+
+
+<span class="c1"># def pad_to_center(img, com):</span>
+<span class="c1">#     _, croprange_pt2 = crop_img(get_channel(img, ch_crop))</span>
+<span class="c1">#     img = img[croprange_pt2]</span>
+<span class="c1">#</span>
+<span class="c1">#     com = get_center_of_mass(get_channel(img, ch_com))</span>
+<span class="c1">#</span>
+<span class="c1">#     pad_dims = img.shape - (com + 1) - com</span>
+<span class="c1">#</span>
+<span class="c1">#     img = pad_to_com(img, pad_dims)</span>
+<span class="c1">#</span>
+<span class="c1">#     return img</span>
+
+
+<div class="viewcode-block" id="pad_to_com"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.pad_to_com">[docs]</a><span class="k">def</span> <span class="nf">pad_to_com</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">pad_dims</span><span class="p">):</span>
+
+    <span class="n">pad_dims</span> <span class="o">=</span> <span class="n">pad_dims</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="c1"># skip the channel dimension</span>
+    <span class="n">pad_width</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pad_dims</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">pad</span> <span class="o">=</span> <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="mi">0</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pad</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)]]</span>
+
+        <span class="n">pad_width</span> <span class="o">+=</span> <span class="n">pad</span>
+
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">pad_width</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">img</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Allen Institute for Cell Science
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

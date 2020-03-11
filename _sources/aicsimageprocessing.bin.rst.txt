@@ -1,0 +1,22 @@
+aicsimageprocessing.bin package
+===============================
+
+Submodules
+----------
+
+aicsimageprocessing.bin.make\_thumbnail module
+----------------------------------------------
+
+.. automodule:: aicsimageprocessing.bin.make_thumbnail
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: aicsimageprocessing.bin
+   :members:
+   :undoc-members:
+   :show-inheritance:

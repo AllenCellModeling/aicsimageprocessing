@@ -1,0 +1,22 @@
+aicsimageprocessing.segmentation package
+========================================
+
+Submodules
+----------
+
+aicsimageprocessing.segmentation.nucleusSegmentation module
+-----------------------------------------------------------
+
+.. automodule:: aicsimageprocessing.segmentation.nucleusSegmentation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: aicsimageprocessing.segmentation
+   :members:
+   :undoc-members:
+   :show-inheritance:

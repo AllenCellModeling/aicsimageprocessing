@@ -1,0 +1,158 @@
+aicsimageprocessing package
+===========================
+
+Subpackages
+-----------
+
+.. toctree::
+
+   aicsimageprocessing.bin
+   aicsimageprocessing.segmentation
+
+Submodules
+----------
+
+aicsimageprocessing.alignMajor module
+-------------------------------------
+
+.. automodule:: aicsimageprocessing.alignMajor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.backgroundCrop module
+-----------------------------------------
+
+.. automodule:: aicsimageprocessing.backgroundCrop
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.backgroundSub module
+----------------------------------------
+
+.. automodule:: aicsimageprocessing.backgroundSub
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.crop\_img module
+------------------------------------
+
+.. automodule:: aicsimageprocessing.crop_img
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.flip module
+-------------------------------
+
+.. automodule:: aicsimageprocessing.flip
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.imgCenter module
+------------------------------------
+
+.. automodule:: aicsimageprocessing.imgCenter
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.imgToCoords module
+--------------------------------------
+
+.. automodule:: aicsimageprocessing.imgToCoords
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.imgToProjection module
+------------------------------------------
+
+.. automodule:: aicsimageprocessing.imgToProjection
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.imshow module
+---------------------------------
+
+.. automodule:: aicsimageprocessing.imshow
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.isosurfaceGenerator module
+----------------------------------------------
+
+.. automodule:: aicsimageprocessing.isosurfaceGenerator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.normalization module
+----------------------------------------
+
+.. automodule:: aicsimageprocessing.normalization
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.resize module
+---------------------------------
+
+.. automodule:: aicsimageprocessing.resize
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.rigidAlignment module
+-----------------------------------------
+
+.. automodule:: aicsimageprocessing.rigidAlignment
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.sdfGenerator module
+---------------------------------------
+
+.. automodule:: aicsimageprocessing.sdfGenerator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.textureAtlas module
+---------------------------------------
+
+.. automodule:: aicsimageprocessing.textureAtlas
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.thumbnailGenerator module
+---------------------------------------------
+
+.. automodule:: aicsimageprocessing.thumbnailGenerator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+aicsimageprocessing.transformation module
+-----------------------------------------
+
+.. automodule:: aicsimageprocessing.transformation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: aicsimageprocessing
+   :members:
+   :undoc-members:
+   :show-inheritance:
