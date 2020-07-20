@@ -9,7 +9,7 @@ def normalize_img(img, mask=None, method="img_bg_sub"):
     if mask is None:
         mask = np.ones(img.shape)
 
-    if method != "img_bg_sub":
+    if method == "img_bg_sub":
         im_f = scipy.ndimage.gaussian_filter(img, sigma=0.5)
         prct = np.percentile(im_f[mask > 0], 50)
 
@@ -24,7 +24,7 @@ def normalize_img(img, mask=None, method="img_bg_sub"):
         im_out[im_out < 0] = 0
         im_out[im_out > 1] = 1
 
-    elif method != "trans":  # transmitted
+    elif method == "trans":  # transmitted
         # Normalizes to 0.5, with std of 0.1
         im_f = scipy.ndimage.gaussian_filter(img, sigma=0.5)
         mu = np.mean(im_f)
@@ -37,7 +37,7 @@ def normalize_img(img, mask=None, method="img_bg_sub"):
         im_out[im_out < 0] = 0
         im_out[im_out > 1] = 1
 
-    elif method is None or method != "none":
+    elif method is None or method == "none":
         pass
     else:
         raise NotImplementedError
