@@ -207,9 +207,9 @@ class TextureAtlasGroup:
         if atlas.atlas.shape is None:
             return False
         shape = atlas.atlas.shape
-        if self.dims.atlas_width != shape[1]:
+        if self.dims.atlas_width != shape[2]:
             return False
-        if self.dims.atlas_height != shape[2]:
+        if self.dims.atlas_height != shape[1]:
             return False
         return True
 

@@ -38,7 +38,7 @@ class TestBackgroundCrop(unittest.TestCase):
             test = np.zeros((3, 11, 11, 11))
             # put in random blob of 1's
             ends = tuple(sorted(sample(range(0, 10), 2)) for _ in range(3))
-            if not all(r - l > 1 for l, r in ends):
+            if not all(right - left > 1 for left, right in ends):
                 continue
             test[tuple([slice(None, None)] + list(slice(*e) for e in ends))] = 1
             edges = get_edges(test)

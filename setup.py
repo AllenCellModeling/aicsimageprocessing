@@ -55,7 +55,7 @@ requirements = [
     "scikit-learn",
     "scikit-fmm==2019.1.30",
     "scipy>=1.3.0",
-    "vtk",
+    "vtk>=9.0.1",
 ]
 
 extra_requirements = {
@@ -81,6 +81,7 @@ setup(
         "Natural Language :: English",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Operating System :: POSIX :: Linux",
         "Operating System :: MacOS",
         "Topic :: Scientific/Engineering :: Bio-Informatics"
