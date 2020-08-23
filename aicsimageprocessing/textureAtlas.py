@@ -207,9 +207,15 @@ class TextureAtlasGroup:
         if atlas.atlas.shape is None:
             return False
         shape = atlas.atlas.shape
-        if self.dims.atlas_width != shape[2]:
+        if self.dims.atlas_width != shape[1]:
+            print(
+                f"width mismatch atlas_width={self.dims.atlas_width} but shape is {shape[1]}"
+            )
             return False
-        if self.dims.atlas_height != shape[1]:
+        if self.dims.atlas_height != shape[2]:
+            print(
+                f"height mismatch atlas_height={self.dims.atlas_height} but shape is {shape[2]}"
+            )
             return False
         return True
 
