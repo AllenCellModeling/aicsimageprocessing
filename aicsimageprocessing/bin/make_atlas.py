@@ -62,9 +62,6 @@ def main():
         atlas_group = textureAtlas.generate_texture_atlas(
             image, name=name, max_edge=2048, pack_order=None
         )
-        atlas_group.dims.pixel_size_x = 1.0
-        atlas_group.dims.pixel_size_y = 1.0
-        atlas_group.dims.pixel_size_z = 4.0
         atlas_group.save(args.outdir)
     except Exception as e:
         log.error("=============================================")
