@@ -4,6 +4,14 @@ aicsimageprocessing.bin package
 Submodules
 ----------
 
+aicsimageprocessing.bin.make\_atlas module
+------------------------------------------
+
+.. automodule:: aicsimageprocessing.bin.make_atlas
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 aicsimageprocessing.bin.make\_thumbnail module
 ----------------------------------------------
 

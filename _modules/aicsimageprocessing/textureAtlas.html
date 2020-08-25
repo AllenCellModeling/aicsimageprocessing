@@ -402,9 +402,17 @@
         <span class="k">if</span> <span class="n">atlas</span><span class="o">.</span><span class="n">atlas</span><span class="o">.</span><span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="n">shape</span> <span class="o">=</span> <span class="n">atlas</span><span class="o">.</span><span class="n">atlas</span><span class="o">.</span><span class="n">shape</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">atlas_width</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">atlas_width</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;width mismatch atlas_width=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">atlas_width</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; but shape is </span><span class="si">{</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">atlas_height</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">atlas_height</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;height mismatch atlas_height=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">atlas_height</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; but shape is </span><span class="si">{</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span>
 
