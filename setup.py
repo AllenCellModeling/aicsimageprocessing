@@ -92,7 +92,8 @@ setup(
     ),
     entry_points={
         "console_scripts": [
-            "make_thumbnail=aicsimageprocessing.bin.make_thumbnail:main"
+            "make_thumbnail=aicsimageprocessing.bin.make_thumbnail:main",
+            "make_atlas=aicsimageprocessing.bin.make_atlas:main",
         ],
     },
     install_requires=requirements,
