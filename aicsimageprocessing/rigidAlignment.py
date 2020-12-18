@@ -18,7 +18,7 @@ def cell_rigid_registration(
 
     _, croprange = crop_img(get_channel(img, ch_crop), method="bigger")
 
-    img = img[croprange]
+    img = img[tuple(croprange)]
 
     img = align_major(img, angle)
 
@@ -58,7 +58,7 @@ def cell_rigid_registration(
 
     croprange = [slice(s, e) for s, e in ranges]
 
-    img = img[croprange]
+    img = img[tuple(croprange)]
 
     img = np.pad(img, pad_width, mode="constant", constant_values=0)
 
@@ -156,7 +156,7 @@ def crop_img(img, method="tight"):
     # dont crop the channel dimension
     croprange[0] = slice(0, None)
 
-    img_out = img[croprange]
+    img_out = img[tuple(croprange)]
 
     return img_out, croprange
 
@@ -171,7 +171,7 @@ def get_flipdims(img):
 def pad_to_position(img, ch_crop, ch_com, com_target, imsize_target):
 
     _, croprange_pt2 = crop_img(get_channel(img, ch_crop))
-    img = img[croprange_pt2]
+    img = img[tuple(croprange_pt2)]
 
     com = get_center_of_mass(get_channel(img, ch_com))
 
@@ -190,7 +190,7 @@ def pad_to_position(img, ch_crop, ch_com, com_target, imsize_target):
 
 # def pad_to_center(img, com):
 #     _, croprange_pt2 = crop_img(get_channel(img, ch_crop))
-#     img = img[croprange_pt2]
+#     img = img[tuple(croprange_pt2)]
 #
 #     com = get_center_of_mass(get_channel(img, ch_com))
 #
