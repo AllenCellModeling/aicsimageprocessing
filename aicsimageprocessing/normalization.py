@@ -1,8 +1,22 @@
 import numpy as np
 import scipy.ndimage
 
+def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None, upper=None):
+    if n_dims is None:
+        if img.shape[0] < 10:
+            # assume first dimension is channels
+            n_dims = len(img.shape) - 1
 
-def normalize_img(img, mask=None, method="img_bg_sub"):
+    # if single channel
+    if n_dims == len(img.shape):
+        return normalize_channel(img, mask, method)
+
+    for channel_ix, channel in enumerate(img):
+        img[channel_ix] = normalize_channel(channel, mask, method)
+
+    return img
+
+def normalize_channel(img, mask=None, method="img_bg_sub", lower=None, upper=None):
 
     img = img.astype(float)
 
@@ -36,7 +50,16 @@ def normalize_img(img, mask=None, method="img_bg_sub"):
 
         im_out[im_out < 0] = 0
         im_out[im_out > 1] = 1
-
+    elif method == "cvapipe":
+        lower = np.percentile(img, 0.05)
+        upper = np.percentile(img, 99.5)
+        im_out = rescale(img, lower, upper)
+    elif method == "custom_scale":
+        im_out = rescale(img, lower, upper)
+    elif method == "custom_percentile":
+        lower = np.percentile(img, lower)
+        upper = np.percentile(img, upper)
+        im_out = rescale(img, lower, upper)
     elif method is None or method == "none":
         pass
     else:
@@ -44,6 +67,10 @@ def normalize_img(img, mask=None, method="img_bg_sub"):
 
     return im_out
 
+def rescale(img, lower, upper):
+    img[img > upper] = upper
+    img[img < lower] = lower
+    return (img - lower) / (upper - lower)
 
 def mask_normalization(image, mask, method):
     raise NotImplementedError
