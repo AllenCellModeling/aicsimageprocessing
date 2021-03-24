@@ -1,7 +1,9 @@
 import numpy as np
 import scipy.ndimage
 
-def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None, upper=None):
+
+def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None,
+                  upper=None):
     if n_dims is None:
         if img.shape[0] < 10:
             # assume first dimension is channels
@@ -16,7 +18,9 @@ def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None, 
 
     return img
 
-def normalize_channel(img, mask=None, method="img_bg_sub", lower=None, upper=None):
+
+def normalize_channel(img, mask=None, method="img_bg_sub", lower=None,
+                      upper=None):
 
     img = img.astype(float)
 
@@ -67,10 +71,12 @@ def normalize_channel(img, mask=None, method="img_bg_sub", lower=None, upper=Non
 
     return im_out
 
+
 def rescale(img, lower, upper):
     img[img > upper] = upper
     img[img < lower] = lower
     return (img - lower) / (upper - lower)
+
 
 def mask_normalization(image, mask, method):
     raise NotImplementedError
