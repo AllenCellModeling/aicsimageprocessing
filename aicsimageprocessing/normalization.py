@@ -11,10 +11,25 @@ def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None,
 
     # if single channel
     if n_dims == len(img.shape):
-        return normalize_channel(img, mask, method)
+        if (upper is not None) or (lower is not None):
+            if not isinstance(upper, (int, float)) or not isinstance(upper, (int, float)):
+                raise ValueError("When normalizing a single channel, `upper` and
+                                  `lower` must each be None or a single numeric
+                                  value.")
 
-    for channel_ix, channel in enumerate(img):
-        img[channel_ix] = normalize_channel(channel, mask, method)
+        return normalize_channel(img, mask, method, upper, lower)
+
+    if (upper is None) or (lower is None):
+        upper = [None] * img.shape[0]
+        lower = [None] * img.shape[0]
+
+    if isinstance(upper, (int, float)):
+        upper = [upper] * img.shape[0]
+    if isinstance(lower, (int, float)):
+        lower = [lower] * img.shape[0]
+
+    for channel_ix, (channel, upper, lower) in enumerate(zip(img, upper, lower)):
+        img[channel_ix] = normalize_channel(channel, mask, method, upper, lower)
 
     return img
 
