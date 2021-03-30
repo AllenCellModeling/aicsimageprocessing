@@ -3,7 +3,7 @@ import scipy.ndimage
 
 
 def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None,
-                  upper=None):
+                  upper=None, channels=None):
     if n_dims is None:
         if img.shape[0] < 10:
             # assume first dimension is channels
@@ -13,23 +13,29 @@ def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None,
     if n_dims == len(img.shape):
         if (upper is not None) or (lower is not None):
             if not isinstance(upper, (int, float)) or not isinstance(upper, (int, float)):
-                raise ValueError("When normalizing a single channel, `upper` and
-                                  `lower` must each be None or a single numeric
-                                  value.")
+                raise ValueError("When normalizing a single channel, `upper` and "
+                                 "`lower` must each be None or a single numeric value.")
 
         return normalize_channel(img, mask, method, upper, lower)
 
+    if channels is None:
+        channels = list(range(img.shape[0]))
+
     if (upper is None) or (lower is None):
-        upper = [None] * img.shape[0]
-        lower = [None] * img.shape[0]
+        upper = [None] * len(channels)
+        lower = [None] * len(channels)
 
     if isinstance(upper, (int, float)):
-        upper = [upper] * img.shape[0]
+        upper = [upper] * len(channels)
     if isinstance(lower, (int, float)):
-        lower = [lower] * img.shape[0]
+        lower = [lower] * len(channels)
 
-    for channel_ix, (channel, upper, lower) in enumerate(zip(img, upper, lower)):
-        img[channel_ix] = normalize_channel(channel, mask, method, upper, lower)
+    if (not len(upper) == len(channels)) or (not len(lower) == len(channels)):
+        raise ValueError("Expected `upper` and `lower`"
+                         "to be same length as `channels`")
+
+    for (channel, upper, lower) in zip(channels, upper, lower):
+        img[channel] = normalize_channel(img[channel], mask, method, upper, lower)
 
     return img
 
