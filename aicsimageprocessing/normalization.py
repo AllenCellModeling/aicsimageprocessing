@@ -2,8 +2,15 @@ import numpy as np
 import scipy.ndimage
 
 
-def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None,
-                  upper=None, channels=None):
+def normalize_img(
+    img,
+    mask=None,
+    method="img_bg_sub",
+    n_dims=None,
+    lower=None,
+    upper=None,
+    channels=None,
+):
     if n_dims is None:
         if img.shape[0] < 10:
             # assume first dimension is channels
@@ -12,9 +19,13 @@ def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None,
     # if single channel
     if n_dims == len(img.shape):
         if (upper is not None) or (lower is not None):
-            if not isinstance(upper, (int, float)) or not isinstance(upper, (int, float)):
-                raise ValueError("When normalizing a single channel, `upper` and "
-                                 "`lower` must each be None or a single numeric value.")
+            if not isinstance(upper, (int, float)) or not isinstance(
+                upper, (int, float)
+            ):
+                raise ValueError(
+                    "When normalizing a single channel, `upper` and "
+                    "`lower` must each be None or a single numeric value."
+                )
 
         return normalize_channel(img, mask, method, upper, lower)
 
@@ -31,8 +42,9 @@ def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None,
         lower = [lower] * len(channels)
 
     if (not len(upper) == len(channels)) or (not len(lower) == len(channels)):
-        raise ValueError("Expected `upper` and `lower`"
-                         "to be same length as `channels`")
+        raise ValueError(
+            "Expected `upper` and `lower`" "to be same length as `channels`"
+        )
 
     for (channel, upper, lower) in zip(channels, upper, lower):
         img[channel] = normalize_channel(img[channel], mask, method, upper, lower)
@@ -40,8 +52,7 @@ def normalize_img(img, mask=None, method="img_bg_sub", n_dims=None, lower=None,
     return img
 
 
-def normalize_channel(img, mask=None, method="img_bg_sub", lower=None,
-                      upper=None):
+def normalize_channel(img, mask=None, method="img_bg_sub", lower=None, upper=None):
 
     img = img.astype(float)
 

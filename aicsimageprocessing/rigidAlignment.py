@@ -8,7 +8,12 @@ from .alignMajor import align_major, angle_between
 
 
 def cell_rigid_registration(
-    img, ch_crop=1, ch_angle=1, ch_com=0, ch_flipdim=1, bbox_size=None,
+    img,
+    ch_crop=1,
+    ch_angle=1,
+    ch_com=0,
+    ch_flipdim=1,
+    bbox_size=None,
     align_image=True,
 ):
     # If bbox_size is not None ch_crop is ignored
