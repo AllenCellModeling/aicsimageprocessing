@@ -8,19 +8,28 @@ from .alignMajor import align_major, angle_between
 
 
 def cell_rigid_registration(
-    img, ch_crop=1, ch_angle=1, ch_com=0, ch_flipdim=1, bbox_size=None
+    img,
+    ch_crop=1,
+    ch_angle=1,
+    ch_com=0,
+    ch_flipdim=1,
+    bbox_size=None,
+    align_image=True,
 ):
     # If bbox_size is not None ch_crop is ignored
-    # rotate
-    angle = get_major_angle(get_channel(img, ch_angle))
 
-    angle = [[i, -j] for i, j in angle]
+    angle = None
+    if align_image:
+        # rotate
+        angle = get_major_angle(get_channel(img, ch_angle))
 
-    _, croprange = crop_img(get_channel(img, ch_crop), method="bigger")
+        angle = [[i, -j] for i, j in angle]
 
-    img = img[croprange]
+        _, croprange = crop_img(get_channel(img, ch_crop), method="bigger")
 
-    img = align_major(img, angle)
+        img = img[croprange]
+
+        img = align_major(img, angle)
 
     com = np.floor(get_center_of_mass(get_channel(img, ch_com)) + 0.5)
 
@@ -63,8 +72,10 @@ def cell_rigid_registration(
     img = np.pad(img, pad_width, mode="constant", constant_values=0)
 
     # flipdim
-    flipdim = get_flipdims(get_channel(img, ch_flipdim))
-    img = flipdims(img, flipdim)
+    flipdim = None
+    if ch_flipdim is not None:
+        flipdim = get_flipdims(get_channel(img, ch_flipdim))
+        img = flipdims(img, flipdim)
 
     return img, angle, flipdim
 
