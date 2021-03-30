@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>aicsimageprocessing.rigidAlignment &mdash; aicsimageprocessing 0.7.5 documentation</title>
   
@@ -16,7 +16,10 @@
 
   
   
+
   
+  
+
   
 
   
@@ -49,7 +52,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> aicsimageprocessing
+            <a href="../../index.html" class="icon icon-home"> aicsimageprocessing
           
 
           
@@ -167,6 +170,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -203,19 +208,28 @@
 
 
 <div class="viewcode-block" id="cell_rigid_registration"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.rigidAlignment.cell_rigid_registration">[docs]</a><span class="k">def</span> <span class="nf">cell_rigid_registration</span><span class="p">(</span>
-    <span class="n">img</span><span class="p">,</span> <span class="n">ch_crop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ch_angle</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ch_com</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ch_flipdim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bbox_size</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">img</span><span class="p">,</span>
+    <span class="n">ch_crop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">ch_angle</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">ch_com</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">ch_flipdim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">bbox_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">align_image</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="c1"># If bbox_size is not None ch_crop is ignored</span>
-    <span class="c1"># rotate</span>
-    <span class="n">angle</span> <span class="o">=</span> <span class="n">get_major_angle</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_angle</span><span class="p">))</span>
 
-    <span class="n">angle</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">angle</span><span class="p">]</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">align_image</span><span class="p">:</span>
+        <span class="c1"># rotate</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">get_major_angle</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_angle</span><span class="p">))</span>
 
-    <span class="n">_</span><span class="p">,</span> <span class="n">croprange</span> <span class="o">=</span> <span class="n">crop_img</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_crop</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bigger&quot;</span><span class="p">)</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">angle</span><span class="p">]</span>
 
-    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">croprange</span><span class="p">]</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">croprange</span> <span class="o">=</span> <span class="n">crop_img</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_crop</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bigger&quot;</span><span class="p">)</span>
 
-    <span class="n">img</span> <span class="o">=</span> <span class="n">align_major</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">croprange</span><span class="p">]</span>
+
+        <span class="n">img</span> <span class="o">=</span> <span class="n">align_major</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
 
     <span class="n">com</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">get_center_of_mass</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_com</span><span class="p">))</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
 
@@ -258,8 +272,10 @@
     <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">pad_width</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># flipdim</span>
-    <span class="n">flipdim</span> <span class="o">=</span> <span class="n">get_flipdims</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_flipdim</span><span class="p">))</span>
-    <span class="n">img</span> <span class="o">=</span> <span class="n">flipdims</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">flipdim</span><span class="p">)</span>
+    <span class="n">flipdim</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">ch_flipdim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">flipdim</span> <span class="o">=</span> <span class="n">get_flipdims</span><span class="p">(</span><span class="n">get_channel</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ch_flipdim</span><span class="p">))</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">flipdims</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">flipdim</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">flipdim</span></div>
 
@@ -420,28 +436,25 @@
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Allen Institute for Cell Science
+        &#169; Copyright 2020, Allen Institute for Cell Science.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
