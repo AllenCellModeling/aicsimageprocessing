@@ -46,7 +46,7 @@ interactive_requirements = [
 ]
 
 requirements = [
-    "aicsimageio>=3.1.2",
+    "aicsimageio>=4.1.0",
     "matplotlib>=3.1.1",
     "numpy>=1.16.4",
     "Pillow>=5.2.0",

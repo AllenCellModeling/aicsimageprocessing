@@ -8,6 +8,7 @@ import platform
 from typing import List, Sequence, Tuple, Union
 
 import aicsimageio
+from aicsimageio.writers.two_d_writer import TwoDWriter
 import numpy as np
 import skimage.transform
 from PIL import Image, ImageDraw, ImageFont
@@ -481,8 +482,9 @@ def make_one_thumbnail(
     else:
         raise ValueError(f"Unknown axis value: {axis}")
 
-    with aicsimageio.AICSImage(infile) as image:
-        imagedata = image.get_image_data("CZYX", T=0)
+    image = aicsimageio.AICSImage(infile)
+    imagedata = image.get_image_data("CZYX", T=0)
+
     generator = ThumbnailGenerator(
         channel_indices=channels,
         size=size,
@@ -507,8 +509,5 @@ def make_one_thumbnail(
         thumbnail = np.array(img)
         thumbnail = thumbnail.transpose(2, 0, 1)
 
-    with aicsimageio.writers.PngWriter(
-        file_path=outfile, overwrite_file=True
-    ) as writer:
-        writer.save(thumbnail)
+    TwoDWriter.save(thumbnail, outfile)
     return thumbnail

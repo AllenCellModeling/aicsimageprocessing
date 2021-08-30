@@ -15,9 +15,9 @@ class Mesh:
     Examples
     --------
     >>> image = AICSImage("some/bio/image.ome.tif")
-    ... mesh0 = generate_mesh(image, isovalue=0, channel=0)
+    ... mesh0 = generate_mesh(image.data, isovalue=0, channel=0)
     ... # will generate a different mesh due to the different isovalue
-    ... mesh1 = generate_mesh(image, isovalue=1, channel=0)
+    ... mesh1 = generate_mesh(image.data, isovalue=1, channel=0)
     ... mesh0.save_as_obj("some/bio/image/mesh.obj")
     ... # mesh.obj can be imported into 3D viewers and represents a 3D rendering of
     ... # image.ome.tif
@@ -78,7 +78,7 @@ def generate_mesh(image, isovalue=0, channel=0):
     """
     if not isinstance(image, AICSImage):
         raise ValueError("Meshes can only be generated with AICSImage objects!")
-    if channel >= image.size_c:
+    if channel >= image.dims.C:
         raise IndexError(
             "Channel provided for mesh generation is out of bounds for image data!"
         )
