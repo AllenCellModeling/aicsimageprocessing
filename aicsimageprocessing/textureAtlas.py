@@ -179,7 +179,7 @@ class TextureAtlasGroup:
         dims.channels = aics_image.dims.C
         dims.tiles = aics_image.dims.Z
 
-        channel_names = aics_image.get_channel_names()
+        channel_names = aics_image.channel_names
         if channel_names is not None:
             dims.channel_names = channel_names
         else:
@@ -265,7 +265,7 @@ class TextureAtlasGroup:
             # add this name to the atlas's metadata for use in get_metadata below.
             atlas.metadata["name"] = atlasname
             full_path = os.path.join(output_dir, atlasname)
-            TwoDWriter.save(atlas.atlas, full_path)
+            TwoDWriter.save(atlas.atlas, full_path, dim_order="SYX")
             i += 1
 
         metadata = self.get_metadata()
