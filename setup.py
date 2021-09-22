@@ -53,7 +53,7 @@ requirements = [
     "PyMCubes",
     "scikit-image>=0.15.0",
     "scikit-learn",
-    "scikit-fmm==2019.1.30",
+    "scikit-fmm>=2021.7.8",
     "scipy>=1.3.0",
     "vtk>=9.0.1",
 ]
