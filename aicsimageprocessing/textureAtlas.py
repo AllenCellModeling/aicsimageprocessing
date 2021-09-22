@@ -265,7 +265,7 @@ class TextureAtlasGroup:
             # add this name to the atlas's metadata for use in get_metadata below.
             atlas.metadata["name"] = atlasname
             full_path = os.path.join(output_dir, atlasname)
-            TwoDWriter.save(atlas.atlas, full_path, dim_order="SYX")
+            TwoDWriter.save(atlas.atlas, full_path, dim_order="SXY")
             i += 1
 
         metadata = self.get_metadata()
