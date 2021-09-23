@@ -471,6 +471,7 @@ def make_one_thumbnail(
     apply_mask: bool = False,
     mask_channel: int = 0,
     label: str = "",
+    t: int = 0
 ):
     axistranspose = (1, 0, 2, 3)
     if axis == 2:  # Z
@@ -483,7 +484,7 @@ def make_one_thumbnail(
         raise ValueError(f"Unknown axis value: {axis}")
 
     image = aicsimageio.AICSImage(infile)
-    imagedata = image.get_image_data("CZYX", T=0)
+    imagedata = image.get_image_data("CZYX", T=t)
 
     generator = ThumbnailGenerator(
         channel_indices=channels,
@@ -509,5 +510,5 @@ def make_one_thumbnail(
         thumbnail = np.array(img)
         thumbnail = thumbnail.transpose(2, 0, 1)
 
-    TwoDWriter.save(thumbnail, outfile)
+    TwoDWriter.save(thumbnail, outfile, dim_order="SXY")
     return thumbnail
