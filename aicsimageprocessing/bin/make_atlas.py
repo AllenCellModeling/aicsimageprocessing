@@ -56,13 +56,14 @@ def main():
 
         dbg = args.debug
         image = AICSImage(args.infile)
-        # preload for performance
-        image.data
-        name = os.path.splitext(os.path.basename(args.infile))[0]
-        atlas_group = textureAtlas.generate_texture_atlas(
-            image, name=name, max_edge=2048, pack_order=None
-        )
-        atlas_group.save(args.outdir)
+        for i in range(0, image.dims.T):
+            name = os.path.splitext(os.path.basename(args.infile))[0]
+            if image.dims.T > 0:
+                name = f"{name}_{i}"
+            atlas_group = textureAtlas.generate_texture_atlas(
+                image, name=name, max_edge=2048, pack_order=None, t=i
+            )
+            atlas_group.save(args.outdir)
     except Exception as e:
         log.error("=============================================")
         if dbg:

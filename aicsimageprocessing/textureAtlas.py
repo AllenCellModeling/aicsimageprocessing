@@ -30,7 +30,7 @@ class TextureAtlasDims:
 
 
 class TextureAtlas:
-    def __init__(self, aics_image, pack_order, dims):
+    def __init__(self, aics_image, pack_order, dims, t=0):
         if not isinstance(dims, TextureAtlasDims):
             raise ValueError(
                 "Texture atlas dimension data must be of type TextureAtlasDims!"
@@ -57,24 +57,24 @@ class TextureAtlas:
 
         self.pack_order = pack_order
         self.metadata = {"name": "NOT_YET_ASSIGNED", "channels": self.pack_order}
-        self.atlas = self.generate_atlas(dims)
+        self.atlas = self.generate_atlas(dims, t)
 
-    def generate_atlas(self, dims):
+    def generate_atlas(self, dims, t):
         atlas = np.stack(
             [
-                self._atlas_single_channel(image_channel, dims)
+                self._atlas_single_channel(image_channel, dims, t)
                 for image_channel in self.pack_order
             ]
         )
         return atlas
 
-    def _atlas_single_channel(self, channel, dims):
+    def _atlas_single_channel(self, channel, dims, t):
         scale = (
             float(dims.tile_width) / float(self.aics_image.dims.X),
             float(dims.tile_height) / float(self.aics_image.dims.Y),
         )
 
-        channel_data = self.aics_image.get_image_data("XYZ", C=channel)
+        channel_data = self.aics_image.get_image_data("XYZ", C=channel, T=t)
         # renormalize
         channel_data = channel_data.astype(np.float32)
 
@@ -110,7 +110,7 @@ class TextureAtlas:
 
 class TextureAtlasGroup:
     def __init__(
-        self, aics_image, name="texture_atlas", pack_order=None, max_edge=2048
+        self, aics_image, t=0, name="texture_atlas", pack_order=None, max_edge=2048
     ):
         self.name = name
         self.max_edge = max_edge
@@ -128,7 +128,7 @@ class TextureAtlasGroup:
             ]
         png_count = 0
         for png in pack_order:
-            self._append(TextureAtlas(aics_image, pack_order=png, dims=self.dims))
+            self._append(TextureAtlas(aics_image, pack_order=png, dims=self.dims, t=t))
             png_count += 1
 
     def _calc_atlas_dimensions(self, aics_image):
@@ -275,7 +275,7 @@ class TextureAtlasGroup:
             json.dump(metadata, json_output)
 
 
-def generate_texture_atlas(im, name="texture_atlas", max_edge=2048, pack_order=None):
+def generate_texture_atlas(im, name="texture_atlas", max_edge=2048, pack_order=None, t=0):
     """
     Creates a TextureAtlasGroup object
 
@@ -297,11 +297,14 @@ def generate_texture_atlas(im, name="texture_atlas", max_edge=2048, pack_order=N
         [[0, 1, 2, 3], [4, 5], [6]] where the first texture atlas will code channel 0
         as r, channel 1 as g, and so on.
 
+    t
+        time index, zero by default.
+
     Returns
     -------
     TextureAtlasGroup object
     """
     atlas_group = TextureAtlasGroup(
-        im, name=name, max_edge=max_edge, pack_order=pack_order
+        im, name=name, max_edge=max_edge, pack_order=pack_order, t=t
     )
     return atlas_group
