@@ -3,7 +3,6 @@
 import unittest
 
 from aicsimageio import AICSImage
-from aicsimageio.readers import ome_tiff_reader
 from aicsimageprocessing.textureAtlas import generate_texture_atlas
 
 

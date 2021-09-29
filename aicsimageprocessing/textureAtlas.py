@@ -275,7 +275,9 @@ class TextureAtlasGroup:
             json.dump(metadata, json_output)
 
 
-def generate_texture_atlas(im, name="texture_atlas", max_edge=2048, pack_order=None, t=0):
+def generate_texture_atlas(
+    im, name="texture_atlas", max_edge=2048, pack_order=None, t=0
+):
     """
     Creates a TextureAtlasGroup object
 
