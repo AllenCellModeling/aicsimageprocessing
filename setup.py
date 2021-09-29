@@ -112,6 +112,6 @@ setup(
     url="https://github.com/AllenCellModeling/aicsimageprocessing",
     # Do not edit this string manually, always use bumpversion
     # Details in CONTRIBUTING.rst
-    version="0.7.5",
+    version="0.8.0",
     zip_safe=False,
 )
