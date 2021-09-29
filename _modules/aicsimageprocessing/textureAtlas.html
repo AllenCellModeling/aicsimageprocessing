@@ -1,73 +1,33 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>aicsimageprocessing.textureAtlas &mdash; aicsimageprocessing 0.7.5 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>aicsimageprocessing.textureAtlas &mdash; aicsimageprocessing 0.8.1 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> aicsimageprocessing
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                0.7.5
+                0.8.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -75,19 +35,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
@@ -132,71 +81,31 @@
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">aicsimageprocessing</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">Module code</a> &raquo;</li>
-        
           <li><a href="../aicsimageprocessing.html">aicsimageprocessing</a> &raquo;</li>
-        
       <li>aicsimageprocessing.textureAtlas</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for aicsimageprocessing.textureAtlas</h1><div class="highlight"><pre>
 <span></span><span class="c1"># author: Zach Crabtree zacharyc@alleninstitute.org</span>
 
@@ -207,7 +116,8 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">skimage.transform</span> <span class="k">as</span> <span class="nn">sktransform</span>
 <span class="kn">from</span> <span class="nn">aicsimageio</span> <span class="kn">import</span> <span class="n">AICSImage</span>
-<span class="kn">from</span> <span class="nn">aicsimageio.writers</span> <span class="kn">import</span> <span class="n">PngWriter</span>
+<span class="kn">from</span> <span class="nn">aicsimageio.writers.two_d_writer</span> <span class="kn">import</span> <span class="n">TwoDWriter</span>
+<span class="kn">from</span> <span class="nn">aicsimageio.types</span> <span class="kn">import</span> <span class="n">PhysicalPixelSizes</span>
 
 
 <div class="viewcode-block" id="TextureAtlasDims"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.textureAtlas.TextureAtlasDims">[docs]</a><span class="k">class</span> <span class="nc">TextureAtlasDims</span><span class="p">:</span>
@@ -229,7 +139,7 @@
 
 
 <div class="viewcode-block" id="TextureAtlas"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.textureAtlas.TextureAtlas">[docs]</a><span class="k">class</span> <span class="nc">TextureAtlas</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aics_image</span><span class="p">,</span> <span class="n">pack_order</span><span class="p">,</span> <span class="n">dims</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aics_image</span><span class="p">,</span> <span class="n">pack_order</span><span class="p">,</span> <span class="n">dims</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">TextureAtlasDims</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Texture atlas dimension data must be of type TextureAtlasDims!&quot;</span>
@@ -246,7 +156,7 @@
                     <span class="n">pack_order</span>
                 <span class="p">)</span>
             <span class="p">)</span>
-        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">channel</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">size_c</span> <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">pack_order</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">channel</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">C</span> <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">pack_order</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span>
                 <span class="p">(</span>
                     <span class="s2">&quot;A channel specified in the ordering </span><span class="si">{}</span><span class="s2"> is out-of-bounds in&quot;</span>
@@ -256,24 +166,24 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">pack_order</span> <span class="o">=</span> <span class="n">pack_order</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;NOT_YET_ASSIGNED&quot;</span><span class="p">,</span> <span class="s2">&quot;channels&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pack_order</span><span class="p">}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">atlas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_atlas</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atlas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_atlas</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
-<div class="viewcode-block" id="TextureAtlas.generate_atlas"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.textureAtlas.TextureAtlas.generate_atlas">[docs]</a>    <span class="k">def</span> <span class="nf">generate_atlas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dims</span><span class="p">):</span>
+<div class="viewcode-block" id="TextureAtlas.generate_atlas"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.textureAtlas.TextureAtlas.generate_atlas">[docs]</a>    <span class="k">def</span> <span class="nf">generate_atlas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dims</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">atlas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
             <span class="p">[</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_atlas_single_channel</span><span class="p">(</span><span class="n">image_channel</span><span class="p">,</span> <span class="n">dims</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_atlas_single_channel</span><span class="p">(</span><span class="n">image_channel</span><span class="p">,</span> <span class="n">dims</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">image_channel</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pack_order</span>
             <span class="p">]</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">atlas</span></div>
 
-    <span class="k">def</span> <span class="nf">_atlas_single_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">dims</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_atlas_single_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">dims</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">scale</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="nb">float</span><span class="p">(</span><span class="n">dims</span><span class="o">.</span><span class="n">tile_width</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">size_x</span><span class="p">),</span>
-            <span class="nb">float</span><span class="p">(</span><span class="n">dims</span><span class="o">.</span><span class="n">tile_height</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">size_y</span><span class="p">),</span>
+            <span class="nb">float</span><span class="p">(</span><span class="n">dims</span><span class="o">.</span><span class="n">tile_width</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">X</span><span class="p">),</span>
+            <span class="nb">float</span><span class="p">(</span><span class="n">dims</span><span class="o">.</span><span class="n">tile_height</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">Y</span><span class="p">),</span>
         <span class="p">)</span>
 
-        <span class="n">channel_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">get_image_data</span><span class="p">(</span><span class="s2">&quot;XYZ&quot;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">channel</span><span class="p">)</span>
+        <span class="n">channel_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">get_image_data</span><span class="p">(</span><span class="s2">&quot;XYZ&quot;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">channel</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
         <span class="c1"># renormalize</span>
         <span class="n">channel_data</span> <span class="o">=</span> <span class="n">channel_data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
@@ -285,7 +195,7 @@
                 <span class="p">(</span><span class="n">dims</span><span class="o">.</span><span class="n">tile_height</span> <span class="o">*</span> <span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span>
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dims</span><span class="o">.</span><span class="n">cols</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">size_z</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">Z</span><span class="p">:</span>
                     <span class="n">left_bound</span><span class="p">,</span> <span class="n">right_bound</span> <span class="o">=</span> <span class="p">(</span>
                         <span class="p">(</span><span class="n">dims</span><span class="o">.</span><span class="n">tile_width</span> <span class="o">*</span> <span class="n">col</span><span class="p">),</span>
                         <span class="p">(</span><span class="n">dims</span><span class="o">.</span><span class="n">tile_width</span> <span class="o">*</span> <span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span>
@@ -309,32 +219,32 @@
 
 <div class="viewcode-block" id="TextureAtlasGroup"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.textureAtlas.TextureAtlasGroup">[docs]</a><span class="k">class</span> <span class="nc">TextureAtlasGroup</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">aics_image</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;texture_atlas&quot;</span><span class="p">,</span> <span class="n">pack_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_edge</span><span class="o">=</span><span class="mi">2048</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">aics_image</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;texture_atlas&quot;</span><span class="p">,</span> <span class="n">pack_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_edge</span><span class="o">=</span><span class="mi">2048</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_edge</span> <span class="o">=</span> <span class="n">max_edge</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stack_height</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">size_z</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stack_height</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">Z</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_atlas_dimensions</span><span class="p">(</span><span class="n">aics_image</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atlas_list</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="n">max_channels_per_png</span> <span class="o">=</span> <span class="mi">3</span>
         <span class="k">if</span> <span class="n">pack_order</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># if no pack order is specified, pack 4 channels per png and move on</span>
-            <span class="n">channel_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">aics_image</span><span class="o">.</span><span class="n">size_c</span><span class="p">))</span>
+            <span class="c1"># if no pack order is specified, pack channels into png and move on</span>
+            <span class="n">channel_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">C</span><span class="p">))</span>
             <span class="n">pack_order</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="n">channel_list</span><span class="p">[</span><span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">max_channels_per_png</span><span class="p">]</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">channel_list</span><span class="p">),</span> <span class="n">max_channels_per_png</span><span class="p">)</span>
             <span class="p">]</span>
         <span class="n">png_count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">png</span> <span class="ow">in</span> <span class="n">pack_order</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="n">TextureAtlas</span><span class="p">(</span><span class="n">aics_image</span><span class="p">,</span> <span class="n">pack_order</span><span class="o">=</span><span class="n">png</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_append</span><span class="p">(</span><span class="n">TextureAtlas</span><span class="p">(</span><span class="n">aics_image</span><span class="p">,</span> <span class="n">pack_order</span><span class="o">=</span><span class="n">png</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dims</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">))</span>
             <span class="n">png_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">_calc_atlas_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aics_image</span><span class="p">):</span>
         <span class="n">tile_width</span><span class="p">,</span> <span class="n">tile_height</span><span class="p">,</span> <span class="n">stack_height</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">aics_image</span><span class="o">.</span><span class="n">size_x</span><span class="p">,</span>
-            <span class="n">aics_image</span><span class="o">.</span><span class="n">size_y</span><span class="p">,</span>
-            <span class="n">aics_image</span><span class="o">.</span><span class="n">size_z</span><span class="p">,</span>
+            <span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">X</span><span class="p">,</span>
+            <span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">Y</span><span class="p">,</span>
+            <span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">Z</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="c1"># maintain aspect ratio of images</span>
         <span class="c1"># initialize atlas with one row of all slices</span>
@@ -373,25 +283,25 @@
         <span class="n">dims</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
         <span class="n">dims</span><span class="o">.</span><span class="n">atlas_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">atlas_width</span><span class="p">)</span>
         <span class="n">dims</span><span class="o">.</span><span class="n">atlas_height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">atlas_height</span><span class="p">)</span>
-        <span class="n">dims</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">size_x</span>
-        <span class="n">dims</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">size_y</span>
-        <span class="n">dims</span><span class="o">.</span><span class="n">channels</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">size_c</span>
-        <span class="n">dims</span><span class="o">.</span><span class="n">tiles</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">size_z</span>
+        <span class="n">dims</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">X</span>
+        <span class="n">dims</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">Y</span>
+        <span class="n">dims</span><span class="o">.</span><span class="n">channels</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">C</span>
+        <span class="n">dims</span><span class="o">.</span><span class="n">tiles</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">Z</span>
 
-        <span class="n">channel_names</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">get_channel_names</span><span class="p">()</span>
+        <span class="n">channel_names</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">channel_names</span>
         <span class="k">if</span> <span class="n">channel_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">dims</span><span class="o">.</span><span class="n">channel_names</span> <span class="o">=</span> <span class="n">channel_names</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">dims</span><span class="o">.</span><span class="n">channel_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CH_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">aics_image</span><span class="o">.</span><span class="n">size_c</span><span class="p">)]</span>
+            <span class="n">dims</span><span class="o">.</span><span class="n">channel_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CH_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">aics_image</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">C</span><span class="p">)]</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">physical_pixel_size</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span><span class="n">get_physical_pixel_size</span><span class="p">()</span>
+            <span class="n">physical_pixel_size</span> <span class="o">=</span> <span class="n">aics_image</span><span class="o">.</span><span class="n">physical_pixel_sizes</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="n">physical_pixel_size</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">physical_pixel_size</span> <span class="o">=</span> <span class="n">PhysicalPixelSizes</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">physical_pixel_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dims</span><span class="o">.</span><span class="n">pixel_size_x</span> <span class="o">=</span> <span class="n">physical_pixel_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">dims</span><span class="o">.</span><span class="n">pixel_size_y</span> <span class="o">=</span> <span class="n">physical_pixel_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">dims</span><span class="o">.</span><span class="n">pixel_size_z</span> <span class="o">=</span> <span class="n">physical_pixel_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">dims</span><span class="o">.</span><span class="n">pixel_size_x</span> <span class="o">=</span> <span class="n">physical_pixel_size</span><span class="o">.</span><span class="n">X</span>
+            <span class="n">dims</span><span class="o">.</span><span class="n">pixel_size_y</span> <span class="o">=</span> <span class="n">physical_pixel_size</span><span class="o">.</span><span class="n">Y</span>
+            <span class="n">dims</span><span class="o">.</span><span class="n">pixel_size_z</span> <span class="o">=</span> <span class="n">physical_pixel_size</span><span class="o">.</span><span class="n">Z</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">dims</span><span class="o">.</span><span class="n">pixel_size_x</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="n">dims</span><span class="o">.</span><span class="n">pixel_size_y</span> <span class="o">=</span> <span class="mi">1</span>
@@ -464,8 +374,7 @@
             <span class="c1"># add this name to the atlas&#39;s metadata for use in get_metadata below.</span>
             <span class="n">atlas</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">atlasname</span>
             <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">atlasname</span><span class="p">)</span>
-            <span class="k">with</span> <span class="n">PngWriter</span><span class="p">(</span><span class="n">full_path</span><span class="p">,</span> <span class="n">overwrite_file</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
-                <span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">atlas</span><span class="o">.</span><span class="n">atlas</span><span class="p">)</span>
+            <span class="n">TwoDWriter</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">atlas</span><span class="o">.</span><span class="n">atlas</span><span class="p">,</span> <span class="n">full_path</span><span class="p">,</span> <span class="n">dim_order</span><span class="o">=</span><span class="s2">&quot;SXY&quot;</span><span class="p">)</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_metadata</span><span class="p">()</span>
@@ -475,7 +384,7 @@
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">json_output</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="generate_texture_atlas"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.textureAtlas.generate_texture_atlas">[docs]</a><span class="k">def</span> <span class="nf">generate_texture_atlas</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;texture_atlas&quot;</span><span class="p">,</span> <span class="n">max_edge</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">pack_order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_texture_atlas"><a class="viewcode-back" href="../../aicsimageprocessing.html#aicsimageprocessing.textureAtlas.generate_texture_atlas">[docs]</a><span class="k">def</span> <span class="nf">generate_texture_atlas</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;texture_atlas&quot;</span><span class="p">,</span> <span class="n">max_edge</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">pack_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates a TextureAtlasGroup object</span>
 
@@ -497,57 +406,44 @@
 <span class="sd">        [[0, 1, 2, 3], [4, 5], [6]] where the first texture atlas will code channel 0</span>
 <span class="sd">        as r, channel 1 as g, and so on.</span>
 
+<span class="sd">    t</span>
+<span class="sd">        time index, zero by default.</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    TextureAtlasGroup object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">atlas_group</span> <span class="o">=</span> <span class="n">TextureAtlasGroup</span><span class="p">(</span>
-        <span class="n">im</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">max_edge</span><span class="o">=</span><span class="n">max_edge</span><span class="p">,</span> <span class="n">pack_order</span><span class="o">=</span><span class="n">pack_order</span>
+        <span class="n">im</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">max_edge</span><span class="o">=</span><span class="n">max_edge</span><span class="p">,</span> <span class="n">pack_order</span><span class="o">=</span><span class="n">pack_order</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">atlas_group</span></div>
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Allen Institute for Cell Science.
-
-    </p>
+    <p>&#169; Copyright 2020, Allen Institute for Cell Science.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
