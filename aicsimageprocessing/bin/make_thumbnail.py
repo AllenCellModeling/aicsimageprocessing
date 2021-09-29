@@ -45,6 +45,7 @@ class Args(argparse.Namespace):
         p.add_argument("--size", type=int, help="size", default=128)
         p.add_argument("--mask", type=int, help="mask channel", default=-1)
         p.add_argument("--axis", type=int, help="axis 0, 1, or 2", default=2)
+        p.add_argument("--time", type=int, help="time index", default=0)
         p.add_argument(
             "--channels", type=int, nargs="+", help="channels to composite", default=[0]
         )
@@ -84,6 +85,7 @@ def main():
             axis=args.axis,
             apply_mask=(args.mask != -1),
             mask_channel=args.mask,
+            t=args.time
         )
     except Exception as e:
         log.error("=============================================")
