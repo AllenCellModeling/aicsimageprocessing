@@ -56,6 +56,10 @@ requirements = [
     "scikit-fmm>=2021.7.8",
     "scipy>=1.3.0",
     "vtk>=9.0.1",
+    "aics_dask_utils",
+    "ome-zarr",
+    "universal_pathlib==0.0.19",
+    
 ]
 
 extra_requirements = {

@@ -27,3 +27,4 @@ from .normalization import *  # noqa
 from .resize import *  # noqa
 from .rigidAlignment import *  # noqa
 from .thumbnailGenerator import *  # noqa
+from .diagnosticsheet import *  # noqa
