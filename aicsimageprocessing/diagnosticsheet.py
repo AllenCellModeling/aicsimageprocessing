@@ -5,20 +5,18 @@
 
 import json
 import logging
-from pathlib import Path
-from typing import List, NamedTuple, Optional, Union
+from typing import NamedTuple, Optional, Union
 from aicsimageio import AICSImage, transforms
 from .imgToProjection import imgtoprojection
 import dask.dataframe as dd
-import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from aics_dask_utils import DistributedHandler
-import warnings
 from upath import UPath as Path
 from ome_zarr.reader import Reader
 from ome_zarr.io import parse_url
+
 logging.getLogger("bfio").setLevel(logging.ERROR)
 logging.getLogger("aicsimageio").setLevel(logging.ERROR)
 
@@ -30,9 +28,11 @@ log = logging.getLogger(__name__)
 
 ###############################################################################
 
+
 class DatasetFields:
     CellId = "CellId"
     DiagnosticSheetPath = "DiagnosticSheetPath"
+
 
 class DiagnosticSheetResult(NamedTuple):
     cell_id: Union[int, str]
@@ -46,6 +46,7 @@ class DiagnosticSheetError(NamedTuple):
 
 ###############################################################################
 
+
 def read_ome_zarr(path, level=0, image_name="default"):
     path = str(path if image_name is None else Path(path) / image_name)
     reader = Reader(parse_url(path))
@@ -55,11 +56,22 @@ def read_ome_zarr(path, level=0, image_name="default"):
     return AICSImage(
         node.data[level].compute(),
         channel_names=node.metadata["name"],
-        physical_pixel_sizes=pps
+        physical_pixel_sizes=pps,
     )
 
-def rescale_image(img_data, channels=('bf', 'dna', 'membrane', 'structure',
-                                      'dna_segmentation', 'membrane_segmentation', 'struct_segmentation_roof')):
+
+def rescale_image(
+    img_data,
+    channels=(
+        "bf",
+        "dna",
+        "membrane",
+        "structure",
+        "dna_segmentation",
+        "membrane_segmentation",
+        "struct_segmentation_roof",
+    ),
+):
     """
     'Raw' channels are stored with values between 0 and MAX_UINT16,
     where the 0-valued voxels denote the background. This function
@@ -76,11 +88,10 @@ def rescale_image(img_data, channels=('bf', 'dna', 'membrane', 'structure',
             img_data[ix] -= 1
 
             img_data[ix] = np.where(
-                img_data[ix] >= 0,
-                img_data[ix] / (_MAX_UINT16 - 1),
-                -1
+                img_data[ix] >= 0, img_data[ix] / (_MAX_UINT16 - 1), -1
             )
     return img_data.astype(np.float16)
+
 
 def _save_plot(
     dataset: pd.DataFrame,
@@ -132,19 +143,19 @@ def _save_plot(
             this_axes.set_title(f"CellID: {row[DatasetFields.CellId]}")
 
         # Read 3D Image
-        if 'projection' not in image_column:
+        if "projection" not in image_column:
             img = read_ome_zarr(row[image_column])
-            chan_names = [img.channel_names[i] for i in channels] 
+            chan_names = [img.channel_names[i] for i in channels]
             img_data = img.get_image_data("CZYX", C=channels)
             img_data = rescale_image(img_data, chan_names)
         # Read Projected Image
         else:
             img = AICSImage(row[image_column])
-            chan_names = [img.channel_names[i] for i in channels] 
+            chan_names = [img.channel_names[i] for i in channels]
             img_data = img.get_image_data("CZYX", C=channels)
             img_data = rescale_image(img_data, chan_names)
             img_data = [img_data[i] for i in range(img_data.shape[0])]
-            
+
         all_proj = imgtoprojection(
             img_data,
             proj_all=True,
@@ -237,9 +248,9 @@ def diagnostic_sheet(
     save_dir: Union[str, Path] = "./",
     image_column: "str" = "registered_path",
     max_cells: int = 200,
-    channels: list = [1,2,3],
-    colors: list = [[1,0,0], [0,0,1], [0,1,0]],
-    proj_method: str = "max", 
+    channels: list = [1, 2, 3],
+    colors: list = [[1, 0, 0], [0, 0, 1], [0, 1, 0]],
+    proj_method: str = "max",
     metadata: Optional[Union[list, str]] = "structure_name",
     feature: Optional[str] = None,
     fig_width: Optional[int] = None,
@@ -264,15 +275,15 @@ def diagnostic_sheet(
         The maximum number of cells to display on a single diagnostic sheet.
         Deafult: 200
     channels: list
-        Channel indices to plot 
-        Default: [1,2,3] (DNA, MEMBRANE, STRUCTURE) for 7 channel images using in 
+        Channel indices to plot
+        Default: [1,2,3] (DNA, MEMBRANE, STRUCTURE) for 7 channel images using in
         the cytodata hackathon
     colors: list
         RGB colors to use for each channel
         Default: Red, Blue, Green for DNA, MEMBRANE, STRUCTURE
     metadata: Optional[Union[list, str]]
         The metadata to group cells and generate a diagnostic sheet.
-        For example, "structure_name" 
+        For example, "structure_name"
         Default: "structure_name"
     feature: Optional[str]
         The name of the single cell feature to display. For example, "imsize_orig".
@@ -432,9 +443,7 @@ def diagnostic_sheet(
 
                 for this_path in this_metadata_paths:
                     if this_path not in manifest[DatasetFields.DiagnosticSheetPath]:
-                        manifest[DatasetFields.DiagnosticSheetPath].append(
-                            this_path
-                        )
+                        manifest[DatasetFields.DiagnosticSheetPath].append(this_path)
 
                 # Save errored cells to JSON
                 with open(
@@ -509,7 +518,7 @@ def diagnostic_sheet(
         manifest = dataset
 
     # Save manifest to CSV
-    manifest_save_path = Path(save_dir) / "diagnostic_sheets"/ "manifest.csv"
+    manifest_save_path = Path(save_dir) / "diagnostic_sheets" / "manifest.csv"
     manifest.to_csv(manifest_save_path, index=False)
 
     return manifest_save_path
