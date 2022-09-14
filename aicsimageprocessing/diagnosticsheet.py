@@ -273,7 +273,7 @@ def diagnostic_sheet(
         Default: "./"
     max_cells: int
         The maximum number of cells to display on a single diagnostic sheet.
-        Deafult: 200
+        Default: 200
     channels: list
         Channel indices to plot
         Default: [1,2,3] (DNA, MEMBRANE, STRUCTURE) for 7 channel images using in
