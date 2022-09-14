@@ -58,6 +58,7 @@ requirements = [
     "vtk>=9.0.1",
     "aics_dask_utils",
     "ome-zarr",
+    "upath",
     
 ]
 
