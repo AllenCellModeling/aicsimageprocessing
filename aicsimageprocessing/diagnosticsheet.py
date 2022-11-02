@@ -105,6 +105,7 @@ def _save_plot(
     feature: Optional[str] = None,
     fig_width: Optional[int] = None,
     fig_height: Optional[int] = None,
+    rescale: Optional[bool] = None,
 ):
 
     log.info(f"Beginning diagnostic sheet generation for {metadata_value}")
@@ -126,7 +127,7 @@ def _save_plot(
         squeeze=False,
         figsize=(fig_height, fig_width),
     )
-
+    
     for row_index, row in dataset.iterrows():
         this_axes = ax_array.flatten()[row_index]
 
@@ -144,16 +145,24 @@ def _save_plot(
 
         # Read 3D Image
         if "projection" not in image_column:
-            img = read_ome_zarr(row[image_column])
+            if row[image_column].split('.')[-1] == 'zarr':
+                img = read_ome_zarr(row[image_column])
+            elif row[image_column].split('.')[-1] == 'tiff':
+                img = AICSImage(row[image_column])
             chan_names = [img.channel_names[i] for i in channels]
-            img_data = img.get_image_data("CZYX", C=channels)
-            img_data = rescale_image(img_data, chan_names)
+            if img.shape[1] == 1:
+                img_data = img.get_image_data("CZYX")
+            else:
+                img_data = img.get_image_data("CZYX", channels=channels)
+            if rescale:
+                img_data = rescale_image(img_data, chan_names)
         # Read Projected Image
         else:
             img = AICSImage(row[image_column])
             chan_names = [img.channel_names[i] for i in channels]
             img_data = img.get_image_data("CZYX", C=channels)
-            img_data = rescale_image(img_data, chan_names)
+            if rescale:
+                img_data = rescale_image(img_data, chan_names)
             img_data = [img_data[i] for i in range(img_data.shape[0])]
 
         all_proj = imgtoprojection(
@@ -258,6 +267,7 @@ def diagnostic_sheet(
     distributed_executor_address: Optional[str] = None,
     batch_size: Optional[int] = None,
     overwrite: bool = False,
+    rescale: bool = False,
     **kwargs,
 ):
     """
@@ -508,6 +518,7 @@ def diagnostic_sheet(
                 [feature for i in range(len(all_grouped_datasets))],
                 [fig_width for i in range(len(all_grouped_datasets))],
                 [fig_height for i in range(len(all_grouped_datasets))],
+                [rescale for i in range(len(all_grouped_datasets))],
                 batch_size=batch_size,
             )
 
