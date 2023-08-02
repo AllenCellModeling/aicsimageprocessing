@@ -1,3 +1,6 @@
+# DEPRECATED
+This library is no longer being maintained due to low usage.
+
 # aicsimageprocessing
 
 [![Build Status](https://github.com/AllenCellModeling/aicsimageprocessing/workflows/Build%20Master/badge.svg)](https://github.com/AllenCellModeling/aicsimageprocessing/actions)
